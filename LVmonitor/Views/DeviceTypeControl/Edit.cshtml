@@ -1,0 +1,145 @@
+﻿@model LvMonitor.Models.Lvm_DeviceTypeControl
+
+@section head {
+    <style>
+        .modal-content {
+            width: 600px !important;
+            margin: 30px auto !important;
+        }
+    </style>
+}
+<div class="lvm-box">
+    <div class="lvm-box-header">
+        <span>@ViewBag.SubTitle @ViewBag.Title</span>
+    </div>
+    <div class="lvm-box-body">
+        @using (Html.BeginForm())
+        {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.ImageId)
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.DeviceTypeControlId)
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.DeviceTypeId, "Device Type", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("DeviceTypeId", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.DeviceTypeId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.ControlNumber, "Number", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.ControlNumber, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ControlNumber, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.ControlCode, "Control Type", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.ControlCode, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ControlCode, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.ControlName, "Name", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.ControlName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ControlName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            @*<div class="form-group">
+                    @Html.LabelFor(model => model.ControlImage, "Image Name", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.ControlImage, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.ControlImage, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.Label("Image Upload", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <div style="display:inline-block;"><img class="LvmLstImg" src="@Url.Content(ViewBag.ImgPath + Model.ControlImage)" alt="" /></div>
+                        <div style="display:inline-block; vertical-align:middle;"><input type="file" name="upload" /></div>
+                    </div>
+                </div>*@
+            <div class="form-group">
+                @Html.Label("Image", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <img id="CtlImg" class="LvmLstImg" src="@Url.Content(ViewBag.ImgPath + Model.ControlImage)" alt="" />
+                    @Html.ActionLink("Select Image", "ImageCatalog", "DeviceTypeControl", null, new { @class = "modal-link btn btn-default" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.ControlDescription, "Description", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.ControlDescription, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ControlDescription, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.Label("Chart Color", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.ChartColor, new { htmlAttributes = new { @class = "form-control jscolor" } })
+                    @Html.ValidationMessageFor(model => model.ChartColor, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Save" class="btn btn-default" />
+                    @*<br /><br />
+                    <div class="text-info">
+                        If image is updated clear browser cache to see the change.
+                    </div>*@
+                </div>
+            </div>
+        </div>
+        }
+    </div>
+</div>
+
+<div id="modal-container" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-content">
+    </div>
+</div>
+
+@section Scripts {
+@Scripts.Render("~/Scripts/App/jscolor.min.js")
+
+    <script type="text/javascript">
+        $(function () {
+            // Initialize numeric spinner input boxes
+            //$(".numeric-spinner").spinedit();
+
+            // Initalize modal dialog
+            // attach modal-container bootstrap attributes to links with .modal-link class.
+            // when a link is clicked with these attributes, bootstrap will display the href content in a modal dialog.
+            $('body').on('click', '.modal-link', function (e) {
+                e.preventDefault();
+                $(this).attr('data-target', '#modal-container');
+                $(this).attr('data-toggle', 'modal');
+            });
+
+            // Attach listener to .modal-close-btn's so that when the button is pressed the modal dialog disappears
+            $('body').on('click', '.modal-close-btn', function () {
+                $('#modal-container').modal('hide');
+            });
+
+            //clear modal cache, so that new content can be loaded
+            $('#modal-container').on('hidden.bs.modal', function () {
+                $(this).removeData('bs.modal');
+            });
+
+            $('#CancelModal').on('click', function () {
+                return false;
+            });
+        });
+
+        function CatImgSelect(id, img) {
+            $('#modal-container').modal('hide');
+            $("#ImageId").val(id);
+            var imgSrc = '@Url.Content(ViewBag.ImgPath)' + img
+            $('#CtlImg').attr('src', imgSrc);
+        }
+    </script>
+}

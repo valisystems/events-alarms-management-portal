@@ -1,0 +1,136 @@
+﻿@model LvMonitor.Models.Lvm_Device
+
+<div class="lvm-box">
+    <div class="lvm-box-header">
+        <span>@ViewBag.SubTitle @ViewBag.Title</span>
+    </div>
+    <div class="lvm-box-body">
+        @using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+        @Html.AntiForgeryToken()
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.DeviceId)
+            <div class="form-group">
+                @Html.LabelFor(model => model.FacilityId, "Facility", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @if (ViewBag.IsSingleFacility)
+                    {
+                    <h5>@ViewBag.SingleFacilityName</h5>
+                    @Html.HiddenFor(model => model.FacilityId)
+                    }
+                    else
+                    {
+                    @Html.DropDownListFor(r => r.FacilityId, (SelectList)ViewBag.lFacility, htmlAttributes: new { @class = "form-control" })
+                    }
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.DepartmentId, "Department", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(r => r.DepartmentId, (SelectList)ViewBag.Department, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.DepartmentId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.RoomId, "Room", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @*@Html.DropDownList("RoomId", null, htmlAttributes: new { @class = "form-control" })*@
+                    @Html.DropDownListFor(r => r.RoomId, (SelectList)ViewBag.Room, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.RoomId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.DeviceTypeId, "Device Type", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("DeviceTypeId", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.DeviceTypeId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.DeviceNumber, "Device #", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.DeviceNumber, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.DeviceNumber, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.DeviceCode, "Device ID", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.DeviceCode, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.DeviceCode, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.DeviceName, "Name", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.DeviceName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.DeviceName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.DeviceDescription, "Description", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.DeviceDescription, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.DeviceDescription, "", new { @class = "text-danger" })
+                </div>
+            </div><div class="form-group">
+                @Html.LabelFor(model => model.MediaTypeId, "Media Type", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("MediaTypeId", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.MediaTypeId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.ImageFile, "Media File", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.ImageFile, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ImageFile, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.Label("Image Upload", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <div style="display:inline-block;">
+                        @*<img class="LvmLstImg140" src="@ViewBag.ImgPath@Model.ImageFile" alt="" />*@
+                        @{
+                          if (!string.IsNullOrWhiteSpace(Model.ImageFile))
+                          {
+                              if (Model.MediaTypeId > 1)
+                              {
+                            <video class="LvmLstImg140" controls>
+                                <source src="@Model.ImageFile" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                              }
+                              else
+                              {
+                                  if (Model.ImageFile.IndexOf(@"/") < 0)
+                                  {
+                            <img class="LvmLstImg140" src="@Url.Content(string.Format("{0}{1}/{2}", ViewBag.ImgPath, Model.FacilityId, Model.ImageFile))" alt="" />
+                                  }
+                                  else
+                                  {
+                            <img class="LvmLstImg140" src="@Model.ImageFile" alt="" />
+                                      }
+                                  }
+                              }
+                          }
+                    </div><br />
+                    <div style="display:inline-block; vertical-align:middle;"><input type="file" name="upload" /></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Save" class="btn btn-default" /> &nbsp;&nbsp;&nbsp;
+                    @Html.ActionLink("Edit Actions", "Index", "DeviceAction", new { id = Model.DeviceId }, null)
+                </div>
+            </div>
+        </div>
+                          }
+    </div>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/Scripts/App/ddlfacilityroom.js")
+}

@@ -1,0 +1,64 @@
+﻿@model LvMonitor.Models.Lvm_DeviceTypeControl
+
+<div class="lvm-box">
+    <div class="lvm-box-header">
+        <span>@ViewBag.Title @ViewBag.SubTitle</span>
+    </div>
+    <div class="lvm-box-body">
+        <div>
+            <dl class="dl-horizontal">
+                <dt>
+                    Device Type
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Lvm_DeviceType.DeviceTypeName)
+                </dd>
+                <dt>
+                    Number
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.ControlNumber)
+                </dd>
+                <dt>
+                    Control Type
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.ControlCode)
+                </dd>
+                <dt>
+                    Name
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.ControlName)
+                </dd>
+                @*<dt>
+                        Image Name
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.ControlImage)
+                    </dd>*@
+                <dt>
+                    Image
+                </dt>
+                <dd>
+                    <img class="LvmLstImg" src="@Url.Content(ViewBag.ImgPath + Model.ControlImage)" alt="" />
+                </dd>
+                <dt>
+                    Description
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.ControlDescription)
+                </dd>
+                <dt>
+                    Chart Color
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.ChartColor)
+                </dd>
+            </dl>
+        </div>
+        <p>
+            @Html.ActionLink("Edit", "Edit", new { id = Model.DeviceTypeControlId })
+        </p>
+    </div>
+</div>

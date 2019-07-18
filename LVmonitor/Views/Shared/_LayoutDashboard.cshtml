@@ -1,0 +1,81 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>@ViewBag.Title - LV Monitor</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    @Styles.Render("~/Content/css")
+    @*@Styles.Render("~/plugins/css")*@
+    @RenderSection("head", required: false)
+</head>
+<body class="hold-transition skin-blue sidebar-mini" >
+    <div class="wrapper"> @*style="border:1px solid red;"*@
+        <header class="main-header" >@*style=" position:absolute; top:0; width:100%;"*@
+            @*border:1px solid red;*@
+            <!-- Logo -->
+            <a href="~/" class="logo">
+                <!-- mini logo for sidebar mini 50x50 pixels -->
+                <span class="logo-mini"><b>LVM</b></span>
+                <!-- logo for regular state and mobile devices -->
+                <span class="logo-lg"><b>LV Monitor</b></span>
+            </a>
+            <!-- Header Navbar: style can be found in header.less -->
+            <nav class="navbar navbar-static-top" role="navigation">
+                <!-- Sidebar toggle button-->
+                <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                    <span class="sr-only">Toggle navigation</span>
+                </a>
+                <div class="navbar-custom-menu" style="padding-right:60px;">
+                    @Html.Partial("_LoginPartial")
+                </div>
+            </nav>
+        </header>
+        <!-- Left side column. contains the logo and sidebar -->
+        <aside class="main-sidebar">
+            <!-- sidebar: style can be found in sidebar.less -->
+            <section class="sidebar">
+                @Html.Partial("_LayoutSideMenu")
+            </section>
+            <!-- /.sidebar -->
+        </aside>
+
+        <div class="content-wrapper">
+            <section class="content-header" style="padding:0;">
+                @*@Html.Partial(string.IsNullOrWhiteSpace(ViewBag.Breadcrumb) ?"_BreadcrumbPartial": (string)ViewBag.Breadcrumb.ToString())*@
+                @RenderSection("ContentHeader", required: false)
+            </section>
+
+            <!-- Main content -->
+            <section class="content">
+                @RenderBody()
+            </section><!-- /.content -->
+        </div><!-- /.content-wrapper -->
+
+        <footer class="main-footer">
+            <div class="pull-right hidden-xs">
+                <b>Version</b> 2.3.0
+            </div>
+            <strong>Copyright &copy; 2016 <a href="#">LV Monitor</a>.</strong> All rights reserved.
+        </footer>
+        @*<div style="height:50px;  border:1px solid red;position:absolute;bottom:0;">aaa</div>*@
+    </div><!-- ./wrapper -->
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+
+    <!--[if lt IE 9]>
+    @Scripts.Render("~/bundles/ShimAndRespond")
+    <![endif]-->
+    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+    <script>
+        $.widget.bridge('uibutton', $.ui.button);
+    </script>
+    @*@Scripts.Render("~/bundles/plugins")*@
+    <!-- AdminLTE App -->
+    @Scripts.Render("~/scripts/app.min.js")
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>

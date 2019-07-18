@@ -1,0 +1,58 @@
+﻿@model LvMonitor.Models.Lvm_FacilityMonitor
+
+<div class="lvm-box">
+    <div class="lvm-box-header">
+        <span>@ViewBag.Title @ViewBag.SubTitle</span>
+    </div>
+    <div class="lvm-box-body">
+        <div>
+            <dl class="dl-horizontal lvm-dl-horizontal2">
+                <dt>
+                    Facility
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Lvm_Facility.FacilityName)
+                </dd>
+                <dt>
+                    Monitor ID
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.MonitorId)
+                </dd>
+                <dt>
+                    Monitor Name
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.MonitorName)
+                </dd>
+                <dt>
+                    Default Template
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Lvm_Template.TemplateName)
+                </dd>
+                <dt>
+                    History Template Width
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.TemplateHistoryWidth)
+                </dd>
+                <dt>
+                    Min Device Template Width
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.TemplateDeviceWidthMin)
+                </dd>
+                <dt>
+                    Device Template Column Number
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.TemplateDeviceColumnNumber)
+                </dd>
+            </dl>
+        </div>
+        <p>
+            @Html.ActionLink("Edit", "Edit", new { FacilityId = Model.FacilityId, MonitorId = Model.MonitorId })
+        </p>
+    </div>
+</div>

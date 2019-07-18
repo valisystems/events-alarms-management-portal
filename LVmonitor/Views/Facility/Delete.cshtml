@@ -1,0 +1,82 @@
+﻿@model LvMonitor.Models.Lvm_Facility
+
+<div class="lvm-box">
+    <div class="lvm-box-header">
+        <span>@ViewBag.SubTitle @ViewBag.Title</span>
+    </div>
+    <div class="lvm-box-body">
+        <p class="text-danger">@ViewBag.AreYouSure</p>
+        <div>
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <dl class="dl-horizontal" style="margin-bottom:6px;">
+                <dt>
+                    Name
+                </dt>
+                <dd>
+                    @Html.DisplayFor(m => m.FacilityName)
+                </dd>
+                <dt>
+                    Description
+                </dt>
+                <dd>
+                    @Html.DisplayFor(m => m.FacilityDescription)
+                </dd>
+                <dt>
+                    Notes
+                </dt>
+                <dd>
+                    @Html.DisplayFor(m => m.FacilityNotes)
+                </dd>
+                <dt>
+                    Discovery
+                </dt>
+                <dd>
+                    @Html.DisplayFor(m => m.IsDeviceDiscovery)
+                </dd>
+                <dt>
+                    Time Zone
+                </dt>
+                <dd>
+                    @TimeZoneInfo.FindSystemTimeZoneById(Model.TimeZoneId)
+                </dd>
+                <dt>
+                    CDR Type
+                </dt>
+                <dd>
+                    @Html.DisplayFor(m => m.Lvm_CdrType.CdrType)
+                </dd>
+                <dt>
+                    CDR Domain
+                </dt>
+                <dd>
+                    @Html.DisplayFor(m => m.CdrDomain)
+                </dd>
+                <dt>
+                    PBX User
+                </dt>
+                <dd>
+                    @Html.DisplayFor(m => m.PbxUser)
+                </dd>
+                <dt>
+                    <span class="control-label"><a href="#divAddress" data-toggle="collapse">Address</a></span>
+                </dt>
+                <dd>
+                    @Html.DisplayFor(m => m.Lvm_Address.ContactName), @Html.DisplayFor(m => m.Lvm_Address.Phone), @Html.DisplayFor(m => m.Lvm_Address.City), @Html.DisplayFor(m => m.Lvm_Address.Street1)
+                </dd>
+            </dl>
+            <div id="divAddress" class="collapse">
+                @Html.Partial("~/Views/Address/_Details.cshtml", Model)
+            </div>
+            <br />
+            @using (Html.BeginForm())
+            {
+            @Html.AntiForgeryToken()
+            <div class="form-actions no-color">
+                <div class="col-md-offset-1 col-md-9">
+                    <input type="submit" value="Delete" class="btn btn-default" />
+                </div>
+            </div>
+            }
+        </div>
+    </div>
+</div>

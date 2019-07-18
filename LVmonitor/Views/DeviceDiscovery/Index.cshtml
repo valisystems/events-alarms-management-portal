@@ -1,0 +1,186 @@
+﻿@model PagedList.IPagedList<LvMonitor.Models.Lvm_DeviceDiscovery>
+@using PagedList.Mvc;
+
+@section head {<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />}
+
+@functions {
+  MvcHtmlString IndexSort(string SortField) { return Html.ActionLink(SortField, "IndexSort", new { SortFieldOld = ViewBag.SortFieldOld, SortField = SortField, SortOrder = ViewBag.SortOrder, FacilityId = ViewBag.FacilityId }); }
+}
+<div class="lvm-box">
+    <div class="lvm-box-header">
+        <span>@ViewBag.Title</span>
+    </div>
+    <div class="lvm-box-body">
+        @using (Html.BeginForm("Index", "DeviceDiscovery", FormMethod.Get))
+        {
+        @*@Html.AntiForgeryToken()*@
+        @Html.Hidden("hdnSelId", "asd")
+
+        @*@Html.ValidationSummary(true, "", new { @class = "text-danger lvm-ul-left0" })*@
+        if (ViewData.ModelState.Any(x => x.Value.Errors.Any()))
+        {
+        <span style="padding-bottom:1px;">
+            @Html.Raw(HttpUtility.HtmlDecode(Html.ValidationSummary(true, "", new { @class = "text-danger lvm-ul-left0" }).ToHtmlString()))
+        </span>
+        }
+        <p class="text-bold">
+            @if (ViewBag.IsSingleFacility)
+        {
+            @Html.Hidden("FacilityId", (string)ViewBag.FacilityId.ToString())
+            }
+            else
+            {
+            <div style="padding-right:10px;">
+                @Html.DropDownList("FacilityId", (SelectList)ViewBag.lFacility, null, htmlAttributes: new { @class = "form-control", onchange = "this.form.submit();" })
+            </div>
+            }
+        </p>
+        @*}*@
+        <table id="tblDd" class="table table-striped lvm-table">
+            <tr>
+                <th>
+                    @*<input id="chkAllDd" onclick="SelectAllChk(this,'chkDd');" runat="server" type="checkbox" class="check-box" />*@
+                    @*<input id="chkAllDd" onclick="SelectAllChk(this,'chkDd');" type="checkbox" class="check-box" />*@
+                    <input id="chkAllDd" type="checkbox" class="check-box" />
+                </th>
+                <th>
+                    @IndexSort("ID")
+                </th>
+                <th>
+                    @IndexSort("Device Type")
+                </th>
+                <th>
+                    @IndexSort("Facility")
+                </th>
+                <th>
+                    @IndexSort("Department")
+                </th>
+                <th>
+                    @IndexSort("Room Number")
+                </th>
+                <th>
+                    @IndexSort("Device Code")
+                </th>
+                <th>
+                    @IndexSort("Device Name")
+                </th>
+                @*<th>
+                        @IndexSort("Device Description")
+                    </th>*@
+                <th>
+                    @IndexSort("Control Type")
+                </th>
+                <th>
+                    @IndexSort("Control Name")
+                </th>
+                <th>
+                    @IndexSort("Created")
+                </th>
+                <th></th>
+            </tr>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    @*<div class="checkbox">
+                            <input type="CheckBox" id="chkSelectDd" name="chkSelectDd" value="" @(Html.Raw(item.IsSelected ? "checked=\"checked\"" : "")) />
+                        </div>*@
+                    @*<span id="@item.DeviceDiscoveryId">
+                        <input type="CheckBox" id="chkSelectDd" name="chkSelectDd" value="" @(Html.Raw(item.IsSelected ? "checked=\"checked\"" : "")) />*@
+                    @*<asp:CheckBox ID="chkSelectDd" runat="server" Enabled='@item.DeviceDiscoveryId' onclick="ToggleTrColor(this)" />*@
+                    @*@Html.Editor(item.IsSelected, new { htmlAttributes = new { @style = "margin-left:0;" } })*@
+                    @*</span>*@
+                    @*<div class="checkbox">*@
+                    @Html.EditorFor(i => item.IsSelected, new { htmlAttributes = new { @style = "margin-left:0;", @class = "chkDd", @value = @item.DeviceDiscoveryId } })
+                    @*</div>*@
+                </td>
+                <td>
+                    @Html.DisplayFor(i => item.DeviceDiscoveryId)
+                </td>
+                <td>
+                    @Html.DisplayFor(i => item.Lvm_DeviceType.DeviceTypeName)
+                </td>
+                <td>
+                    @Html.DisplayFor(i => item.Lvm_Facility.FacilityName)
+                </td>
+                <td>
+                    @Html.DisplayFor(i => item.Lvm_Department.DepartmentName)
+                </td>
+                <td>
+                    @Html.DisplayFor(i => item.Lvm_Room.RoomNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(i => item.DeviceCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(i => item.DeviceName)
+                </td>
+                @*<td>
+                        @Html.DisplayFor(i => item.DeviceDescription)
+                    </td>*@
+                <td>
+                    @Html.DisplayFor(i => item.ControlCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(i => item.ControlName)
+                </td>
+                <td style="white-space:nowrap;">
+                    @Html.DisplayFor(i => item.DateCreated)
+                </td>
+                <td style="white-space:nowrap;">
+                    @Html.ActionLink(" ", "Details", new { id = item.DeviceDiscoveryId }, new { @class = "fa fa-eye" })&nbsp;
+                    @Html.ActionLink(" ", "Edit", new { id = item.DeviceDiscoveryId }, new { @class = "fa fa-pencil-square-o" })&nbsp;
+                    @Html.ActionLink(" ", "Delete", new { id = item.DeviceDiscoveryId }, new { @class = "fa fa-trash", onclick = "return confirm('Are you sure you want to delete selected records?');" })
+                </td>
+            </tr>
+            }
+        </table>
+        <div class="lvm-tbl-pager">
+            <div class="lvm-tbl-pager-btn">@Html.PagedListPager(Model, page => Url.Action("Index", new { SortField = ViewBag.SortField, SortOrder = ViewBag.SortOrder, FacilityId = ViewBag.FacilityId, page }))</div>
+            <div class="lvm-tbl-pager-pagenum">Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount</div>
+        </div>
+        <p>
+            @*<span class="control-label">Field Name</span>*@
+            @*@Html.DropDownList("FacilityId", (SelectList)ViewBag.lField, null, htmlAttributes: new { @class = "form-control", onchange = "this.form.submit();" })*@
+            @*<div style="display:table">
+                    <div style="display:table-cell; padding-right:10px;">
+                        @Html.DropDownList("FacilityId", (SelectList)ViewBag.lFacility, null, htmlAttributes: new { @class = "form-control", @id = "ddlFacility", @style = "width:180px" })
+                    </div>
+                    <div style="display:table-cell; padding-right:10px;">
+                        @Html.DropDownList("DepartmentId", (SelectList)ViewBag.lDepartment, null, htmlAttributes: new { @class = "form-control", @id = "ddlDepartment", @style = "width:180px" })
+                    </div>
+                    <div style="display:table-cell; padding-right:10px;">
+                        @Html.DropDownList("DeviceTypeId", (SelectList)ViewBag.lDeviceType, null, htmlAttributes: new { @class = "form-control", @id = "ddlDeviceType", @style = "width:180px" })
+                    </div>
+                    <div style="display:table-cell;">
+                        <span class="input-group-btn">
+                            <button name="btnUpdate" id="btnUpdate" type="submit" class="btn btn-default">Update Selected Records</button>
+                        </span>
+                    </div>
+                </div>*@
+            @*<div>Selected Record Actions</div>*@
+            <h5>Selected Record Actions</h5>
+            <div class="input-group input-space">
+                @Html.DropDownList("DeviceTypeId", (SelectList)ViewBag.lDeviceType, null, htmlAttributes: new { @class = "form-control", @id = "ddlDeviceType", @style = "width:180px" })
+                @Html.DropDownList("FacilityId", (SelectList)ViewBag.lFacilitySel, null, htmlAttributes: new { @class = "form-control", @id = "ddlFacility", @style = "width:180px" })
+                @Html.DropDownList("DepartmentId", (SelectList)ViewBag.lDepartment, null, htmlAttributes: new { @class = "form-control", @id = "ddlDepartment", @style = "width:180px" })
+                @Html.DropDownList("RoomId", (SelectList)ViewBag.lRoom, null, htmlAttributes: new { @class = "form-control", @id = "ddlRoom", @style = "width:180px" })
+                <span class="input-group-btn input-space pull-left">
+                    @Html.ActionLink("Update", "Update", "DeviceDiscovery", new { id = string.Format("{0}_{1}_{2}_{3}", ViewBag.SortField, ViewBag.SortOrder, ViewBag.FacilityId, (Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)) }, new { @class = "btn btn-default", @id = "btnUpdate" })
+                    @Html.ActionLink("Approve", "Approve", "DeviceDiscovery", new { id = string.Format("{0}_{1}_{2}_{3}", ViewBag.SortField, ViewBag.SortOrder, ViewBag.FacilityId, (Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)) }, new { @class = "btn btn-default", @id = "btnApprove" })
+                    @Html.ActionLink("Delete", "DeleteSel", "DeviceDiscovery", new { id = string.Format("{0}_{1}_{2}_{3}", ViewBag.SortField, ViewBag.SortOrder, ViewBag.FacilityId, (Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)) }, new { @class = "btn btn-default text-danger", @id = "btnDelete", onclick = "return confirm('Are you sure you want to delete selected records?');" })
+                    @*@Html.ActionLink("Approve", "Approve", "DeviceDiscovery", new { id = 1 }, new { @class = "btn btn-default", @id = "btnApprove" })
+                        @Html.ActionLink("Delete", "Delete", "DeviceDiscovery", new { id = 1 }, new { @class = "btn btn-default text-danger", @id = "btnDelete", onclick = "return confirm('Are you sure you want to delete selected records?');" })*@
+                </span>
+            </div>
+
+            @*@Html.LabelFor(model => model.DepartmentDescription, "Description", htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.DropDownListFor(r => r.FacilityId, (SelectList)ViewBag.lFacility, htmlAttributes: new { @class = "form-control" })*@
+
+        </p>
+        }
+    </div>
+</div>
+@section Scripts {
+    @Scripts.Render("~/Scripts/App/lvm-device-discovery.js")
+}

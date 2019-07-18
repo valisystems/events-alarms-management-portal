@@ -1,0 +1,277 @@
+﻿@model LvMonitor.Models.AnalyticsCdrModel
+@using LvMonitor.Common;
+@section head {
+    <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+    @Mvc.RazorTools.BundleManager.Styles.Render()
+    <link href="~/Content/bootstrap-theme.min.css" rel="stylesheet" />
+    <link href="~/Content/daterangepicker.css" rel="stylesheet" />
+
+    <style>
+        .modal-content {
+            width: 600px !important;
+            margin: 30px auto !important;
+        }
+
+        .modal-header {
+            padding-top: 6px;
+            padding-bottom: 6px;
+        }
+
+        .modal-body .lvm-dl-horizontal {
+            margin-top: 0;
+            margin-bottom: 10px;
+        }
+    </style>
+}
+@functions {
+  MvcHtmlString IndexSort(string SortField, string SortFieldTxt) { return Html.ActionLink(SortFieldTxt, "CdrRec", new { fid = Model.FacilityId, did = Model.DepartmentId, rl = Model.RoomList, df = Model.DateFrom, dt = Model.DateTo, dr = Model.Direction, rd = Model.RingDurationMin, cd = Model.CallDurationMin, fr = Model.From, to = Model.To, ich = Model.IsChart, p = 1, sfo = Model.SortFieldOld, sf = SortField, so = Model.SortOrder, iss = true, rc = Model.RecCount }); }
+}
+@{ var PgLst = (List<LvMonitor.Models.sLvm_RepCdrRec_Result>)Model.ReportList;}
+<div class="lvm-box">
+    <div class="lvm-box-header">
+        <span>@ViewBag.Title @ViewBag.SubTitle</span>
+    </div>
+    <div class="lvm-box-body">
+        @using (Html.BeginForm())
+        {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.ReportId)
+        @Html.HiddenFor(model => model.Id)
+        @Html.HiddenFor(model => model.CurUserId)
+        @Html.HiddenFor(model => model.IsSuperAdmin)
+        @Html.HiddenFor(model => model.IsSingleFacility)
+
+        @Html.HiddenFor(model => model.SortFieldOld)
+        @Html.HiddenFor(model => model.SortField)
+        @Html.HiddenFor(model => model.SortOrder)
+        @Html.HiddenFor(model => model.RecCount)
+
+        @*@Html.HiddenFor(model => model.DateFromTo)*@
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(m => m.FacilityId, "Facility", htmlAttributes: new { @class = "control-label col-md-1" })
+                <div class="col-md-3">
+                    @*@Html.DropDownListFor(m => m.FacilityId, (SelectList)ViewBag.lFacility, htmlAttributes: new { @class = "form-control", })*@
+                    @if (Model.IsSingleFacility)
+                    {
+                    <h5>@Model.SingleFacilityName</h5>
+                    @Html.HiddenFor(model => model.FacilityId)
+                    }
+                    else
+                    {
+                    @Html.DropDownList("FacilityId", new SelectList(ViewBag.lFacility, "FacilityId", "FacilityName", Model.FacilityId), null, htmlAttributes: new { @class = "form-control" })
+                    }
+                </div>
+                @Html.LabelFor(m => m.DepartmentId, "Department", htmlAttributes: new { @class = "control-label col-md-1" })
+                <div class="col-md-3">
+                    @Html.DropDownListFor(m => m.DepartmentId, new SelectList(ViewBag.lDepartment, "DepartmentId", "DepartmentName").InsertEmptyFirst("Select Department", "0"), htmlAttributes: new { @class = "form-control" })
+                </div>
+                @Html.LabelFor(m => m.RoomList, "Rooms", htmlAttributes: new { @class = "control-label col-md-1" })
+                <div class="col-md-3">
+                    @Html.EditorFor(model => model.RoomList, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.DateFrom, "Date", htmlAttributes: new { @class = "control-label col-md-1" })
+                <div class="col-md-3">
+                    @Html.EditorFor(model => model.DateFromTo, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "Enter Date Range", @style = "height:34px;" } })
+                </div>
+                @Html.LabelFor(m => m.Direction, "Direction", htmlAttributes: new { @class = "control-label col-md-1" })
+                <div class="col-md-2">
+                    @Html.DropDownListFor(m => m.Direction, new SelectList(ViewBag.lDirection, "Value", "Text", Model.Direction), htmlAttributes: new { @class = "form-control" })
+                </div>
+                <div class="col-md-5">
+                    <div class="row">
+                        @Html.LabelFor(m => m.RingDurationMin, "Ring Duration", htmlAttributes: new { @class = "control-label col-md-3", style = "padding-left:0; white-space:nowrap;" })
+                        <div class="col-md-2">
+                            @Html.EditorFor(model => model.RingDurationMin, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+                        @Html.LabelFor(m => m.CallDurationMin, "Call Duration", htmlAttributes: new { @class = "control-label col-md-3", style = "padding-left:0; white-space:nowrap;" })
+                        <div class="col-md-2">
+                            @Html.EditorFor(model => model.CallDurationMin, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-1 col-md-8">
+                    <div style="display:table;">
+                        <div class="LvmLabel" style="display:table-cell;">
+                            <input id="GetReport" name="GetReport" type="submit" value="Get Report" class="btn btn-default" />
+                        </div>
+                        @*<div class="LvmLabel" style="display:table-cell;padding-left:20px;">@Html.LabelFor(model => model.Direction, "Direction")</div>
+                            @Html.DropDownListFor(m => m.Direction, new SelectList(ViewBag.lDirection, "Value", "Text", Model.Direction), htmlAttributes: new { @class = "form-control" })*@
+                        <div class="LvmLabel" style="display:table-cell;padding-left:20px;">@Html.EditorFor(model => model.IsChart)</div>
+                        <div class="LvmLabel" style="display:table-cell; ">Show Chart</div>
+                    </div>
+                </div>
+                <div class="col-md-3 LvmRepExport">
+                    <button name="btnRepPDF" id="btnRepPDF" type="submit" class="btn btn-default" title="PDF" style="color:#ff0000;">
+                        <i class="fa fa-file-pdf-o icon-fixed-width" aria-hidden="true"></i>
+                    </button>&nbsp;
+                    <button name="btnRepExcel" id="btnRepExcel" class="btn btn-default" title="Excel" style="color:#1f6b41;">
+                        <i class="fa fa-file-excel-o icon-fixed-width" aria-hidden="true"></i>
+                    </button>&nbsp;
+                    <button name="btnRepWord" id="btnRepWord" class="btn btn-default" title="Word" style="color:#295391;">
+                        <i class="fa fa-file-word-o icon-fixed-width" aria-hidden="true"></i>
+                    </button>&nbsp;
+                    <button name="btnRepImage" id="btnRepImage" class="btn btn-default" title="Image" style="color:#ff8c00;">
+                        <i class="fa fa-file-image-o icon-fixed-width" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        }
+        @{
+          if (Model.IsChart && Model.IsGetReport && (PgLst.Count() > 0))
+          {
+            <hr />
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="form-group">
+                        <p class="text-center"><strong>@ViewBag.ChartTitle</strong></p>
+                        <div style="height:250px;">
+                            <canvas id="cnvChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          }
+        }
+        <table class="table LvmRepTbl" @{if (!Model.IsGetReport || (PgLst.Count() == 0)) { <text> style="display:none" </text>          }; }>
+            <tr>
+                <th>
+                    @IndexSort("CallStart", "Call Start")
+                </th>
+                <th>
+                    @IndexSort("CallEnd", "Call End")
+                </th>
+                <th>
+                    @IndexSort("Department", "Department")
+                </th>
+                <th>
+                    @IndexSort("Room", "Room #")
+                </th>
+                <th>
+                    @IndexSort("Direction", "Direction")
+                </th>
+                <th>
+                    @IndexSort("From", "From")
+                </th>
+                <th>
+                    @IndexSort("To", "To")
+                </th>
+                @*<th>
+                        @IndexSort("CallStatus", "Status")
+                    </th>*@
+                <th>
+                    @IndexSort("RingDuration", "Ring #")
+                </th>
+                <th>
+                    @IndexSort("TalkTime", "Talk Time")
+                </th>
+                <th class="lvm-th-ico" style="width:36px;"></th>
+            </tr>
+            @foreach (var item in PgLst)
+            {
+            <tr>
+                <td style="text-align:center;">
+                    @Html.ValueFor(i => item.CallStart, "{0:dd/M/yyyy hh:mm:ss tt}")
+                </td>
+                <td style="text-align:center;">
+                    @Html.ValueFor(i => item.CallEnd, "{0:dd/M/yyyy hh:mm:ss tt}")
+                </td>
+                <td>
+                    @Html.DisplayFor(i => item.Department)
+                </td>
+                <td style="text-align:center;">
+                    @Html.DisplayFor(i => item.Room)
+                </td>
+                <td>
+                    @Html.DisplayFor(i => item.Direction)
+                </td>
+                <td>
+                    @Html.DisplayFor(i => item.From)
+                </td>
+                <td>
+                    @Html.DisplayFor(i => item.To)
+                </td>
+                @*<td>
+                        @Html.DisplayFor(i => item.CallStatus)
+                    </td>*@
+                <td style="text-align:center;">
+                    @Html.ValueFor(i => item.RingDuration)
+                </td>
+                <td style="text-align:center;">
+                    @Html.ValueFor(i => item.TalkTime)
+                </td>
+                <td class="lvm-td-ico">
+                    @if ((int)ViewBag.CdrTypeId == (int)Utilities.CdrType.PortSip)
+                    {
+                    @Html.ActionLink(" ", "Details", "CdrPortSip", new { id = item.RecId }, new { @class = "modal-link fa fa-eye" });
+                    }
+                    else
+                    {
+                    @Html.ActionLink(" ", "Details", "CdrVodia", new { id = item.RecId }, new { @class = "modal-link fa fa-eye" });
+                    }
+
+                </td>
+
+            </tr>
+            }
+        </table>
+        <div class="lvm-tbl-pager">
+            @Html.Partial("~/Views/Analytics/_PagerCdr.cshtml")
+            <div class="lvm-tbl-pager-pagenum">Page @(Model.Pager.TotalPages < Model.Pager.CurrentPage ? 0 : Model.Pager.CurrentPage) of @Model.Pager.TotalPages</div>
+        </div>
+    </div>
+</div>
+<div id="modal-container" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-content">
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/Scripts/App/ddlfacilitydepartment.js")
+    @Scripts.Render("~/bundles/daterangepicker")
+    @Scripts.Render("~/bundles/chartjs")
+    @Scripts.Render("~/Scripts/App/lvm-modal.js")
+
+    @{
+      if (Model.IsChart && Model.IsGetReport && (PgLst.Count() > 0))
+      {
+        <script>
+            $(document).ready(function () {
+
+                @Html.Raw(Model.ChartJs);
+
+            });
+        </script>
+      }
+    }
+
+    @*<script type="text/javascript">
+            $(function () {
+                $('body').on('click', '.modal-link', function (e) {
+                    e.preventDefault();
+                    $(this).attr('data-target', '#modal-container');
+                    $(this).attr('data-toggle', 'modal');
+                });
+
+                // Attach listener to .modal-close-btn's so that when the button is pressed the modal dialog disappears
+                $('body').on('click', '.modal-close-btn', function () {
+                    $('#modal-container').modal('hide');
+                });
+
+                //clear modal cache, so that new content can be loaded
+                $('#modal-container').on('hidden.bs.modal', function () {
+                    $(this).removeData('bs.modal');
+                });
+
+                $('#CancelModal').on('click', function () {
+                    return false;
+                });
+            });
+        </script>*@
+}

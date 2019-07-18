@@ -1,0 +1,89 @@
+﻿@model LvMonitor.Models.Lvm_DeviceAction
+@section head {
+    <link href="~/Content/sumoselect.css" rel="stylesheet" type="text/css" />
+    @*<style type="text/css">
+                .select-all {
+        margin-top:6px;
+        margin-bottom:6px;
+        }
+    </style>*@
+    }
+<div class="lvm-box">
+    <div class="lvm-box-header">
+        <span>@ViewBag.SubTitle for <strong>@Html.ActionLink((string)@ViewBag.DeviceNameCode, "Edit", "Device", new { id = @ViewBag.DeviceId }, null)</strong></span>
+    </div>
+    <div class="lvm-box-body">
+        @using (Html.BeginForm())
+        {
+        @Html.AntiForgeryToken()
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.Hidden("DeviceId", (string)ViewBag.DeviceId.ToString())
+            @Html.HiddenFor(model => model.SelControlIds)
+            @Html.HiddenFor(model => model.SelAcTempIds)
+            <div class="form-group">
+                @Html.LabelFor(model => model.DeviceTypeControlId, "Control", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("DeviceTypeControlId", null, htmlAttributes: new { @class = "form-control SlectBox", @multiple = "multiple", @placeholder = "Select control(s)" })
+                    @*@Html.ValidationMessageFor(model => model.DeviceTypeControlId, "", new { @class = "text-danger" })*@
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.IsControlOn, "Condition Alarm", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <div class="checkbox" style="margin-left:20px;">
+                        @Html.EditorFor(model => model.IsControlOn)
+                        @Html.ValidationMessageFor(model => model.IsControlOn, "", new { @class = "text-danger", style = "margine-left:40px;" })
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.DeviceActionTemplateId, "Action", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @*@Html.DropDownList("DeviceActionTemplateId", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.DeviceActionTemplateId, "", new { @class = "text-danger" })*@
+                    @Html.DropDownList("DeviceActionTemplateId", null, htmlAttributes: new { @class = "form-control SlectBox", @multiple = "multiple", @placeholder = "Select control(s)" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.IsActive, "Active", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <div class="checkbox" style="margin-left:20px;">
+                        @Html.EditorFor(model => model.IsActive)
+                        @Html.ValidationMessageFor(model => model.IsActive, "", new { @class = "text-danger", style = "margine-left:40px;" })
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input id="btnSubmit" type="submit" value="Create" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+        }
+    </div>
+</div>
+
+@section Scripts {
+@Scripts.Render("~/Scripts/jquery.sumoselect.min.js")
+@Scripts.Render("~/Scripts/App/lvm-sumoselect.js")
+
+
+@*<script type="text/javascript">
+     $(document).ready(function () {
+         window.asd = $('.SlectBox').SumoSelect({ selectAll: true });
+
+
+         $('#btnSubmit').on('click', function () {
+             var obj = [], items = '';
+             $('.opt.selected').each(function (i) {
+                 obj.push($(this).val());
+                 //$('.testSelAll')[0].sumo.unSelectItem(i);
+             });
+             for (var i = 0; i < obj.length; i++) { items += ' ' + obj[i] };
+             alert(items);
+         });
+
+     });
+</script>*@
+}

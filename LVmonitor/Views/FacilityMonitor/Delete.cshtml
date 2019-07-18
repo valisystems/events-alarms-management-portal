@@ -1,0 +1,66 @@
+﻿@model LvMonitor.Models.Lvm_FacilityMonitor
+
+<div class="lvm-box">
+    <div class="lvm-box-header">
+        <span>@ViewBag.SubTitle @ViewBag.Title</span>
+    </div>
+    <div class="lvm-box-body">
+        <p class="text-danger">@ViewBag.AreYouSure</p>
+        <div>
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <dl class="dl-horizontal lvm-dl-horizontal2">
+                <dt>
+                    Facility
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Lvm_Facility.FacilityName)
+                </dd>
+                <dt>
+                    Monitor ID
+                </dt>
+                <dt>
+                    Monitor Name
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.MonitorName)
+                </dd>
+                <dd>
+                    @Html.DisplayFor(model => model.MonitorId)
+                </dd>
+                <dt>
+                    Default Template
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Lvm_Template.TemplateName)
+                </dd>
+                <dt>
+                    History Template Width
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.TemplateHistoryWidth)
+                </dd>
+                <dt>
+                    Min Device Template Width
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.TemplateDeviceWidthMin)
+                </dd>
+                <dt>
+                    Device Template Column Number
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.TemplateDeviceColumnNumber)
+                </dd>
+            </dl>
+            @using (Html.BeginForm())
+            {
+            @Html.AntiForgeryToken()
+            <div class="form-actions no-color">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Delete" class="btn btn-default" />
+                </div>
+            </div>
+            }
+        </div>
+    </div>
+</div>

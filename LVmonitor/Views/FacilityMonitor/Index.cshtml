@@ -1,0 +1,86 @@
+﻿@model PagedList.IPagedList<LvMonitor.Models.Lvm_FacilityMonitor>
+@using PagedList.Mvc;
+@section head {<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />}
+<div class="lvm-box">
+    <div class="lvm-box-header">
+        <span>@ViewBag.Title</span>
+    </div>
+    <div class="lvm-box-body">
+        <p>
+            @Html.ActionLink("Create New", "Create")
+        </p>
+        @*@using (Html.BeginForm("Index", "FacilityMonitor", FormMethod.Get))
+            {
+            <p>@Html.DropDownList("FacilityId", new SelectList(ViewBag.Facility, "FacilityId", "FacilityName").InsertEmptyFirst("Select Facility", "0"), null, htmlAttributes: new { @class = "form-control", onchange = "this.form.submit();" })</p>
+            }*@
+        @if (!ViewBag.IsSingleFacility)
+        {
+            using (Html.BeginForm("Index", "FacilityMonitor", FormMethod.Get))
+            {
+            <p>@Html.DropDownList("FacilityId", (SelectList)ViewBag.lFacility, null, htmlAttributes: new { @class = "form-control", onchange = "this.form.submit();" })</p>
+            }
+        }
+        <table class="table table-striped lvm-table">
+            <tr>
+                <th>
+                    Facility
+                </th>
+                <th>
+                    Monitor ID
+                </th>
+                <th>
+                    Monitor Name
+                </th>
+                <th>
+                    Default Template
+                </th>
+
+                <th>
+                    History Template<br />Width
+                </th>
+                <th>
+                    Min Device<br />Template Width
+                </th>
+                <th>
+                    Device Template<br />Column Number
+                </th>
+                <th class="lvm-th-ico"></th>
+            </tr>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Lvm_Facility.FacilityName)
+                </td>
+                <td style="text-align:center;">
+                    @Html.DisplayFor(modelItem => item.MonitorId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MonitorName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Lvm_Template.TemplateName)
+                </td>
+                <td style="text-align:center;">
+                    @Html.DisplayFor(modelItem => item.TemplateHistoryWidth)
+                </td>
+                <td style="text-align:center;">
+                    @Html.DisplayFor(modelItem => item.TemplateDeviceWidthMin)
+                </td>
+                <td style="text-align:center;">
+                    @Html.DisplayFor(modelItem => item.TemplateDeviceColumnNumber)
+                </td>
+                <td class="lvm-td-ico">
+                    @Html.ActionLink(" ", "Details", "FacilityMonitor", new { FacilityId = item.FacilityId, MonitorId = item.MonitorId }, new { @class = "fa fa-eye" })&nbsp;
+                    @Html.ActionLink(" ", "Edit", "FacilityMonitor", new { FacilityId = item.FacilityId, MonitorId = item.MonitorId }, new { @class = "fa fa-pencil-square-o" })&nbsp;
+                    @Html.ActionLink(" ", "Delete", "FacilityMonitor", new { FacilityId = item.FacilityId, MonitorId = item.MonitorId }, new { @class = "fa fa-trash" })
+                </td>
+            </tr>
+            }
+        </table>
+        <div class="lvm-tbl-pager">
+            <div class="lvm-tbl-pager-btn">@Html.PagedListPager(Model, page => Url.Action("Index", new { FacilityId = ViewBag.FacilityId, page }))</div>
+            <div class="lvm-tbl-pager-pagenum">Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount</div>
+        </div>
+    </div>
+</div>

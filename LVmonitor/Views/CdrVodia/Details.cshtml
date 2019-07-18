@@ -1,0 +1,271 @@
+﻿@model LvMonitor.Models.Lvm_CdrVodia
+
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal">&times;</button>
+    <h3 class="modal-title">Call Details</h3>
+</div>
+<div class="modal-body">
+    <dl class="dl-horizontal lvm-dl-horizontal">
+        <dt>
+            CDR Type
+        </dt>
+        <dd>
+            Vodia
+        </dd>
+        <dt>
+            Facility
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FacilityName)
+        </dd>
+        <dt>
+            Action
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Action)
+        </dd>
+        <dt>
+            System
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.System)
+        </dd>
+
+        <dt>
+            Primary Call ID
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PrimaryCallID)
+        </dd>
+
+        <dt>
+            Call ID
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CallID)
+        </dd>
+
+        <dt>
+            From
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.From)
+        </dd>
+
+        <dt>
+            To
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.To)
+        </dd>
+
+        <dt>
+            Direction
+        </dt>
+
+        <dd>
+            @if (Model.Direction == true)
+            { <text>Inbound</text> }
+            else
+            { <text>Outbound</text> }
+        </dd>
+
+        <dt>
+            Remote Party
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RemoteParty)
+        </dd>
+
+        <dt>
+            Local Party
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LocalParty)
+        </dd>
+
+        <dt>
+            Trunk Name
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TrunkName)
+        </dd>
+
+        <dt>
+            Trunk ID
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TrunkID)
+        </dd>
+
+        <dt>
+            Cost
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Cost)
+        </dd>
+
+        <dt>
+            CMC
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CMC)
+        </dd>
+
+        <dt>
+            Domain
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Domain)
+        </dd>
+
+        <dt>
+            Time Start
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TimeStart)
+        </dd>
+
+        <dt>
+            Time Connected
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TimeConnected)
+        </dd>
+
+        <dt>
+            Time End
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TimeEnd)
+        </dd>
+
+        <dt>
+            Local Time
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LocalTime)
+        </dd>
+
+        <dt>
+            Duration HHMMSS
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DurationHHMMSS)
+        </dd>
+
+        <dt>
+            Duration
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Duration)
+        </dd>
+
+        <dt>
+            Record Location
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RecordLocation)
+        </dd>
+
+        <dt>
+            Record Users
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RecordUsers)
+        </dd>
+
+        <dt>
+            Type
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Type)
+        </dd>
+
+        <dt>
+            Extension
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Extension)
+        </dd>
+
+        <dt>
+            Extension Name
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ExtensionName)
+        </dd>
+        <dt>
+            Idle Duration
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IdleDuration)
+        </dd>
+
+        <dt>
+            Ring Duration
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.RingDuration)
+        </dd>
+        <dt>
+            Hold Duration
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.HoldDuration)
+        </dd>
+        <dt>
+            Ivr Duration
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IvrDuration)
+        </dd>
+        <dt>
+            Account Number
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.AccountNumber)
+        </dd>
+        <dt>
+            IP Address
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IPAdr)
+        </dd>
+        <dt>
+            Quality
+        </dt>
+        <dd>
+            <div style="overflow-x: auto;">
+                @Html.DisplayFor(model => model.Quality)
+            </div>
+        </dd>
+    </dl>
+    <div class="row">
+        <div class="col-xs-4 col-xs-offset-4" style="padding-left:0;">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+    </div>
+</div>

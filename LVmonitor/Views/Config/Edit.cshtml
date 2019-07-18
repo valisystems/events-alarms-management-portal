@@ -1,0 +1,88 @@
+﻿@model LvMonitor.Models.Lvm_Config
+
+<div class="lvm-box">
+    <div class="lvm-box-header">
+        <span>@ViewBag.SubTitle @ViewBag.Title</span>
+    </div>
+    <div class="lvm-box-body">
+        @using (Html.BeginForm())
+        {
+        @Html.AntiForgeryToken()
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.ConfigId)
+            @Html.HiddenFor(model => model.AuthCode)
+            <div class="form-group">
+                @Html.LabelFor(model => model.AuthCode, "Auth. Code (WebConfig)", htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-9">
+                    @*@Html.EditorFor(model => model.AuthCode, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.AuthCode, "", new { @class = "text-danger" })*@
+                    @Html.Label(Model.AuthCode, htmlAttributes: new { @style = "padding-top:8px;font-weight: normal;" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.MonitorHistoryWidth, "Monitor History Width", htmlAttributes: new { @class = "control-label col-md-3 text-nowrap" })
+                <div class="col-md-9">
+                    @Html.EditorFor(model => model.MonitorHistoryWidth, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.MonitorHistoryWidth, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.MonitorTemplateWidthMin, "Min Monitor Template Width", htmlAttributes: new { @class = "control-label col-md-3 text-nowrap" })
+                <div class="col-md-9">
+                    @Html.EditorFor(model => model.MonitorTemplateWidthMin, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.MonitorTemplateWidthMin, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.MonitorColumnNumber, "Monitor Column Number", htmlAttributes: new { @class = "control-label col-md-3 text-nowrap" })
+                <div class="col-md-9">
+                    @Html.EditorFor(model => model.MonitorColumnNumber, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.MonitorColumnNumber, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.ImageFileTypes, "Image File Types", htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-9">
+                    @Html.EditorFor(model => model.ImageFileTypes, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ImageFileTypes, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.ImageFileSizeMaxMb, "Max Image File Size (Mb)", htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-9">
+                    @Html.EditorFor(model => model.ImageFileSizeMaxMb, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ImageFileSizeMaxMb, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.IsDeviceDiscovery, "Device Discovery (All Facilities)", htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-9">
+                    <div class="checkbox">
+                        @Html.EditorFor(m => m.IsDeviceDiscovery, new { htmlAttributes = new { @style = "margin-left:0;" } })
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-3 col-md-9">
+                    <input type="submit" value="Save" class="btn btn-default" />
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.Label("Reset Database and Insert Test Data", htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-9">
+                    @Html.ActionLink("DB Reset", "DbReset", null, new { @class = "btn btn-default", style = "color:red;", onclick = "return confirm('Are you sure you want to reset the DB and lose all the data?');" }) &nbsp;
+                    @Html.ActionLink("Delete Devices and Rooms", "DeleteDeviceRoom", null, new { @class = "btn btn-default", style = "color:red;", onclick = "return confirm('Are you sure you want to delete Devices and Rooms?');" }) &nbsp;
+                    @Html.ActionLink("Delete Monitor Records", "DeleteMonitorRecords", null, new { @class = "btn btn-default", style = "color:red;", onclick = "return confirm('Are you sure you want to delete Monitor Records?');" }) &nbsp; &nbsp; &nbsp;
+                    @Html.ActionLink("Insert Monitor Test Data", "InsertMonLogTestData", null, new { @class = "btn btn-default", onclick = "return confirm('Are you sure you want to Insert Monitor Test Data for 6 months?');" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-3 col-md-9 text-green">
+                    @ViewBag.Status
+                </div>
+            </div>
+        </div>
+        }
+    </div>
+</div>

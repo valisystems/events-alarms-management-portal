@@ -1,0 +1,38 @@
+﻿@model IEnumerable<LvMonitor.Models.Lvm_ResourceTextType>
+<div class="lvm-box">
+    <div class="lvm-box-header">
+        <span>@ViewBag.Title</span>
+    </div>
+    <div class="lvm-box-body">
+        <p>
+            @Html.ActionLink("Create New", "Create")
+        </p>
+        <table class="table table-striped lvm-table">
+            <tr>
+                <th>
+                    ID
+                </th>
+                <th>
+                    Text Type
+                </th>
+                <th class="lvm-th-ico"></th>
+            </tr>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ResourceTextTypeId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ResourceTextType)
+                </td>
+                <td class="lvm-td-ico">
+                    @Html.ActionLink(" ", "Details", "ResourceTextType", new { id = item.ResourceTextTypeId }, new { @class = "fa fa-eye" })&nbsp;
+                    @Html.ActionLink(" ", "Edit", "ResourceTextType", new { id = item.ResourceTextTypeId }, new { @class = "fa fa-pencil-square-o" })&nbsp;
+                    @Html.ActionLink(" ", "Delete", "ResourceTextType", new { id = item.ResourceTextTypeId }, new { @class = "fa fa-trash" })
+                </td>
+            </tr>
+            }
+        </table>
+    </div>
+</div>

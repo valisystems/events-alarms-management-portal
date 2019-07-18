@@ -1,0 +1,78 @@
+﻿@model LvMonitor.Models.Lvm_FacilityMonitor
+
+<div class="lvm-box">
+    <div class="lvm-box-header">
+        <span>@ViewBag.SubTitle @ViewBag.Title</span>
+    </div>
+    <div class="lvm-box-body">
+        @using (Html.BeginForm())
+        {
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(true, "", new { @class = "text-danger lvm-ul-left0" })
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(m => m.FacilityId, "Facility", htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-9">
+                    @if (ViewBag.IsSingleFacility)
+                    {
+                    <h5>@ViewBag.SingleFacilityName</h5>
+                    @Html.Hidden("FacilityId", (string)ViewBag.FacilityId.ToString())
+                    }
+                    else
+                    {
+                    @Html.DropDownListFor(r => r.FacilityId, (SelectList)ViewBag.lFacility, htmlAttributes: new { @class = "form-control" })
+                    }
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.MonitorId, "Monitor ID (Auto #)", htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-9">
+                    @Html.EditorFor(model => model.MonitorId, new { htmlAttributes = new { @class = "form-control" } })
+                    @*@Html.ValidationMessageFor(model => model.MonitorId, "", new { @class = "text-danger" })*@
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.MonitorName, "Monitor Name", htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-9">
+                    @Html.EditorFor(model => model.MonitorName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.MonitorName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.TemplateId, "Default Template", htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-9">
+                    @Html.DropDownList("TemplateId", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.TemplateId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.TemplateHistoryWidth, "History Template Width", htmlAttributes: new { @class = "control-label col-md-3 text-nowrap" })
+                <div class="col-md-9">
+                    @Html.EditorFor(model => model.TemplateHistoryWidth, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.TemplateHistoryWidth, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.TemplateDeviceWidthMin, "Min Device Template Width", htmlAttributes: new { @class = "control-label col-md-3 text-nowrap" })
+                <div class="col-md-9">
+                    @Html.EditorFor(model => model.TemplateDeviceWidthMin, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.TemplateDeviceWidthMin, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.TemplateDeviceColumnNumber, "Device Template Column Number", htmlAttributes: new { @class = "control-label col-md-3 text-nowrap" })
+                <div class="col-md-9">
+                    @Html.EditorFor(model => model.TemplateDeviceColumnNumber, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.TemplateDeviceColumnNumber, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-3 col-md-9">
+                    <input type="submit" value="Create" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+        }
+    </div>
+</div>

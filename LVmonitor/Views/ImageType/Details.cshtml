@@ -1,0 +1,39 @@
+﻿@model LvMonitor.Models.Lvm_ImageType
+<div class="lvm-box">
+    <div class="lvm-box-header">
+        <span>@ViewBag.Title @ViewBag.SubTitle</span>
+    </div>
+    <div class="lvm-box-body">
+        <div>
+            <dl class="dl-horizontal">
+                <dt>
+                    Image Type
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.ImageType)
+                </dd>
+                <dt>
+                    Image Path
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.ImagePath)
+                </dd>
+                <dt>
+                    Width
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Width)
+                </dd>
+                <dt>
+                    Height
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Height)
+                </dd>
+            </dl>
+        </div>
+        <p>
+            @Html.ActionLink("Edit", "Edit", new { id = Model.ImageTypeId })
+        </p>
+    </div>
+</div>

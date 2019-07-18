@@ -1,0 +1,28 @@
+﻿@model LvMonitor.Models.Lvm_ResourceTextType
+
+<div class="lvm-box">
+    <div class="lvm-box-header">
+        <span>@ViewBag.Title @ViewBag.SubTitle</span>
+    </div>
+    <div class="lvm-box-body">
+        <div>
+            <dl class="dl-horizontal">
+                <dt>
+                    ID
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.ResourceTextTypeId)
+                </dd>
+                <dt>
+                    Text Type
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.ResourceTextType)
+                </dd>
+            </dl>
+        </div>
+        <p>
+            @Html.ActionLink("Edit", "Edit", new { id = Model.ResourceTextTypeId })
+        </p>
+    </div>
+</div>

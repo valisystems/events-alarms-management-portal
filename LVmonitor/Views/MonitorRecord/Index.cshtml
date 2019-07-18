@@ -1,0 +1,152 @@
+﻿@model PagedList.IPagedList<LvMonitor.Models.Lvm_MonitorRecord>
+@using PagedList.Mvc;
+@section head {<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />}
+
+<div class="lvm-box">
+    <div class="lvm-box-header">
+        <span>@ViewBag.Title</span>
+    </div>
+    <div class="lvm-box-body">
+        <p>
+            @Html.ActionLink("Create New", "Create")
+        </p>
+        @using (Html.BeginForm("Index", "MonitorRecord", FormMethod.Get))
+        {
+        <p>@Html.DropDownList("FacilityId", new SelectList(ViewBag.Facility, "FacilityId", "FacilityName").InsertEmptyFirst("Select Facility", "0"), null, htmlAttributes: new { @class = "form-control", onchange = "this.form.submit();" })</p>
+        }        <table class="table table-striped lvm-table">
+            <tr>
+                <th>
+                    Facility ID
+                </th>
+                <th>
+                    Device Name
+                </th>
+                <th>
+                    Monitor Name
+                </th>
+                <th>
+                    Temp ID
+                </th>
+                <th>
+                    Ctl1
+                </th>
+                <th>
+                    Ctl2
+                </th>
+                <th>
+                    Ctl3
+                </th>
+                <th>
+                    Ctl4
+                </th>
+                <th>
+                    Ctl5
+                </th>
+                <th>
+                    Device Data
+                </th>
+                <th>
+                    Date
+                </th>        @*<th>
+                        LastDeviceRecordId
+                    </th>
+
+                    <th>
+                        ControlImg1
+                    </th>
+                    <th>
+                        ControlImg2
+                    </th>
+                    <th>
+                        ControlImg3
+                    </th>
+                    <th>
+                        ControlImg4
+                    </th>
+                    <th>
+                        ControlImg5
+                    </th>
+                    <th>
+                        DeviceRecordImg
+                    </th>
+                    <th>
+                        TemplateName
+                    </th>*@
+
+                @*<th class="lvm-th-ico"></th>*@
+            </tr>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FacilityId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Lvm_Device.DeviceName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Lvm_FacilityMonitor.MonitorName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TemplateId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Control1)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Control2)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Control3)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Control4)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Control5)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DeviceData)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateCreated)
+                </td>
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.LastDeviceRecordId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ControlImg1)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ControlImg2)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ControlImg3)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ControlImg4)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ControlImg5)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DeviceRecordImg)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TemplateName)
+                    </td>*@
+
+                @*<td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.MonitorRecordId }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.MonitorRecordId }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.MonitorRecordId })
+                    </td>*@
+            </tr>
+            }
+        </table>
+        <div class="lvm-tbl-pager">
+            <div class="lvm-tbl-pager-btn">@Html.PagedListPager(Model, page => Url.Action("Index", new { FacilityId = ViewBag.FacilityId, page }))</div>
+            <div class="lvm-tbl-pager-pagenum">Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount</div>
+        </div>
+    </div>
+</div>

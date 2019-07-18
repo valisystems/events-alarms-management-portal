@@ -1,0 +1,78 @@
+﻿@model LvMonitor.Models.Lvm_DeviceRecordImage
+@{
+  ViewBag.Title = "Details";
+}
+<h2>Details</h2>
+<div>
+    <h4>Device Record Image</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Facility
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Lvm_Facility.FacilityName)
+        </dd>
+        <dt>
+            Media Type
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Lvm_MediaType.MediaType)
+        </dd>
+        <dt>
+            Image #
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ImageNumber)
+        </dd>
+        <dt>
+            Image Name
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ImageName)
+        </dd>
+        <dt>
+            Image File
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ImageFile)
+        </dd>
+        <dt>
+            Image
+        </dt>
+        <dd>
+            @{
+              if (!string.IsNullOrWhiteSpace(Model.ImageFile))
+              {
+                  if (Model.MediaTypeId > 1)
+                  {
+                <video class="LvmLstImg" controls>
+                    <source src="@Model.ImageFile" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                  }
+                  else
+                  {
+                      if (Model.ImageFile.IndexOf(@"/") < 0)
+                      {
+                <img class="LvmLstImg" src="@Url.Content(string.Format("{0}{1}/{2}", ViewBag.ImgPath, Model.FacilityId, Model.ImageFile))" alt="" />
+                      }
+                      else
+                      {
+                <img class="LvmLstImg" src="@Model.ImageFile" alt="" />
+                          }
+                      }
+                  }
+              }
+        </dd>
+        <dt>
+            Description
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ImageDescription)
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.DeviceRecordImageId })
+</p>

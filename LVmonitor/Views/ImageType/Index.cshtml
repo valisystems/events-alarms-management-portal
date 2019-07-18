@@ -1,0 +1,50 @@
+﻿@model IEnumerable<LvMonitor.Models.Lvm_ImageType>
+<div class="lvm-box">
+    <div class="lvm-box-header">
+        <span>@ViewBag.Title</span>
+    </div>
+    <div class="lvm-box-body">
+        <p>
+            @Html.ActionLink("Create New", "Create")
+        </p>
+        <table class="table table-striped lvm-table">
+            <tr>
+                <th>
+                    Image Type
+                </th>
+                <th>
+                    Image Path
+                </th>
+                <th>
+                    Width
+                </th>
+                <th>
+                    Height
+                </th>
+                <th class="lvm-th-ico"></th>
+            </tr>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ImageType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ImagePath)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Width)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Height)
+                </td>
+                <td class="lvm-td-ico">
+                    @Html.ActionLink(" ", "Details", "ImageType", new { id = item.ImageTypeId }, new { @class = "fa fa-eye" })&nbsp;
+                    @Html.ActionLink(" ", "Edit", "ImageType", new { id = item.ImageTypeId }, new { @class = "fa fa-pencil-square-o" })&nbsp;
+                    @Html.ActionLink(" ", "Delete", "ImageType", new { id = item.ImageTypeId }, new { @class = "fa fa-trash" })
+                </td>
+            </tr>
+            }
+        </table>
+    </div>
+</div>

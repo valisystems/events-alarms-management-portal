@@ -1,0 +1,40 @@
+﻿@model LvMonitor.Models.Lvm_SecurityIp
+
+<div class="lvm-box">
+    <div class="lvm-box-header">
+        <span>@ViewBag.Title @ViewBag.SubTitle</span>
+    </div>
+    <div class="lvm-box-body">
+        <div>
+            <dl class="dl-horizontal">
+                <dt>
+                    IP
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.IP)
+                </dd>
+                <dt>
+                    Is White IP
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.IsIpWhite)
+                </dd>
+                <dt>
+                    Is Black IP
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.IsIpBlack)
+                </dd>
+                <dt>
+                    Facility
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Lvm_Facility.FacilityName)
+                </dd>
+            </dl>
+        </div>
+        <p>
+            @Html.ActionLink("Edit", "Edit", new { id = Model.SecurityIpId })
+        </p>
+    </div>
+</div>

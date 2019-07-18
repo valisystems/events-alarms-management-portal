@@ -1,0 +1,75 @@
+﻿@model IEnumerable<LvMonitor.Models.Lvm_DeviceTypeControl>
+<div class="lvm-box">
+    <div class="lvm-box-header">
+        <span>@ViewBag.Title</span>
+    </div>
+    <div class="lvm-box-body">
+        <p>
+            @Html.ActionLink("Create New", "Create")
+        </p>
+        <table class="table table-striped lvm-table">
+            <tr>
+                <th>
+                    Device Type
+                </th>
+                <th style="text-align:center;">
+                    Number
+                </th>
+                <th style="text-align:center;">
+                    Control Type @*Code*@
+                </th>
+                <th>
+                    Name
+                </th>
+                @*<th>
+                Image File
+                </th>*@
+                <th style="text-align:center;">
+                    Image
+                </th>
+                <th>
+                    Description
+                </th>
+                <th style="text-align:center;">
+                    Chart Color
+                </th>
+                <th class="lvm-th-ico"></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Lvm_DeviceType.DeviceTypeName)
+                </td>
+                <td style="text-align:center;">
+                    @Html.DisplayFor(modelItem => item.ControlNumber)
+                </td>
+                <td style="text-align:center;">
+                    @Html.DisplayFor(modelItem => item.ControlCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ControlName)
+                </td>
+                @*<td>
+                @Html.DisplayFor(modelItem => item.ControlImage)
+                </td>*@
+                <td style="text-align:center;">
+                    <img class="LvmLstImg" src="@Url.Content(ViewBag.ImgPath + item.ControlImage)" alt="" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ControlDescription)
+                </td>
+                <td style="text-align:center;color: #@item.ChartColor;">
+                    @Html.DisplayFor(modelItem => item.ChartColor)
+                </td>
+                <td class="lvm-td-ico">
+                    @Html.ActionLink(" ", "Details", "DeviceTypeControl", new { id = item.DeviceTypeControlId }, new { @class = "fa fa-eye" })&nbsp;
+                    @Html.ActionLink(" ", "Edit", "DeviceTypeControl", new { id = item.DeviceTypeControlId }, new { @class = "fa fa-pencil-square-o" })&nbsp;
+                    @Html.ActionLink(" ", "Delete", "DeviceTypeControl", new { id = item.DeviceTypeControlId }, new { @class = "fa fa-trash" })
+                </td>
+            </tr>
+            }
+        </table>
+    </div>
+</div>

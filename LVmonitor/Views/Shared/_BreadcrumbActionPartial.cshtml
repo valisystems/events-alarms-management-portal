@@ -1,0 +1,26 @@
+﻿<div>
+    @if (ViewContext.RouteData.Values["controller"].ToString().ToLower() != "dashboard")
+    {
+    <ol class="breadcrumb">
+        <li>@Html.ActionLink("Dashboard", "Index", "Dashboard")</li>
+        @{
+          if (string.IsNullOrWhiteSpace(@ViewBag.SubTitle))
+          {
+            <li class="active">@ViewBag.Title </li>}
+          else
+          {
+              string Ttl = ViewBag.Title.ToString();
+              string Cont = @ViewBag.DifCont;
+              string rCont = ViewContext.RouteData.Values["controller"].ToString();
+              if (string.IsNullOrWhiteSpace(Cont)) Cont = rCont;
+              string ActName = @ViewBag.DifAct == null ? "Index" : @ViewBag.DifAct;
+            <li>@Html.ActionLink(@Ttl, ActName, Cont)</li>
+              if (!string.IsNullOrWhiteSpace(@ViewBag.Title2)) {<li>@Html.ActionLink((string)ViewBag.Title2.ToString(), "Index", rCont, new { id = ViewBag.DeviceId }, null)</li>}
+            <li class="active">@ViewBag.SubTitle</li>
+          }
+        }
+    </ol>
+          }
+          else
+          {<ol class="breadcrumb"><li class="active"><div>@ViewBag.Title</div></li></ol>}
+</div>

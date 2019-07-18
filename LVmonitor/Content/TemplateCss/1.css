@@ -1,0 +1,36 @@
+.LvmTeplate{
+ padding:0 3px;
+/*border: 1px solid gray;*/
+}
+
+.LvmTemp3 > div{
+ padding:0;
+border: 1px solid gray;
+}
+
+.LvmTemp3 table {
+border: 1px solid lightgray;
+width: 100%;
+}
+
+.LvmTemp3 td {
+border-top: 1px solid lightgray;
+vertical-align: middle;
+padding-left: 6px;
+}
+
+.LvmTemp3 > td {
+border-top: none;
+
+}
+
+.LvmTemp3 .LvmTep_tdImg {
+width: 80px;
+padding: 10px;
+border-right: 1px solid lightgray;
+}
+
+.LvmTemp3 .LvmTep_tdImg img {
+width: 100%;
+}
+

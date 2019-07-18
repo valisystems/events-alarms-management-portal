@@ -1,0 +1,58 @@
+﻿@model IEnumerable<LvMonitor.Models.Lvm_DeviceAction>
+
+<div class="lvm-box">
+    <div class="lvm-box-header">
+        @*<span>Device Actions for <strong>@ViewBag.DeviceNameCode</strong></span>*@
+        <span>Device Actions for <strong>@Html.ActionLink((string)@ViewBag.DeviceNameCode, "Edit", "Device", new { id = @ViewBag.DeviceId }, null)</strong></span>
+    </div>
+    <div class="lvm-box-body">
+        <p>
+            @Html.ActionLink("Add New Action", "Create", new { id = @ViewBag.DeviceId })
+        </p>
+        <table class="table lvm-flex-table">
+            <tr>
+                <th style="width: 120px;">
+                    Control
+                </th>
+                <th style="width: 60px; text-align:center;">
+                    Condition Alarm
+                </th>
+                @*<th style="width: 60px;">
+                    Type
+                </th>*@
+                <th style="width: 120px;">
+                    Action
+                </th>
+                <th style="width: 60px;">
+                    Active
+                </th>
+                <th style="width: 90px;"></th>
+            </tr>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Lvm_DeviceTypeControl.ControlName) (@Html.DisplayFor(modelItem => item.Lvm_DeviceTypeControl.ControlCode))
+                </td>
+                <td style="text-align:center;">
+                    @Html.DisplayFor(modelItem => item.IsControlOn)
+                </td>
+                @*<td>
+                    @Html.DisplayFor(modelItem => item.Lvm_DeviceActionType.DeviceActionType)
+                </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.Lvm_DeviceActionTemplate.ActionName)
+                </td>
+                <td style="text-align:center;">
+                    @Html.DisplayFor(modelItem => item.IsActive)
+                </td>
+                <td style="text-align:center;white-space:nowrap;">
+                    @Html.ActionLink(" ", "Details", "DeviceAction", new { id = item.DeviceActionId }, new { @class = "fa fa-eye" })&nbsp;
+                    @Html.ActionLink(" ", "Edit", "DeviceAction", new { id = item.DeviceActionId }, new { @class = "fa fa-pencil-square-o" })&nbsp;
+                    @Html.ActionLink(" ", "Delete", "DeviceAction", new { id = item.DeviceActionId }, new { @class = "fa fa-trash" })
+                </td>
+            </tr>
+            }
+        </table>
+    </div>
+</div>

@@ -1,0 +1,255 @@
+﻿@model LvMonitor.Models.Lvm_DeviceActionTemplate
+
+@section head {
+    <style>
+        .modal-content {
+            width: 600px !important;
+            margin: 30px auto !important;
+        }
+    </style>
+}
+<div class="lvm-box">
+    <div class="lvm-box-header">
+        <span>@ViewBag.SubTitle @ViewBag.Title</span>
+    </div>
+    <div class="lvm-box-body">
+        @using (Html.BeginForm())
+        {
+        @Html.AntiForgeryToken()
+        @Html.Hidden("hdnUrlTypeId", (string)ViewBag.UrlTypeId.ToString())
+        @Html.Hidden("hdnUrlGen", "");
+        @Html.Hidden("hdnActionUrl", "#ActionUrl");
+        @Html.Hidden("hdnTrigPat", "#ActionUrl");
+
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.FacilityId, "Facility", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("FacilityId", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.FacilityId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.ActionName, "Name", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.ActionName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ActionName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Description, "Description", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control", @style = "width: 600px; max-width: 600px" } })
+                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.IsActive, "Active", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <div class="checkbox" style="margin-left:20px;">
+                        @Html.EditorFor(model => model.IsActive)
+                        @Html.ValidationMessageFor(model => model.IsActive, "", new { @class = "text-danger", style = "margine-left:40px;" })
+                    </div>
+                </div>
+            </div>
+            @*Action Triggers*@
+            <div class="form-group">
+                <div class="control-label col-md-2"><a href="#divTrg1" data-toggle="collapse">Action Trigger #1</a></div>
+                <div class="col-md-10"></div>
+                <div id="divTrg1" class="collapse in col-md-12" style="margin-top:10px;">
+                    <div class="form-group">
+                        <div class="form-inline">
+                            @Html.LabelFor(model => model.CallAfterSec, "Call After", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-2">
+                                @Html.EditorFor(model => model.CallAfterSec, new { htmlAttributes = new { @class = "form-control", @style = "width: 100px; max-width: 100px" } }) &nbsp;sec.
+                                @Html.ValidationMessageFor(model => model.CallAfterSec, "", new { @class = "text-danger" })
+                            </div>
+                            @Html.LabelFor(model => model.CallRepeatEveryMin, "Repeat Every", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-6">
+                                @Html.EditorFor(model => model.CallRepeatEveryMin, new { htmlAttributes = new { @class = "form-control", @style = "width: 100px; max-width: 100px" } }) &nbsp;min.
+                                @Html.ValidationMessageFor(model => model.CallRepeatEveryMin, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.DeviceActionTypeId, "Type", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.DropDownList("DeviceActionTypeId", null, htmlAttributes: new { @class = "form-control", style = "width: 100px;" })
+                            @Html.ValidationMessageFor(model => model.DeviceActionTypeId, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-2" style="text-align:right;">
+                            @Html.ActionLink("URL", "UrlGen", "DeviceActionTemplate", new { id = ViewBag.UrlTypeId }, new { @class = "modal-link btn btn-default", onclick= "SetCurTrig('');" })
+                        </div>
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.ActionUrl, new { htmlAttributes = new { @class = "form-control", @style = "width: 600px; max-width: 600px", onclick = "SetCurTrigPat('#ActionUrl');" } })
+                            @Html.ValidationMessageFor(model => model.ActionUrl, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-bottom:0;">
+                        @Html.LabelFor(model => model.ActionData, "Data", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.ActionData, new { htmlAttributes = new { @class = "form-control", @style = "height:100px; width: 600px; max-width: 600px", onclick = "SetCurTrigPat('#ActionData');" } })
+                            @Html.ValidationMessageFor(model => model.ActionData, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group" style="margin-top:0; ">
+                <div class="control-label col-md-2"><a href="#divTrg2" data-toggle="collapse">Action Trigger #2</a></div>
+                <div class="col-md-10"></div>
+                <div id="divTrg2" class="collapse col-md-12" style="margin-top:10px;">
+                    <div class="form-group">
+                        <div class="form-inline">
+                            @Html.LabelFor(model => model.CallAfterSec2, "Call After", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-2">
+                                @Html.EditorFor(model => model.CallAfterSec2, new { htmlAttributes = new { @class = "form-control", @style = "width: 100px; max-width: 100px" } }) &nbsp;sec.
+                                @Html.ValidationMessageFor(model => model.CallAfterSec2, "", new { @class = "text-danger" })
+                            </div>
+                            @Html.LabelFor(model => model.CallRepeatEveryMin2, "Repeat Every", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-6">
+                                @Html.EditorFor(model => model.CallRepeatEveryMin2, new { htmlAttributes = new { @class = "form-control", @style = "width: 100px; max-width: 100px" } }) &nbsp;min.
+                                @Html.ValidationMessageFor(model => model.CallRepeatEveryMin2, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.DeviceActionTypeId2, "Type", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.DropDownList("DeviceActionTypeId2", null, htmlAttributes: new { @class = "form-control", style = "width: 100px;" })
+                            @Html.ValidationMessageFor(model => model.DeviceActionTypeId2, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        
+                        <div class="col-md-2" style="text-align:right;">
+                            @Html.ActionLink("URL", "UrlGen", "DeviceActionTemplate", new { id = ViewBag.UrlTypeId }, new { @class = "modal-link btn btn-default", onclick = "SetCurTrig('2');" })
+                        </div>
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.ActionUrl2, new { htmlAttributes = new { @class = "form-control", @style = "width: 600px; max-width: 600px", onclick = "SetCurTrigPat('#ActionUrl2');" } })
+                            @Html.ValidationMessageFor(model => model.ActionUrl2, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.ActionData2, "Data", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.ActionData2, new { htmlAttributes = new { @class = "form-control", @style = "height:100px; width: 600px; max-width: 600px", onclick = "SetCurTrigPat('#ActionData2');" } })
+                            @Html.ValidationMessageFor(model => model.ActionData2, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="control-label col-md-2"><a href="#divTrg3" data-toggle="collapse">Action Trigger #3</a></div>
+                <div class="col-md-10"></div>
+                <div id="divTrg3" class="collapse col-md-12" style="margin-top:10px;">
+                    <div class="form-group">
+                        <div class="form-inline">
+                            @Html.LabelFor(model => model.CallAfterSec3, "Call After", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-2">
+                                @Html.EditorFor(model => model.CallAfterSec3, new { htmlAttributes = new { @class = "form-control", @style = "width: 100px; max-width: 100px" } }) &nbsp;sec.
+                                @Html.ValidationMessageFor(model => model.CallAfterSec3, "", new { @class = "text-danger" })
+                            </div>
+                            @Html.LabelFor(model => model.CallRepeatEveryMin3, "Repeat Every", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-6">
+                                @Html.EditorFor(model => model.CallRepeatEveryMin3, new { htmlAttributes = new { @class = "form-control", @style = "width: 100px; max-width: 100px" } }) &nbsp;min.
+                                @Html.ValidationMessageFor(model => model.CallRepeatEveryMin3, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.DeviceActionTypeId3, "Type", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.DropDownList("DeviceActionTypeId3", null, htmlAttributes: new { @class = "form-control", style = "width: 100px;" })
+                            @Html.ValidationMessageFor(model => model.DeviceActionTypeId3, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-2" style="text-align:right;">
+                            @Html.ActionLink("URL", "UrlGen", "DeviceActionTemplate", new { id = ViewBag.UrlTypeId }, new { @class = "modal-link btn btn-default", onclick = "SetCurTrig('3');" })
+                        </div>
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.ActionUrl3, new { htmlAttributes = new { @class = "form-control", @style = "width: 600px; max-width: 600px", onclick = "SetCurTrigPat('#ActionUrl3');" } })
+                            @Html.ValidationMessageFor(model => model.ActionUrl3, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.ActionData3, "Data", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.ActionData3, new { htmlAttributes = new { @class = "form-control", @style = "height:100px; width: 600px; max-width: 600px", onclick = "SetCurTrigPat('#ActionData3');" } })
+                            @Html.ValidationMessageFor(model => model.ActionData3, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="control-label col-md-2"><a href="#divTrgOff" data-toggle="collapse">Alarm Cancel Trigger</a></div>
+                <div class="col-md-10"></div>
+                <div id="divTrgOff" class="collapse col-md-12" style="margin-top:10px;">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.DeviceActionTypeIdOff, "Type", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.DropDownList("DeviceActionTypeIdOff", null, htmlAttributes: new { @class = "form-control", style = "width: 100px;" })
+                            @Html.ValidationMessageFor(model => model.DeviceActionTypeIdOff, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-2" style="text-align:right;">
+                            @Html.ActionLink("URL", "UrlGen", "DeviceActionTemplate", new { id = ViewBag.UrlTypeId }, new { @class = "modal-link btn btn-default", onclick = "SetCurTrig('Off');" })
+                        </div>
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.ActionUrlOff, new { htmlAttributes = new { @class = "form-control", @style = "width: 600px; max-width: 600px", onclick = "SetCurTrigPat('#ActionUrlOff');" } })
+                            @Html.ValidationMessageFor(model => model.ActionUrlOff, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.ActionDataOff, "Data", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.ActionDataOff, new { htmlAttributes = new { @class = "form-control", @style = "height:100px; width: 600px; max-width: 600px", onclick = "SetCurTrigPat('#ActionDataOff');" } })
+                            @Html.ValidationMessageFor(model => model.ActionDataOff, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.Label("Patterns", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10" style="padding-top:6px;">
+                    @Html.ActionLink("<%DeviceCode%>", "", "", new { href = "javascript:void(0)", onclick = "AddPattern('DeviceCode')" }) - Device Code
+                    <br />@Html.ActionLink("<%Room%>", "", "", new { href = "javascript:void(0)", onclick = "AddPattern('Room')" }) - Room
+                    <br />@Html.ActionLink("<%Floor%>", "", "", new { href = "javascript:void(0)", onclick = "AddPattern('Floor')" }) - Floor
+                    <br />@Html.ActionLink("<%Department%>", "", "", new { href = "javascript:void(0)", onclick = "AddPattern('Department')" }) - Department
+                    <br />@Html.ActionLink("<%CtlCode%>", "", "", new { href = "javascript:void(0)", onclick = "AddPattern('DeviceCode')" }) - Control Code
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+        }
+    </div>
+</div>
+
+<div id="modal-container" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-content">
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/Scripts/App/lvm-modal-urlgen.js")
+    <script type="text/javascript">
+        function AddPattern(p) {
+            var input = $($("#hdnTrigPat").val());
+            input.val(input.val() + "<%" + p + "%>");
+        }
+        function SetCurTrig(n) { $("#hdnActionUrl").val("#ActionUrl" + n); $("#hdnTrigPat").val("#ActionUrl" + n); }
+        function SetCurTrigPat(n) {$("#hdnTrigPat").val(n); }
+    </script>
+}

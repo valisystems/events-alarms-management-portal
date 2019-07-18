@@ -1,0 +1,34 @@
+﻿@model LvMonitor.Models.Lvm_Department
+
+<div class="lvm-box">
+    <div class="lvm-box-header">
+        <span>@ViewBag.Title.TrimEnd('s') @ViewBag.SubTitle</span>
+    </div>
+    <div class="lvm-box-body">
+        <div>
+            <dl class="dl-horizontal">
+                <dt>
+                    Facility
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Lvm_Facility.FacilityName)
+                </dd>
+                <dt>
+                    Name
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.DepartmentName)
+                </dd>
+                <dt>
+                    Description
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.DepartmentDescription)
+                </dd>
+            </dl>
+        </div>
+        <p>
+            @Html.ActionLink("Edit", "Edit", new { id = Model.DepartmentId })
+        </p>
+    </div>
+</div>

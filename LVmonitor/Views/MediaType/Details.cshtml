@@ -1,0 +1,22 @@
+﻿@model LvMonitor.Models.Lvm_MediaType
+
+<div class="lvm-box">
+    <div class="lvm-box-header">
+        <span>@ViewBag.Title @ViewBag.SubTitle</span>
+    </div>
+    <div class="lvm-box-body">
+        <div>
+            <dl class="dl-horizontal">
+                <dt>
+                    Media Type
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.MediaType)
+                </dd>
+            </dl>
+        </div>
+        <p>
+            @Html.ActionLink("Edit", "Edit", new { id = Model.MediaTypeId })
+        </p>
+    </div>
+</div>

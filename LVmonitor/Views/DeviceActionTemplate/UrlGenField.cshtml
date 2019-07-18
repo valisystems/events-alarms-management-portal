@@ -1,0 +1,24 @@
+﻿@model LvMonitor.Models.UrlGenModel
+
+@foreach (var item in Model.Fields)
+{
+<div class="form-group">
+    @Html.Label(item.FieldUrl, item.FieldTitle, htmlAttributes: new { @class = "control-label col-xs-3", @style = "white-space: nowrap;" })
+    <div class="col-xs-9">
+        @*@Html.Editor(item.FieldUrl, new { htmlAttributes = new { @class = "form-control", value = "aaa" } })*@
+        @if (item.DataType == "Bool")
+        {
+        @*<input name="@item.FieldUrl" id="@item.FieldUrl" class="check-box" type="checkbox" value='@item.DefaultVal.ToLower()=="true"?"True":"False"' data-val="true">*@
+        @Html.CheckBox(item.FieldUrl, @item.DefaultVal.ToLower() == "true", new { @class = "lvm-urlfield" })
+        }
+        else if ((item.DataType == "Ddl") && (item.FieldUrl == "audio"))
+        {
+        @Html.DropDownList("audio", ((SelectList)ViewBag.lAudio).InsertEmptyFirst("Select Audio", ""), null, htmlAttributes: new { @class = "form-control lvm-urlfield", @id = "audio" })
+        }
+        else
+        {
+        <input name="@item.FieldUrl" id="@item.FieldUrl" class="form-control text-box single-line lvm-urlfield" type="text" value="@item.DefaultVal">
+        }
+    </div>
+</div>
+}

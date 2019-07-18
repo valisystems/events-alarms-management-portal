@@ -1,0 +1,63 @@
+﻿@model LvMonitor.Models.Lvm_ResourceTts
+<div class="lvm-box">
+    <div class="lvm-box-header">
+        <span>@ViewBag.Title @ViewBag.SubTitle</span>
+    </div>
+    <div class="lvm-box-body">
+        <div>
+            <dl class="dl-horizontal">
+                <dt>
+                    Voice Name
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.VoiceName)
+                </dd>
+                <dt>
+                    Volume
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Volume)
+                </dd>
+                <dt>
+                    Rate
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Rate)
+                </dd>
+                <dt>
+                    Samples Per Second
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.SamplesPerSecond)
+                </dd>
+                <dt>
+                    Bits Per Sample
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.BitsPerSample)
+                </dd>
+                <dt>
+                    Audio Channel
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.AudioChannel)
+                </dd>
+                <dt>
+                    Text Name
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.TextName)
+                </dd>
+                <dt>
+                    Test Text
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Text)
+                </dd>
+            </dl>
+        </div>
+        <p>
+            @Html.ActionLink("Edit", "Edit", new { id = Model.ResourceTtsId })
+        </p>
+    </div>
+</div>

@@ -1,0 +1,35 @@
+﻿@model PagedList.IPagedList<LvMonitor.Models.Lvm_UrlDebug>
+@using PagedList.Mvc;
+@section head {
+    @*<meta http-equiv="refresh" content="5" />*@
+    <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+}
+@{ Layout = "~/Views/Shared/_LayoutUrlDebug.cshtml";}
+<div class="lvm-box">
+    <div class="lvm-box-header">
+        <span>@ViewBag.Title</span>
+    </div>
+    <div class="lvm-box-body">
+        <p style="font-size:14px;">
+            Use this URL to catch data:
+            <span class="text-info" style="font-size:16px;" id="spanLink">@ViewBag.DebugUrl</span>
+        </p>
+        <p>
+            @*<button name="Refresh" type="submit" class="LvmRecTestBtnStReload" value="Refresh"><img alt="" src="@Url.Content("~/Content/Images/Reload.png")" /></button>*@
+            @*<input type="submit" value="Refresh" class="btn btn-default" />*@
+            @Html.ActionLink("Refresh", "Index", "UrlDebug", null, new { @class = "btn btn-default" })
+            &nbsp;&nbsp;&nbsp;
+            <input type="button" class="btn btn-default" value="Copy Link" name="CopyLink" id="CopyLink" onclick="CopyLinkToClipboard()" />
+            @*@Html.ActionLink("Copy Link", "ClearData", "UrlDebug", null, new { @class = "btn btn-default" })*@
+            &nbsp;&nbsp;&nbsp;
+            @Html.ActionLink("Clear Data", "ClearData", "UrlDebug", null, new { @class = "btn btn-default" })
+        </p>
+        <div id="tblUrlDebug">
+            @Html.Partial("~/Views/UrlDebug/Tbl.cshtml")
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+@Scripts.Render("~/scripts/app/signalclient-urldebug.js")
+}

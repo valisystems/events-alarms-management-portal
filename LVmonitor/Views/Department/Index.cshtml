@@ -1,0 +1,50 @@
+﻿@model IEnumerable<LvMonitor.Models.Lvm_Department>
+
+<div class="lvm-box">
+    <div class="lvm-box-header">
+        <span>@ViewBag.Title</span>
+    </div>
+    <div class="lvm-box-body">
+        <p>@Html.ActionLink("Create New", "Create")</p>
+        @if (!ViewBag.IsSingleFacility)
+        {
+            using (Html.BeginForm("Index", "Department", FormMethod.Get))
+            {
+            <p>@Html.DropDownList("FacilityId", (SelectList)ViewBag.lFacility, null, htmlAttributes: new { @class = "form-control", onchange = "this.form.submit();" })</p>
+            }
+        }
+        <table class="table table-striped lvm-table">
+            <tr>
+                <th>
+                    Facility
+                </th>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Description
+                </th>
+                <th class="lvm-th-ico"></th>
+            </tr>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Lvm_Facility.FacilityName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DepartmentName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DepartmentDescription)
+                </td>
+                <td class="lvm-td-ico">
+                    @Html.ActionLink(" ", "Details", "Department", new { id = item.DepartmentId }, new { @class = "fa fa-eye" })&nbsp;
+                    @Html.ActionLink(" ", "Edit", "Department", new { id = item.DepartmentId }, new { @class = "fa fa-pencil-square-o" })&nbsp;
+                    @Html.ActionLink(" ", "Delete", "Department", new { id = item.DepartmentId }, new { @class = "fa fa-trash" })
+                </td>
+            </tr>
+            }
+        </table>
+    </div>
+</div>

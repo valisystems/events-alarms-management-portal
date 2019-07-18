@@ -1,0 +1,73 @@
+﻿@model IEnumerable<LvMonitor.Models.Lvm_Image>
+
+<div class="lvm-box">
+    <div class="lvm-box-header">
+        <span>@ViewBag.Title</span>
+    </div>
+    <div class="lvm-box-body">
+        <p>@Html.ActionLink("Create New", "Create")</p>
+        @using (Html.BeginForm("Index", "Image", FormMethod.Get))
+        {
+        <p>
+            <div style="display:inline-block;">
+                @if (ViewBag.IsSingleFacility)
+                {
+                @Html.Hidden("FacilityId", (string)ViewBag.FacilityId.ToString())
+                }
+                else
+                {
+                <div style="padding-right:10px;">
+                    @Html.DropDownList("FacilityId", (SelectList)ViewBag.lFacility, null, htmlAttributes: new { @class = "form-control", onchange = "this.form.submit();" })
+                </div>
+                }
+            </div>
+            <div style="display:inline-block;">
+                @Html.DropDownList("ImageTypeId", new SelectList(ViewBag.ImageType, "ImageTypeId", "ImageType").InsertEmptyFirst("Select ImageType", "0"), null, htmlAttributes: new { @class = "form-control", onchange = "this.form.submit();" })
+            </div>
+        </p>
+        }
+        <table class="table">
+            <tr>
+                @*<th>
+                        Facility
+                    </th>*@
+                <th>
+                    Image Type
+                </th>
+                <th>
+                    Image Name
+                </th>
+                <th>
+                    Image
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+            <tr>
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.Lvm_Facility.FacilityName)
+                    </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.Lvm_ImageType.ImageType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ImageName)
+                </td>
+                <td>
+                    @if (!string.IsNullOrWhiteSpace(item.ImageFile))
+                    {
+                    <img class="LvmLstImg80" src="@Url.Content(string.Format("~{0}{1}", item.Lvm_ImageType.ImagePath, item.ImageFile))" alt="" />
+                    }
+                </td>
+                <td class="lvm-td-ico">
+                    @Html.ActionLink(" ", "Details", "Image", new { id = item.ImageId }, new { @class = "fa fa-eye" })&nbsp;
+                    @Html.ActionLink(" ", "Edit", "Image", new { id = item.ImageId }, new { @class = "fa fa-pencil-square-o" })&nbsp;
+                    @Html.ActionLink(" ", "Delete", "Image", new { id = item.ImageId }, new { @class = "fa fa-trash" })
+                </td>
+            </tr>
+            }
+        </table>
+    </div>
+</div>

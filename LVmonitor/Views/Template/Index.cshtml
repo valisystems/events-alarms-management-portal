@@ -1,0 +1,52 @@
+﻿@model IEnumerable<LvMonitor.Models.Lvm_Template>
+<div class="lvm-box">
+    <div class="lvm-box-header">
+        <span>@ViewBag.Title</span>
+    </div>
+    <div class="lvm-box-body">
+        <p>
+            @Html.ActionLink("Create New", "Create") &nbsp;&nbsp;&nbsp;
+            @if (Model.Count() == 0) {@Html.ActionLink("Add Default Templates", "AddDefaults")}
+        </p>
+        <table class="table table-striped lvm-table">
+            <tr>
+                <th>
+                    Template #
+                </th>
+                <th>
+                    Template Name
+                </th>
+                <th>
+                    Template File
+                </th>
+                <th>
+                    Image
+                </th>
+                <th class="lvm-th-ico"></th>
+            </tr>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TemplateNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TemplateName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TemplateFile)
+                </td>
+                <td>
+                    <img class="LvmLstImg80" src="@Url.Content(ViewBag.ImgPath + item.Thumbnail)" alt="" />
+                </td>
+                <td class="lvm-td-ico">
+                    @*@Html.ActionLink(" ", "Details", "Template", new { id = item.TemplateId }, new { @class = "fa fa-eye" })&nbsp;*@
+                    @Html.ActionLink(" ", "Edit", "Template", new { id = item.TemplateId }, new { @class = "fa fa-pencil-square-o" })&nbsp;
+                    @Html.ActionLink(" ", "Delete", "Template", new { id = item.TemplateId }, new { @class = "fa fa-trash" })&nbsp;
+                    @Html.ActionLink(" ", "Copy", "Template", new { id = item.TemplateId }, new { @class = "fa fa-copy" })
+                </td>
+            </tr>
+            }
+        </table>
+    </div>
+</div>

@@ -1,0 +1,139 @@
+﻿@model LvMonitor.Models.Lvm_Device
+
+<div class="lvm-box">
+    <div class="lvm-box-header">
+        <span>@ViewBag.Title @ViewBag.SubTitle</span>
+    </div>
+    <div class="lvm-box-body">
+        <div class="row">
+            <div class="col-md-4">
+                <dl class="dl-horizontal">
+                    <dt>
+                        Facility
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Lvm_Facility.FacilityName)
+                    </dd>
+                    <dt>
+                        Department
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Lvm_Department.DepartmentName)
+                    </dd>
+                    <dt>
+                        Floor #
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Lvm_Room.FloorNumber)
+                    </dd>
+                    <dt>
+                        Room #
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Lvm_Room.RoomNumber)
+                    </dd>
+                    <dt>
+                        Device Type
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Lvm_DeviceType.DeviceTypeName)
+                    </dd>
+                    <dt>
+                        Device #
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.DeviceNumber)
+                    </dd>
+                    <dt>
+                        Device ID
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.DeviceCode)
+                    </dd>
+                    <dt>
+                        Name
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.DeviceName)
+                    </dd>
+                    <dt>
+                        Description
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.DeviceDescription)
+                    </dd>
+                    <dt>
+                        Media Type
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Lvm_MediaType.MediaType)
+                    </dd>
+                    <dt>
+                        Media File
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.ImageFile)
+                    </dd>
+                    @*<dt>
+                            Image
+                        </dt>
+                        <dd>
+                            @{
+                              if (Model.MediaTypeId > 1)
+                              {
+                                <video class="LvmLstImg140" controls>
+                                    <source src="@Model.ImageFile" type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
+                              }
+                              else
+                              {
+                                  if (Model.ImageFile.IndexOf(@"/") < 0)
+                                  {
+                                <img class="LvmLstImg140" src="@Url.Content(string.Format("{0}{1}/{2}", ViewBag.ImgPath, Model.FacilityId, Model.ImageFile))" alt="" />
+                                  }
+                                  else
+                                  {
+                                <img class="LvmLstImg140" src="@Model.ImageFile" alt="" />
+                                  }
+                              }
+                            }
+                        </dd>*@
+                </dl>
+            </div>
+            <div class="col-md-8">
+                <div style="padding-bottom:10px;">
+                    @{
+                      if (!string.IsNullOrWhiteSpace(Model.ImageFile))
+                      {
+                          if (Model.MediaTypeId > 1)
+                          {
+                        <video class="img-responsive" controls style="width:100%; max-width:500px;">
+                            <source src="@Model.ImageFile" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                          }
+                          else
+                          {
+                              if (Model.ImageFile.IndexOf(@"/") < 0)
+                              {
+                        <img class="img-responsive" src="@Url.Content(string.Format("{0}{1}/{2}", ViewBag.ImgPath, Model.FacilityId, Model.ImageFile))" alt="" style="width:100%; max-width:500px;" />
+                              }
+                              else
+                              {
+                        <img class="img-responsive" src="@Model.ImageFile" alt="" style="width:100%; max-width:500px;" />
+                                  }
+                              }
+                          }
+                      }
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                @Html.ActionLink("Edit Device", "Edit", new { id = Model.DeviceId }) &nbsp;&nbsp;&nbsp;
+                @Html.ActionLink("Edit Actions", "Index", "DeviceAction", new { id = Model.DeviceId }, null)
+            </div>
+        </div>
+    </div>
+</div>

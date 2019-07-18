@@ -1,0 +1,230 @@
+﻿@model LvMonitor.Models.DeviceRecordTestModel
+
+@section head {@Mvc.RazorTools.BundleManager.Styles.Render()}
+
+
+
+<div class="lvm-box">
+    <div class="lvm-box-header">
+        <span>@ViewBag.Title</span>
+    </div>
+    <div class="lvm-box-body">
+        @using (Html.BeginForm())
+        {
+        @Html.AntiForgeryToken()
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.Id)
+            @Html.HiddenFor(model => model.TextFields)
+            @Html.HiddenFor(model => model.Tts)
+            @Html.HiddenFor(model => model.IsDiscovery)
+            @Html.HiddenFor(model => model.FacilityIdOld)
+            @Html.HiddenFor(model => model.DepartmentIdOld)
+            @Html.HiddenFor(model => model.DeviceIdOld)
+            @Html.HiddenFor(model => model.ControlNumber)
+
+            <div class="row">
+                <div class="col-xs-9">
+                    <div class="form-group">
+                        @*@Html.LabelFor(m => m.FacilityId, "Facility", htmlAttributes: new { @class = "control-label col-xs-1" })*@
+                        <div class="col-xs-3">
+                            @Html.DropDownListFor(m => m.FacilityId, (SelectList)ViewBag.lFacility, htmlAttributes: new { @class = "form-control", onchange = "this.form.submit();" })
+                            @Html.ValidationMessageFor(model => model.FacilityId, "", new { @class = "text-danger" })
+                        </div>
+                        @*@Html.LabelFor(m => m.DepartmentId, "Department", htmlAttributes: new { @class = "control-label col-xs-1" })*@
+                        <div class="col-xs-3">
+                            @*@Html.DropDownListFor(m => m.DepartmentId, (SelectList)ViewBag.lDepartment, htmlAttributes: new { @class = "form-control", onchange = "this.form.submit();" })*@
+                            @Html.DropDownListFor(m => m.DepartmentId, new SelectList(ViewBag.lDepartment, "DepartmentId", "DepartmentName").InsertEmptyFirst("Select Department", "0"), htmlAttributes: new { @class = "form-control", onchange = "this.form.submit();" })
+                            @Html.ValidationMessageFor(model => model.DepartmentId, "", new { @class = "text-danger" })
+                        </div>
+                        @*@Html.LabelFor(m => m.DeviceId, "Device", htmlAttributes: new { @class = "control-label col-xs-1" })*@
+                        <div class="col-xs-3">
+                            @Html.DropDownListFor(m => m.DeviceId, (SelectList)ViewBag.lDevice, htmlAttributes: new { @class = "form-control", onchange = "this.form.submit();" })
+                            @Html.ValidationMessageFor(model => model.DeviceId, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="control-label col-xs-3" style="text-align:left;">
+                            <strong>Floor</strong> @ViewBag.Floor &nbsp;&nbsp;&nbsp;
+                            <strong>Room</strong>: @ViewBag.Room
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.Label("Current Status", htmlAttributes: new { @class = "control-label text-nowrap col-xs-2", @style = "padding-top:14px;" })
+                        <div class="col-xs-10" style="padding-left:0;">
+                            <div class="LvmRecTestBtnStDiv">
+                                @foreach (var item in Model.Controls)
+                                {
+                                <button name="CtlBtn_st_@item.Num" id="CtlBtn_st_@item.Num" type="submit" value="@string.Format("0_{0}", item.Num)" @if (item.IsStateSel) { <text> style="border: 1px solid red;" </text>  }>
+                                    <img alt="" src="@Url.Content(item.Img)" @if (item.IsState) { <text> style="opacity:1;" </text>    } />
+                                </button>}
+                                <button name="Refresh" type="submit" class="LvmRecTestBtnStReload" value="Refresh"><img alt="" src="@Url.Content("~/Content/Images/Reload.png")" /></button>
+                                <div class="LvmLabel" style="display:inline-block; padding-left:6px;vertical-align:middle;">@Html.EditorFor(model => model.IsShowStatusAfterSend)&nbsp;&nbsp;Show Status After Send</div>
+
+                                @*<div class="LvmLabel" style="display:table-cell; padding-left:20px;vertical-align:middle;">Show Monitor</div>
+                                    <div style="display:table-cell;vertical-align:middle;">@Html.EditorFor(model => model.IsMonitor, new { htmlAttributes = new { onclick = "this.form.submit();" } })</div>*@
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.Label("Action to Send", htmlAttributes: new { @class = "control-label text-nowrap col-xs-2" })
+                        <div class="col-xs-10" style="padding-left:0;">
+                            <div class="LvmRecTestBtnAcDiv">
+                                @foreach (var item in Model.Controls)
+                                {
+                                <button name="CtlBtn_ac_@item.Num" id="CtlBtn_ac_@item.Num" type="submit" value="@string.Format("0_{0}", item.Num)" @if (item.IsActionSel) { <text> class="LvmRecTestBtnAcDivBtnUnder" </text>  }>
+                                    <img alt="" src="@{if (item.IsAction){@Url.Content("~/Content/Images/on.png")} else {@Url.Content("~/Content/Images/off.png")}}" />
+                                </button>}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-3" style="padding:0; height:150px;">
+                    @{ if (Model.MediaTypeId > 1)
+                      {
+                        <video class="LvmRecTestDevImg" controls>
+                            <source src="@Model.DeviceImg" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                      }
+                      else
+                      {
+                        <img alt="" class="LvmRecTestDevImg" src="@Url.Content(Model.DeviceImg)" />
+                      } }
+                </div>
+            </div>
+            @Html.HiddenFor(model => model.Id)
+            <div class="form-group">
+                @Html.LabelFor(model => model.ResourceTextTypeId, "Text Type", htmlAttributes: new { @class = "control-label text-nowrap col-xs-1" })
+                <div class="col-xs-11 LvmRecTestDevResTxt" style="padding-left:0;">
+                    @*<div>@Html.LabelFor(model => model.ResourceTextTypeId, "Text Type", htmlAttributes: new { @class = "control-label text-nowrap" })&nbsp;</div>*@
+                    <div>@Html.DropDownListFor(m => m.ResourceTextTypeId, (SelectList)ViewBag.lResourceTextType, htmlAttributes: new { @class = "form-control", onchange = "this.form.submit();" })</div>
+                    <div>&nbsp;&nbsp;&nbsp;@Html.LabelFor(model => model.ResourceTextId, "Text Field", htmlAttributes: new { @class = "control-label text-nowrap" })&nbsp;</div>
+                    @*<div>@Html.DropDownListFor(m => m.ResourceTextId, (SelectList)ViewBag.lResourceText, htmlAttributes: new { @class = "form-control" })</div>*@
+                    <div>@Html.DropDownListFor(m => m.TextField, (SelectList)ViewBag.lResourceText, htmlAttributes: new { @class = "form-control" })</div>
+                    <div>
+                        &nbsp;&nbsp;
+                        <input type="submit" class="btn btn-default" value="Add Text Field" name="AddTextField" />
+                    </div>
+                    <div>
+                        &nbsp;&nbsp;
+                        <input type="submit" class="btn btn-default" value="Delete Last Text Field" name="DelTextField" />
+                    </div>
+                    <div>
+                        &nbsp;&nbsp;
+                        <input type="submit" class="btn btn-default" value="Delete All Text Fields" name="DelAllTextFields" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ResourceTtsId, "Audio", htmlAttributes: new { @class = "control-label text-nowrap col-xs-1" })
+                <div class="col-xs-11 LvmRecTestDevResTxt" style="padding-left:0;">
+                    <div>@Html.DropDownListFor(m => m.ResourceTtsId, (SelectList)ViewBag.lResourceTts, htmlAttributes: new { @class = "form-control" })</div>
+                    <div>&nbsp;&nbsp;<input type="submit" class="btn btn-default" value="Add Audio" name="AddAudio" /></div>
+                    <div>&nbsp;&nbsp;<input type="submit" class="btn btn-default" value="Delete Audio" name="DelAudio" /></div>
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Url, htmlAttributes: new { @class = "control-label col-xs-1" })
+                <div class="col-xs-9" style="padding-left:0;padding-right:0;">
+                    @*<div>@Html.LabelFor(model => model.Url, htmlAttributes: new { @class = "control-label" })</div>
+                        <div>*@
+                    @Html.EditorFor(model => model.Url, new { htmlAttributes = new { @class = "form-control", @style = "height:100px; max-width: 100%" } })
+                    @Html.ValidationMessageFor(model => model.Url, "", new { @class = "text-danger" })
+                    @*</div>*@
+                </div>
+                <div class="col-xs-2" style="padding: 15px 0 0 5px;">
+                    &nbsp;&nbsp;
+                    <input type="button" class="btn btn-default" value="Copy To Clipboard" name="CopyToClipboard" id="CopyToClipboard" />@*onclick="copyToClipboard('#url')"*@
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-xs-offset-1 col-xs-1" style="padding-left:0;">
+                    @*<input type="submit" name="SendRecord" value="Send Record" class="btn btn-default" onclick="LvmSendRecord();" />*@
+                    @*<input type="submit" name="SendRecord" value="Send Record" class="btn btn-default" @if (ViewBag.IsDisableSend) { <text> style="display:none;" </text>}/>*@
+                    <input type="submit" name="SendRecord" value="Send Record" class="btn btn-default" @if (ViewBag.IsDisableSend) { <text> disabled="disabled" </text>   } />
+                </div>
+                <div class="col-xs-10">
+                    <div style="display:table; margin-top:10px;">
+                        <div class="LvmLabel" style="display:table-cell;padding-left:20px; vertical-align:middle;">JSON</div>
+                        <div style="display:table-cell; vertical-align:middle;">@Html.EditorFor(model => model.IsJson, new { htmlAttributes = new { onclick = "this.form.submit();" } })</div>
+                        <div class="LvmLabel" style="display:table-cell; padding-left:20px;vertical-align:middle;">POST</div>
+                        <div style="display:table-cell;vertical-align:middle;">@Html.EditorFor(model => model.IsPost, new { htmlAttributes = new { onclick = "this.form.submit();" } })</div>
+                        <div class="LvmLabel" style="display:table-cell; padding-left:20px;vertical-align:middle;">URL Encode</div>
+                        <div style="display:table-cell;vertical-align:middle;">@Html.EditorFor(model => model.IsUrlEncode, new { htmlAttributes = new { onclick = "this.form.submit();" } })</div>
+                        <div class="LvmLabel" style="display:table-cell; padding-left:20px;vertical-align:middle;">Show Monitor</div>
+                        <div style="display:table-cell;vertical-align:middle;">@Html.EditorFor(model => model.IsMonitor, new { htmlAttributes = new { onclick = "this.form.submit();" } })</div>
+                    </div>
+                </div>
+                @*@Html.LabelFor(model => model.IsDiscovery, "Discovery", htmlAttributes: new { @class = "control-label col-xs-1", style = "text-align:left;padding-right:0;" })*@
+                <div class="col-xs-1" style="padding-left:0;">
+                    @*<label class="switch">
+                            <input name="IsDiscovery" id="IsDiscovery" type="checkbox" @if (Model.IsDiscovery) { <text>checked="checked"</text>} >
+                            <div class="slider round"></div>
+                        </label>*@
+                </div>
+            </div>
+            <hr />
+            <div class="form-group">
+                <div class="col-xs-12">
+                    <iframe src="@Url.Action("IndexTest", "Monitor")" style="width:100%; height:600px; border:1px solid lightgray;  @if (!Model.IsMonitor) { <text>display:none;</text>} "></iframe>
+                </div>
+
+            </div>
+
+        </div>
+                      }
+    </div>
+</div>
+@*<button onclick="PostJson()">Post Json Test</button>*@
+
+@section Scripts {
+    @*@Scripts.Render("~/Scripts/App/DeviceRecordTestSubmit.js")*@
+
+    @*@Scripts.Render("~/Scripts/App/lvm-postjson.js")*@
+
+
+
+
+    <script type="text/javascript">
+
+        //function PostJson() {
+        //    var url = window.parent.location.href + '/';
+        //    url = url.substring(0, url.indexOf("/DeviceRecordTest/"));
+        //    url = url + "/Monitor/WriteData/";
+        //    var d = {"BaseName":"Di-189139DA1","EventType":"Normal","SensorID":"ctl_55399"}
+        //    LvmPostJson(url, d);
+        //}
+
+
+        $(document).ready(function () {
+
+            $("#CopyToClipboard").click(
+                function (event) {
+                    var copyTextarea = document.querySelector('#Url');
+                    copyTextarea.select();
+                    try {
+                        var successful = document.execCommand('copy');
+                        //var msg = successful ? 'successful' : 'unsuccessful';
+                        //console.log('Copying text command was ' + msg);
+                    } catch (err) {
+                        // console.log('Oops, unable to copy');
+                    }
+                }
+            );
+
+            @{
+              if (Model.IsSendRecordClick)
+              {
+                    <Text>
+            var url = window.parent.location.href + '/';
+            url = url.substring(0, url.indexOf("/DeviceRecordTest/"));
+            url = url + "/DeviceRecordTest/UpdateMonitors/@string.Format("{0}_{1}", Model.FacilityId, Model.DeviceId)";
+            $.get(url, null, 'html');
+            </Text>
+        };
+        }
+
+
+        });
+    </script>
+}

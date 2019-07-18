@@ -1,0 +1,277 @@
+﻿@model LvMonitor.Models.DashboardModel
+
+@{Layout = "~/Views/Shared/_LayoutDashboard.cshtml";}
+
+@section head {
+    <link href="~/Content/bootstrap-theme.min.css" rel="stylesheet" />
+    <link href="~/Content/daterangepicker.css" rel="stylesheet" />
+}
+
+@*@section ContentHeader {
+    <div class="form-group choose-date hidden-xs" style="position: absolute;
+    top: 0;
+    right: 0;
+    height: 40px;
+    width: 254px;
+    border: 0;
+    border-left: 1px solid #dbdee0;
+    padding: 3px 10px;">
+        <div class="controls">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                <input class="form-control" id="daterange" value="09/09/2013 - 09/28/2013" type="text">
+                <span class="input-group-addon"><i class="fa fa-chevron-down"></i></span>
+            </div>
+        </div>
+    </div>
+        }*@
+
+@*@using (Html.BeginForm("IndexPost", "Dashboard", FormMethod.Post))*@
+@section ContentHeader {
+    @using (Html.BeginForm())
+    {
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.Id)
+    @Html.HiddenFor(model => model.CurUserId)
+    @Html.HiddenFor(model => model.IsSuperAdmin)
+    @Html.HiddenFor(model => model.IsSingleFacility)
+    @*@Html.HiddenFor(model => model.FacilityId)*@
+    @*@Html.HiddenFor(model => model.DateFrom)
+    @Html.HiddenFor(model => model.DateTo)*@
+
+
+   @*@Html.Hidden("CurUserId", (string)Model.CurUserId.ToString())*@
+    @*@Html.Hidden("IsSuperAdmin", @Model.IsSuperAdmin)
+        @Html.Hidden("IsSingleFacility", @Model.IsSingleFacility)
+        @Html.Hidden("FacilityId", @Model.FacilityId)
+        @Html.Hidden("DateFrom", @Model.DateFrom)
+        @Html.Hidden("DateTo", @Model.DateTo)*@
+
+    <div style="padding:4px 14px;">
+        @if (Model.IsSingleFacility)
+        {
+        <h4>@ViewBag.Facility</h4>        @Html.HiddenFor(model => model.FacilityId)
+ @*@Html.Hidden("FacilityId", (string)Model.FacilityId.ToString())*@
+        }
+        else
+        {
+        @Html.DropDownList("FacilityId", new SelectList(ViewBag.Facility, "FacilityId", "FacilityName", Model.FacilityId).InsertEmptyFirst("Select Facility", "0"), null, htmlAttributes: new { @class = "form-control", onchange = "this.form.submit();" })
+        }
+    </div>
+    <div class="form-group hidden-xs lvm-breadcrumb-right">
+        @*@Html.EditorFor(model => model.DateFromTo, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "Enter Date Range", @style = "height:34px; max-width:400px;" } })*@
+
+        @*<div class="col-md-10 input-group">
+                @Html.EditorFor(model => model.DateFromTo, new { htmlAttributes = new { @class = "form-control" } })
+                <span class="btn btn-default input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+            </div>*@
+        <div class="controls">
+            <div class="input-group">
+                <span class="input-group-addon">
+                    @*<a href="@Url.Action("Index")" class="fa fa-repeat"></a>*@
+                    @*<input type="submit" value="Save" class="fa fa-repeat" />*@
+                    <button type="submit" style="background: transparent;border: 0px;padding: 0;outline: 0;">
+                        <span class="fa fa-repeat"></span>
+                    </button>
+                </span>
+                @Html.EditorFor(model => model.DateFromTo, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "Enter Date Range", @style = "height:34px; max-width:400px;" } })
+                @*<span class="input-group-addon"><i class="fa fa-calendar"></i></span>*@
+            </div>
+        </div>
+    </div>
+    }
+}
+
+
+<div>
+    <!-- Info boxes -->
+    <div class="row">
+        <!-- /.col -->
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="info-box">
+                <span class="info-box-icon bg-red"><i class="fa fa-bell-o"></i></span>
+                <div class="info-box-content">
+                    <span class="info-box-text">Number<br />Of Calls</span>
+                    <span class="info-box-number">@ViewBag.CallNum</span>
+                </div>
+                <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
+        <!-- fix for small devices only -->
+        <div class="clearfix visible-sm-block"></div>
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="info-box">
+                <span class="info-box-icon bg-green"><i class="fa fa-clock-o"></i></span>
+                <div class="info-box-content">
+                    <span class="info-box-text">Average<br />Response Time</span>
+                    <span class="info-box-number">@ViewBag.ResponseTime</span>
+                </div>
+                <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="info-box">
+                <span class="info-box-icon bg-yellow"><i class="fa fa-group"></i></span>
+                <div class="info-box-content">
+                    <span class="info-box-text">Nurses<br />On Duty</span>
+                    <span class="info-box-number">@ViewBag.OnDuty</span>
+                </div>
+                <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
+        <div class="col-md-3 col-sm-6 col-xs-12">
+            <div class="info-box">
+                <span class="info-box-icon bg-aqua"><i class="fa fa-user"></i></span>
+                <div class="info-box-content">
+                    <span class="info-box-text">Total<br />Patients</span>
+                    <span class="info-box-number">@ViewBag.TotalDev</span>
+                </div>
+                <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Total Number Of Calls @*&nbsp; @ViewBag.ChartTitleTotal*@</h3>
+                    <div class="box-tools pull-right">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                            <i class="fa fa-minus"></i>
+                        </button>
+                    </div>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <p class="text-center">
+                                <strong>@ViewBag.ChartTitleTotal</strong>
+                            </p>
+                            @*<div id="calls-total-chart" style="height: 250px;"></div>*@
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="form-group">
+                                        @*<label>@ViewBag.ChartTitleTotal</label>*@
+                                        <div style="height:250px;">
+                                            <canvas id="cnvChartTotal"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- /.row -->
+                </div>
+            </div>
+            <!-- /.box -->
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="box">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Number Of Calls By Sensor Type</h3>
+                    <div class="box-tools pull-right">
+                        @*<button type="button" class="btn btn-box-tool" onclick="printChart('cnvChartType')">
+                            <i class="fa fa-print"></i>
+                        </button>*@
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                            <i class="fa fa-minus"></i>
+                        </button>
+                    </div>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <p class="text-center">
+                                <strong>@ViewBag.ChartTitleType</strong>
+                            </p>
+                            <div class="col-md-12">
+                                <div class="row">
+                                    <div class="form-group">
+                                        @*<label>@ViewBag.ChartTitleTotal</label>*@
+                                        <div style="height:250px;">
+                                            <canvas id="cnvChartType"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!-- /.row -->
+                </div>
+            </div>
+            <!-- /.box -->
+        </div>
+        <!-- /.col -->
+    </div>
+    <!-- /.row -->
+
+</div>
+
+@section Scripts {
+@Scripts.Render("~/Scripts/App/ddlfacilitydepartment.js")
+@Scripts.Render("~/bundles/daterangepicker")
+@Scripts.Render("~/bundles/chartjs")
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var start = moment("@Model.DateFrom.ToString()"); // moment().subtract(7, 'days');
+            var end = moment("@Model.DateTo.ToString()"); //moment();
+            @*var start = moment("@{((DateTime)Model.DateFrom).ToLongDateString();}"); // moment().subtract(7, 'days');
+            var end = moment("@{((DateTime)Model.DateTo).ToLongDateString();}"); //moment();*@
+            //String.Format("{0:d/M/yyyy HH:mm:ss}", dt)
+
+            @*var start = moment("@String.Format("{0:d/MMM/yyyy HH:mm:ss}", Model.DateFrom)"); // moment().subtract(7, 'days');
+            var end = moment("@String.Format("{0:d/MMM/yyyy HH:mm:ss}", Model.DateTo)"); //moment();*@
+
+            $('#DateFromTo').daterangepicker(
+            {
+                startDate: start,
+                endDate: end,
+                opens: "left",
+                alwaysShowCalendars: true,
+                showDropdowns: true,
+                linkedCalendars: false,
+                autoApply: true,
+                ranges: {
+                    'Today': [moment(), moment()],
+                    'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                    'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                    'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                    'Last 90 Days': [moment().subtract(89, 'days'), moment()],
+                    'This Month': [moment().startOf('month'), moment().endOf('month')],
+                    'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+                }
+                //,
+                //timePicker: true,
+                //timePickerIncrement: 30,
+                //locale: {
+                //    format: 'MM/DD/YYYY h:mm A'
+                //}
+            }
+            );
+
+        @Html.Raw(ViewBag.ChartTot);
+        @Html.Raw(ViewBag.ChartType);
+
+        });
+    </script>
+
+}
+

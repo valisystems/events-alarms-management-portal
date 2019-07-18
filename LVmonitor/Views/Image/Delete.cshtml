@@ -1,0 +1,48 @@
+﻿@model LvMonitor.Models.Lvm_Image
+
+<div class="lvm-box">
+    <div class="lvm-box-header">
+        <span>@ViewBag.SubTitle Image</span>
+    </div>
+    <div class="lvm-box-body">
+        <p class="text-danger">@ViewBag.Msg</p>
+        <div>
+            <dl class="dl-horizontal">
+                <dt>
+                    Facility
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Lvm_Facility.FacilityName)
+                </dd>
+                <dt>
+                    Image Type
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Lvm_ImageType.ImageType)
+                </dd>
+                <dt>
+                    Image Name
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.ImageName)
+                </dd>
+                <dt>
+                    Image
+                </dt>
+                <dd>
+                    @if (!string.IsNullOrWhiteSpace(Model.ImageFile))
+                    {
+                    <img class="LvmLstImg80" src="@Url.Content(string.Format("~{0}{1}", Model.Lvm_ImageType.ImagePath, Model.ImageFile))" alt="" />
+                    }
+                </dd>
+            </dl>
+            @using (Html.BeginForm())
+            {
+            @Html.AntiForgeryToken()
+            <div class="form-actions no-color">
+                <input type="submit" value="Delete" class="btn btn-default" />
+            </div>
+            }
+        </div>
+    </div>
+</div>

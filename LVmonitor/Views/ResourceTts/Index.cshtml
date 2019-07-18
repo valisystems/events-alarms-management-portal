@@ -1,0 +1,83 @@
+﻿@model IEnumerable<LvMonitor.Models.Lvm_ResourceTts>
+
+<div class="lvm-box">
+    <div class="lvm-box-header">
+        <span>@ViewBag.Title</span>
+    </div>
+    <div class="lvm-box-body">
+        <p>
+            @Html.ActionLink("Create New", "Create")
+        </p>
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <table class="table table-striped lvm-table">
+            <tr>
+                <th>
+                    Voice Name
+                </th>
+                <th>
+                    Audio<br/>Channel
+                </th>
+                <th>
+                    Bits<br />Per Sample
+                </th>
+                <th>
+                    Volume
+                </th>
+                <th>
+                    Rate
+                </th>
+                <th>
+                    Samples<br />Per Second
+                </th>
+                <th>
+                    Text Name
+                </th>
+                @*<th>
+                    File Name
+                </th>*@
+                <th class="lvm-th-ico"></th>
+            </tr>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VoiceName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AudioChannel)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BitsPerSample)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Volume)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Rate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SamplesPerSecond)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TextName)
+                </td>
+                @*<td>
+                    @Html.DisplayFor(modelItem => item.FileName)
+                </td>*@
+                <td class="lvm-td-ico">
+                    <audio preload="auto" id="@Url.Content("a" + @item.ResourceTtsId)">
+                        <source src="@Url.Content("~/Content/Voice/" + item.FileName + "?g=" + Guid.NewGuid())" type="audio/wav" />
+                    </audio>
+                    <a class="fa fa-volume-up" onclick="PlayPause(@Url.Content("'a" + @item.ResourceTtsId + "'"))" href="#"> </a>
+                    @Html.ActionLink(" ", "Details", "ResourceTts", new { id = item.ResourceTtsId }, new { @class = "fa fa-eye" })&nbsp;
+                    @Html.ActionLink(" ", "Edit", "ResourceTts", new { id = item.ResourceTtsId }, new { @class = "fa fa-pencil-square-o" })&nbsp;
+                    @Html.ActionLink(" ", "Delete", "ResourceTts", new { id = item.ResourceTtsId }, new { @class = "fa fa-trash" })
+                </td>
+            </tr>
+            }
+        </table>
+    </div>
+</div>
+@section Scripts {
+@Scripts.Render("~/Scripts/App/lvm-audio.js")
+}

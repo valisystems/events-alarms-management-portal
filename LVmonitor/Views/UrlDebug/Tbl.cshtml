@@ -1,0 +1,39 @@
+﻿@model PagedList.IPagedList<LvMonitor.Models.Lvm_UrlDebug>
+@using PagedList.Mvc;
+<table class="table table-striped lvm-table">
+    <tr>
+        <th style="width:180px; text-align:center;">
+            Date
+        </th>
+        <th style="width:100px; text-align:center;">
+            Type
+        </th>
+        <th>
+            Data
+        </th>
+        <th>
+            Raw Data
+        </th>
+    </tr>
+    @foreach (var item in Model)
+            {
+                <tr>
+                    <td style="text-align:center;">
+                        @Html.DisplayFor(mi => item.DateCreated)
+                    </td>
+                    <td style="text-align:center;">
+                        @Html.DisplayFor(mi => item.Lvm_DeviceActionType.DeviceActionType)
+                    </td>
+                    <td>
+                        @Html.Raw(item.UrlData)
+                    </td>
+                    <td>
+                        @Html.Raw(item.UrlDataRaw)
+                    </td>
+                </tr>
+            }
+</table>
+<div class="lvm-tbl-pager">
+    <div class="lvm-tbl-pager-btn">@Html.PagedListPager(Model, page => Url.Action("Index", new { page }))</div>
+    <div class="lvm-tbl-pager-pagenum">Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount</div>
+</div>

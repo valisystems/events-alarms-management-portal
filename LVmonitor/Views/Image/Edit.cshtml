@@ -1,0 +1,65 @@
+﻿@model LvMonitor.Models.Lvm_Image
+
+<div class="lvm-box">
+    <div class="lvm-box-header">
+        <span>@ViewBag.SubTitle Image</span>
+    </div>
+    <div class="lvm-box-body">
+        @using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+        @Html.AntiForgeryToken()
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.ImageId)
+            @Html.HiddenFor(model => model.ImageFile)
+            <div class="form-group">
+                @Html.LabelFor(model => model.FacilityId, "Facility", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @if (ViewBag.IsSingleFacility)
+                    {
+                    <h5>@ViewBag.SingleFacilityName</h5>
+                    @Html.HiddenFor(model => model.FacilityId)
+                    }
+                    else
+                    {
+                    @Html.DropDownListFor(r => r.FacilityId, (SelectList)ViewBag.lFacility, htmlAttributes: new { @class = "form-control" })
+                    }
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.ImageTypeId, "Image Type", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("ImageTypeId", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.ImageTypeId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.ImageName, "Image Name", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.ImageName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ImageName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.Label("Image Upload", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @if (!string.IsNullOrWhiteSpace(Model.ImageFile))
+                    {
+                    <div style="display:inline-block;"><img class="LvmLstImg80" src="@Url.Content(string.Format("~{0}{1}", Model.Lvm_ImageType.ImagePath, Model.ImageFile))" alt="" /></div>
+                    }
+                    <div style="display:inline-block; vertical-align:middle;"><input type="file" name="upload" /></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Save" class="btn btn-default" />
+                    <br /><br />
+                    <div class="text-info">
+                        If image is updated clear browser cache to see the change.
+                    </div>
+                </div>
+            </div>
+        </div>
+        }
+    </div>
+</div>

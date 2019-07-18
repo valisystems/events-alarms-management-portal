@@ -1,0 +1,34 @@
+﻿@model LvMonitor.Models.UrlGenModel
+
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal">&times;</button>
+    <h3 class="modal-title">URL Generator</h3>
+</div>
+<div class="modal-body">
+    @*<div class="lvm-box-body">*@
+        @using (Html.BeginForm())
+        {
+        @Html.AntiForgeryToken()
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(m => m.UrlTypeId, "URL Type", htmlAttributes: new { @class = "control-label col-xs-3" })
+                <div class="col-xs-9">
+                    @Html.DropDownListFor(m => m.UrlTypeId, (SelectList)ViewBag.lUrlType, htmlAttributes: new { @class = "form-control", onchange = "UrlType_Change(this.value);" })
+                </div>
+            </div>
+            <div id="lvm-url-fields">
+                @Html.Partial("UrlGenField")
+            </div>
+        </div>
+        }
+    @*</div>*@
+    <div class="row">
+        <div class="col-xs-4 col-xs-offset-4">
+            <button type="button" id="lvm-btn-ok" class="btn btn-success" onclick="LvmBtnOk_Click();">OK</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        </div>
+    </div>
+    @*}*@
+</div>
+

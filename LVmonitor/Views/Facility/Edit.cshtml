@@ -1,0 +1,106 @@
+﻿@model LvMonitor.Models.Lvm_Facility
+@*<h4 class="LvmSubtitle">@ViewBag.SubTitle</h4>*@
+
+<div class="lvm-box">
+    <div class="lvm-box-header">
+        <span>@ViewBag.SubTitle @ViewBag.Title</span>
+    </div>
+    <div class="lvm-box-body">
+        @using (Html.BeginForm())
+        {
+        @Html.AntiForgeryToken()
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(m => m.FacilityId)
+            <div class="form-group">
+                @Html.Label("ID", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.Label(Model.FacilityId.ToString(), htmlAttributes: new { @class = "form-control LvmFormLabel" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.FacilityName, "Name", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(m => m.FacilityName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(m => m.FacilityName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.FacilityDescription, "Description", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(m => m.FacilityDescription, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(m => m.FacilityDescription, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.FacilityNotes, "Notes", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(m => m.FacilityNotes, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(m => m.FacilityNotes, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.IsDeviceDiscovery, "Device Discovery", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <div class="checkbox">
+                        @Html.EditorFor(m => m.IsDeviceDiscovery, new { htmlAttributes = new { @style = "margin-left:0;" } })
+                        @Html.ValidationMessageFor(m => m.IsDeviceDiscovery, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.TimeZoneId, "Time Zone", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(m => m.TimeZoneId, (SelectList)ViewBag.lTimeZone, htmlAttributes: new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.CdrTypeId, "CDR Type", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(r => r.CdrTypeId, (SelectList)ViewBag.lCdrType, htmlAttributes: new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.CdrDomain, "CDR Domain", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(m => m.CdrDomain, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(m => m.CdrDomain, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.PbxUser, "PBX User", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(m => m.PbxUser, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(m => m.PbxUser, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.PbxPassword, "PBX Password", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.PasswordFor(m => m.PbxPassword, new { @class = "form-control", placeholder = "********" })
+                    @Html.ValidationMessageFor(m => m.PbxPassword, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.HiddenFor(m => m.AddressId)
+                <div class="control-label col-md-2"><a href="#divAddress" data-toggle="collapse">Address</a></div>
+                <div class="col-md-10" style="padding-top:4px;">@Html.DisplayFor(m => m.Lvm_Address.ContactName), @Html.DisplayFor(m => m.Lvm_Address.Phone), @Html.DisplayFor(m => m.Lvm_Address.City), @Html.DisplayFor(m => m.Lvm_Address.Street1)</div>
+                <div id="divAddress" class="collapse col-md-12">
+                    <br />
+                    @Html.Partial("~/Views/Address/_Edit.cshtml", Model)
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Save" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+        }
+    </div>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/Scripts/App/ddlcountrystate.js")
+}
+

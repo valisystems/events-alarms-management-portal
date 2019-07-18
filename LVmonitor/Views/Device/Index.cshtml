@@ -1,0 +1,167 @@
+﻿@model PagedList.IPagedList<LvMonitor.Models.Lvm_Device>
+@using PagedList.Mvc;
+@section head {<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />}
+
+<div class="lvm-box">
+    <div class="lvm-box-header">
+        <span>@ViewBag.Title</span>
+    </div>
+    <div class="lvm-box-body">
+        <p>@Html.ActionLink("Create New", "Create")</p>
+        @using (Html.BeginForm("Index", "Device", FormMethod.Get))
+        {
+        <p>
+            <div style="display:inline-block;">
+                @*@Html.DropDownList("FacilityId", new SelectList(ViewBag.Facility, "FacilityId", "FacilityName", ViewBag.FacilityId).InsertEmptyFirst("Select Facility", "0"), null, htmlAttributes: new { @class = "form-control", onchange = "this.form.submit();" })*@
+                @if (ViewBag.IsSingleFacility)
+                {
+                @Html.Hidden("FacilityId", (string)ViewBag.FacilityId.ToString())
+                }
+                else
+                {
+                <div style="padding-right:10px;">
+                    @Html.DropDownList("FacilityId", (SelectList)ViewBag.lFacility, null, htmlAttributes: new { @class = "form-control", onchange = "this.form.submit();" })
+                </div>
+                }
+            </div>
+            <div style="display:@{if (ViewBag.FacilityId > 0) {<text>inline-block</text> } else {<text>none</text> }};">
+                @Html.DropDownList("DepartmentId", new SelectList(ViewBag.Department, "DepartmentId", "DepartmentName").InsertEmptyFirst("Select Department", "0"), null, htmlAttributes: new { @class = "form-control", onchange = "this.form.submit();" })
+            </div>
+
+            <div style="display: inline-block;padding-left:20px;">
+                @Html.TextBox("TxtSearch", ViewBag.TxtSearch as string, new { placeholder = "Device ID or Name", @class = "form-control" })
+            </div>&nbsp;
+            <div style="display: inline-block; vertical-align:top;">
+                <input type="submit" value="Search" class="btn btn-default" />
+            </div>
+            <div style="float:right;">
+                <label for="fileUpload" class="btn btn-default">
+                    Import Devices From File
+                    <input type="file" accept=".csv" id="fileUpload" style="display:none">
+                </label>
+            </div>
+        </p>
+  }
+        <table class="table table-striped lvm-table">
+            <tr>
+                <th>
+                    Facility
+                </th>
+                <th>
+                    Department
+                </th>
+                <th style="text-align:center;">
+                    Floor
+                </th>
+                <th style="text-align:center;">
+                    Room
+                </th>
+                <th>
+                    Device Type
+                </th>
+                @*<th style="text-align:center;">
+                        Device #
+                    </th>*@
+                <th>
+                    Device ID
+                </th>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Description
+                </th>
+                @*<th>
+                        Media Type
+                    </th>
+                    <th>
+                        Media File
+                    </th>*@
+                <th>
+                    Image
+                </th>
+                <th class="lvm-th-ico"></th>
+            </tr>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Lvm_Facility.FacilityName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Lvm_Department.DepartmentName)
+                </td>
+                <td style="text-align:center;">
+                    @Html.DisplayFor(modelItem => item.Lvm_Room.FloorNumber)
+                </td>
+                <td style="text-align:center;">
+                    @Html.DisplayFor(modelItem => item.Lvm_Room.RoomNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Lvm_DeviceType.DeviceTypeName)
+                </td>
+                @*<td style="text-align:right; padding-right:30px;">
+                        @Html.DisplayFor(modelItem => item.DeviceNumber)
+                    </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.DeviceCode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DeviceName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DeviceDescription)
+                </td>
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.Lvm_MediaType.MediaType)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ImageFile)
+                    </td>*@
+                <td>
+                    @{
+                      if (!string.IsNullOrWhiteSpace(item.ImageFile))
+                      {
+                          if (item.MediaTypeId > 1)
+                          {
+                        <video class="LvmLstImg" controls>
+                            <source src="@item.ImageFile" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                          }
+                          else
+                          {
+                              if (item.ImageFile.IndexOf(@"/") < 0)
+                              {
+                            <img class="LvmLstImg" src="@Url.Content(string.Format("{0}{1}/{2}", ViewBag.ImgPath, item.FacilityId, item.ImageFile))" alt="" />
+                              }
+                              else
+                              {
+                            <img class="LvmLstImg" src="@item.ImageFile" alt="" />
+                              }
+                          }
+                      }
+                    }
+                </td>
+                <td class="lvm-td-ico">
+                    @{ string acColor = @item.IsAction ? "color:red;" : ""; }
+                    @Html.ActionLink(" ", "Index", "DeviceAction", new { id = item.DeviceId }, new { @class = "fa fa-external-link", title = "Device Actions", style = @acColor })&nbsp;
+                    @Html.ActionLink(" ", "Details", "Device", new { id = item.DeviceId }, new { @class = "fa fa-eye" })&nbsp;
+                    @Html.ActionLink(" ", "Edit", "Device", new { id = item.DeviceId }, new { @class = "fa fa-pencil-square-o" })&nbsp;
+                    @Html.ActionLink(" ", "Delete", "Device", new { id = item.DeviceId }, new { @class = "fa fa-trash" })
+                </td>
+            </tr>
+                      }
+        </table>
+        <div class="lvm-tbl-pager">
+            <div class="lvm-tbl-pager-btn">@Html.PagedListPager(Model, page => Url.Action("Index", new { FacilityId = ViewBag.FacilityId, DepartmentId = ViewBag.DepartmentId, page }))</div>
+            <div class="lvm-tbl-pager-pagenum">Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount</div>
+        </div>
+        <h5>
+            <b>@Html.ActionLink("Import Record Format:", "DownloadSampleCsv", "Device", null, new {title = "Click to download sample file." })</b> DeviceType, Department, RoomNumber, DeviceCode, DeviceName, DeviceDescription 
+        </h5>
+    </div>
+</div>
+@section Scripts {
+@Scripts.Render("~/Scripts/App/lvm-upload-device.js")
+}

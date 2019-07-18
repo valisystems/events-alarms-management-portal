@@ -1,0 +1,7 @@
+﻿@model IEnumerable<LvMonitor.Models.Lvm_MonitorRecord>
+
+@foreach (var item in Model)
+{
+    item.TemplateName = ViewBag.TempName;
+    @Html.Partial("~/Views/Templates/" + item.TemplateName + ".cshtml", item);
+}

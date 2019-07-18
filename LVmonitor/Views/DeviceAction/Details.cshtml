@@ -1,0 +1,88 @@
+﻿@model LvMonitor.Models.Lvm_DeviceAction
+
+<div class="lvm-box">
+    <div class="lvm-box-header">
+        <span>@ViewBag.SubTitle for <strong>@Html.ActionLink((string)@ViewBag.DeviceNameCode, "Edit", "Device", new { id = @ViewBag.DeviceId }, null)</strong></span>
+    </div>
+    <div class="lvm-box-body">
+        <div>
+            <dl class="dl-horizontal">
+                <dt>Control</dt>
+                <dd>@Html.DisplayFor(model => model.Lvm_DeviceTypeControl.ControlName)</dd>
+                <dt>Condition Alarm</dt>
+                <dd>@Html.DisplayFor(model => model.IsControlOn)</dd>
+                <dt>Name</dt>
+                <dd>@Html.DisplayFor(model => model.Lvm_DeviceActionTemplate.ActionName)</dd>
+                <dt>Active</dt>
+                <dd>@Html.DisplayFor(model => model.IsActive)</dd>
+
+                @if (!(string.IsNullOrEmpty(Model.Lvm_DeviceActionTemplate.ActionUrl2) && string.IsNullOrEmpty(Model.Lvm_DeviceActionTemplate.ActionUrl3) && string.IsNullOrEmpty(Model.Lvm_DeviceActionTemplate.ActionUrlOff)))
+                {
+                <dt style="color:#629ec1;">Action Trigger #1</dt>
+                <dd></dd>
+                }
+                @if (!((Model.Lvm_DeviceActionTemplate.CallAfterSec ?? 0) == 0 || (Model.Lvm_DeviceActionTemplate.CallRepeatEveryMin ?? 0) == 0))
+                {
+                <dt>Call After</dt>
+                <dd>@Html.DisplayFor(model => model.Lvm_DeviceActionTemplate.CallAfterSec) sec. &nbsp;&nbsp;&nbsp; <span style="font-weight:bold;">Repeat Every</span> @Html.DisplayFor(model => model.Lvm_DeviceActionTemplate.CallRepeatEveryMin) min.</dd>
+                }
+                <dt>Type</dt>
+                <dd>@Html.DisplayFor(model => model.Lvm_DeviceActionTemplate.Lvm_DeviceActionType.DeviceActionType)</dd>
+                <dt>URL</dt>
+                <dd>@Html.DisplayFor(model => model.Lvm_DeviceActionTemplate.ActionUrl)</dd>
+                <dt>Data</dt>
+                <dd><div style="overflow-y: auto; max-height:100px; overflow-x:auto; width:100%; ">@Html.DisplayFor(model => model.Lvm_DeviceActionTemplate.ActionData)</div></dd>
+
+                @if (!string.IsNullOrEmpty(Model.Lvm_DeviceActionTemplate.ActionUrl2))
+                {
+                <dt style="color:#629ec1;">Action Trigger #2</dt>
+                <dd></dd>
+                    if (!((Model.Lvm_DeviceActionTemplate.CallAfterSec2 ?? 0) == 0 || (Model.Lvm_DeviceActionTemplate.CallRepeatEveryMin2 ?? 0) == 0))
+                    {
+                    <dt>Call After</dt>
+                    <dd>@Html.DisplayFor(model => model.Lvm_DeviceActionTemplate.CallAfterSec2) sec. &nbsp;&nbsp;&nbsp; <span style="font-weight:bold;">Repeat Every</span> @Html.DisplayFor(model => model.Lvm_DeviceActionTemplate.CallRepeatEveryMin2) min.</dd>
+                    }
+                <dt>Type</dt>
+                <dd>@Html.DisplayFor(model => model.Lvm_DeviceActionTemplate.Lvm_DeviceActionType1.DeviceActionType)</dd>
+                <dt>URL</dt>
+                <dd>@Html.DisplayFor(model => model.Lvm_DeviceActionTemplate.ActionUrl2)</dd>
+                <dt>Data</dt>
+                <dd><div style="overflow-y: auto; max-height:100px; overflow-x:auto; width:100%; ">@Html.DisplayFor(model => model.Lvm_DeviceActionTemplate.ActionData2)</div></dd>
+                }
+
+                @if (!string.IsNullOrEmpty(Model.Lvm_DeviceActionTemplate.ActionUrl3))
+                {
+                <dt style="color:#629ec1;">Action Trigger #3</dt>
+                <dd></dd>
+                    if (!((Model.Lvm_DeviceActionTemplate.CallAfterSec3 ?? 0) == 0 || (Model.Lvm_DeviceActionTemplate.CallRepeatEveryMin3 ?? 0) == 0))
+                    {
+                    <dt>Call After</dt>
+                    <dd>@Html.DisplayFor(model => model.Lvm_DeviceActionTemplate.CallAfterSec3) sec. &nbsp;&nbsp;&nbsp; <span style="font-weight:bold;">Repeat Every</span> @Html.DisplayFor(model => model.Lvm_DeviceActionTemplate.CallRepeatEveryMin3) min.</dd>
+                    }
+                <dt>Type</dt>
+                <dd>@Html.DisplayFor(model => model.Lvm_DeviceActionTemplate.Lvm_DeviceActionType2.DeviceActionType)</dd>
+                <dt>URL</dt>
+                <dd>@Html.DisplayFor(model => model.Lvm_DeviceActionTemplate.ActionUrl3)</dd>
+                <dt>Data</dt>
+                <dd><div style="overflow-y: auto; max-height:100px; overflow-x:auto; width:100%; ">@Html.DisplayFor(model => model.Lvm_DeviceActionTemplate.ActionData3)</div></dd>
+                }
+
+                @if (!string.IsNullOrEmpty(Model.Lvm_DeviceActionTemplate.ActionUrlOff))
+                {
+                <dt style="color:#629ec1;">Alarm Cancel Trigger</dt>
+                <dd></dd>
+                <dt>Type</dt>
+                <dd>@Html.DisplayFor(model => model.Lvm_DeviceActionTemplate.Lvm_DeviceActionType3.DeviceActionType)</dd>
+                <dt>URL</dt>
+                <dd>@Html.DisplayFor(model => model.Lvm_DeviceActionTemplate.ActionUrlOff)</dd>
+                <dt>Data</dt>
+                <dd><div style="overflow-y: auto; max-height:100px; overflow-x:auto; width:100%; ">@Html.DisplayFor(model => model.Lvm_DeviceActionTemplate.ActionDataOff)</div></dd>
+                }
+
+            </dl>
+        </div>
+        <p>
+            @Html.ActionLink("Edit", "Edit", new { id = Model.DeviceActionId })
+        </p>
+    </div>
+</div>

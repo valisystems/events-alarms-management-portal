@@ -1,0 +1,35 @@
+﻿
+@{
+  ViewBag.Title = "Create";
+}
+
+<h2>Create Role</h2>
+@Html.ActionLink("List Roles", "Index") | @Html.ActionLink("Manage User Role", "ManageUserRoles")
+<hr />
+@using (Html.BeginForm())
+{
+@Html.AntiForgeryToken()
+@Html.ValidationSummary(true)
+
+<div>
+    Role name
+</div>
+    <p>
+        @Html.TextBox("RoleName")
+    </p>
+    <input type="submit" value="Save" />
+}
+
+@*@model Microsoft.AspNet.Identity.EntityFramework.IdentityRole
+@{
+  ViewBag.Title = "Add New Role";
+}
+<h2>Add New User Role:</h2>
+
+@using (Html.BeginForm())
+{
+<p> Enter User Role Name:</p>
+
+    @Html.EditorFor(m => m.Name)
+    <input type="submit" value="Create Role" />
+}*@

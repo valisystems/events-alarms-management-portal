@@ -1,0 +1,59 @@
+﻿@model LvMonitor.Models.Lvm_ResourceText
+
+<div class="lvm-box">
+    <div class="lvm-box-header">
+        <span>@ViewBag.SubTitle @ViewBag.Title</span>
+    </div>
+    <div class="lvm-box-body">
+        @using (Html.BeginForm())
+        {
+        @Html.AntiForgeryToken()
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.ResourceTextId)
+            <div class="form-group">
+                @Html.LabelFor(model => model.ResourceTextTypeId, "Text Type", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("ResourceTextTypeId", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.ResourceTextTypeId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.ResourceText, "Text", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.ResourceText, new { htmlAttributes = new { @class = "form-control", @style = "height:100px; width: 600px; max-width: 600px" } })
+                    @Html.ValidationMessageFor(model => model.ResourceText, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Description, "Description", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control", @style = "width: 600px; max-width: 600px" } })
+                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.Label("Patterns", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10" style="padding-top:6px;">
+                    @Html.ActionLink("<%DeviceCode%>", "", "", new { href = "javascript:void(0)", onclick = "AddPattern('DeviceCode')" }) - Device Code
+                    <br />@Html.ActionLink("<%Room%>", "", "", new { href = "javascript:void(0)", onclick = "AddPattern('Room')" }) - Room
+                    <br />@Html.ActionLink("<%Floor%>", "", "", new { href = "javascript:void(0)", onclick = "AddPattern('Floor')" }) - Floor
+                    <br />@Html.ActionLink("<%Department%>", "", "", new { href = "javascript:void(0)", onclick = "AddPattern('Department')" }) - Department
+                    <br />@Html.ActionLink("<%CtlCode%>", "", "", new { href = "javascript:void(0)", onclick = "AddPattern('DeviceCode')" }) - Control Code
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Save" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+        }
+    </div>
+</div>
+@section Scripts {
+    <script type="text/javascript">
+        //function AddPattern(p) { $('#ResourceText').val($('#ResourceText').val() + "<%" + p + "%>"); }
+        function AddPattern(p) { $('#ResourceText').append("<%" + p + "%>"); }
+    </script>
+}

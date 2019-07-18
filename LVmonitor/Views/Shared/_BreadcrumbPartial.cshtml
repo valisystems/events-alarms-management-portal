@@ -1,0 +1,21 @@
+﻿<div>
+    @if (ViewContext.RouteData.Values["controller"].ToString().ToLower() != "dashboard")
+    {
+    <ol class="breadcrumb">
+        <li>@Html.ActionLink("Dashboard", "Index", "Dashboard")</li>
+        @{
+          if (string.IsNullOrWhiteSpace(@ViewBag.SubTitle))
+          {
+            <li class="active">@ViewBag.Title </li>}
+          else
+          {
+              string Ttl = ViewBag.Title.ToString();
+            <li>@Html.ActionLink(@Ttl, "Index", ViewContext.RouteData.Values["controller"].ToString())</li>
+            <li class="active">@ViewBag.SubTitle</li>
+          }
+        }
+    </ol>
+          }
+          else
+          {<ol class="breadcrumb"><li class="active"><div>@ViewBag.Title</div></li></ol>}
+</div>

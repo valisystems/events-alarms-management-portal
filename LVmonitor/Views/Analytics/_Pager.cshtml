@@ -1,0 +1,42 @@
+﻿@model LvMonitor.Models.AnalyticsModel
+
+@if (Model.Pager.EndPage > 1)
+{
+<ul class="pagination">
+    @if (Model.Pager.CurrentPage > 1)
+    {
+    <li>
+        <a href="@Url.Action(ViewBag.ActionName, new { fid = Model.FacilityId, did = Model.DepartmentId, rl=Model.RoomList, df = Model.DateFrom, dt = Model.DateTo, rtm = Model.ResponseTimeMin, st = Model.ShowTop, ich = Model.IsChart, p =  1, sfo = Model.SortFieldOld, sf = Model.SortField, so = Model.SortOrder, iis=false, rc=Model.RecCount })">
+            <i class="fa fa-fast-backward" aria-hidden="true"></i>
+        </a>
+    </li>
+    <li>
+        <a href="@Url.Action(ViewBag.ActionName, new { fid = Model.FacilityId, did = Model.DepartmentId, rl=Model.RoomList, df = Model.DateFrom, dt = Model.DateTo, rtm = Model.ResponseTimeMin, st = Model.ShowTop, ich = Model.IsChart, p = Model.Pager.CurrentPage -1, sfo = Model.SortFieldOld, sf = Model.SortField, so = Model.SortOrder, iis=false, rc=Model.RecCount })">
+            <i class="fa fa-backward" aria-hidden="true"></i>
+        </a>
+    </li>
+    }
+    @for (var page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
+    {
+    <li class="@(page == Model.Pager.CurrentPage ? "active" : "")">
+        @*@Html.ActionLink(page.ToString(), ViewBag.ActionName, new { fid = Model.FacilityId, did = Model.DepartmentId, rl = Model.RoomList, df = Model.DateFrom, dt = Model.DateTo, rtm = Model.ResponseTimeMin, st = Model.ShowTop, ich = Model.IsChart, p = page, sfo = Model.SortFieldOld, sf = Model.SortField, so = Model.SortOrder, iis = false, rc = Model.RecCount })*@
+        <a href="@Url.Action(ViewBag.ActionName, new { fid = Model.FacilityId, did = Model.DepartmentId, rl = Model.RoomList, df = Model.DateFrom, dt = Model.DateTo, rtm = Model.ResponseTimeMin, st = Model.ShowTop, ich = Model.IsChart, p = page, sfo = Model.SortFieldOld, sf = Model.SortField, so = Model.SortOrder, iis=false, rc=Model.RecCount })">
+            @page.ToString()
+        </a>
+    </li>
+    }
+    @if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
+    {
+    <li>
+        <a href="@Url.Action(ViewBag.ActionName, new { fid = Model.FacilityId, did = Model.DepartmentId, rl=Model.RoomList, df = Model.DateFrom, dt = Model.DateTo, rtm = Model.ResponseTimeMin, st = Model.ShowTop, ich = Model.IsChart, p = Model.Pager.CurrentPage + 1, sfo = Model.SortFieldOld, sf = Model.SortField, so = Model.SortOrder, iis=false, rc=Model.RecCount })">
+            <i class="fa fa-forward" aria-hidden="true"></i>
+        </a>
+    </li>
+    <li>
+        <a href="@Url.Action(ViewBag.ActionName, new { fid = Model.FacilityId, did = Model.DepartmentId, rl=Model.RoomList, df = Model.DateFrom, dt = Model.DateTo, rtm = Model.ResponseTimeMin, st = Model.ShowTop, ich = Model.IsChart, p = Model.Pager.TotalPages, sfo = Model.SortFieldOld, sf = Model.SortField, so = Model.SortOrder, iis=false, rc=Model.RecCount })">
+            <i class="fa fa-step-forward" aria-hidden="true"></i>
+        </a>
+    </li>
+    }
+</ul>
+}

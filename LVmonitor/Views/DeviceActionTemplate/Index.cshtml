@@ -1,0 +1,49 @@
+﻿@model IEnumerable<LvMonitor.Models.Lvm_DeviceActionTemplate>
+
+<div class="lvm-box">
+    <div class="lvm-box-header">
+        <span>@ViewBag.Title</span>
+    </div>
+    <div class="lvm-box-body">
+        <p>
+            @Html.ActionLink("Create New", "Create")
+        </p>
+        @using (Html.BeginForm("Index", "DeviceActionTemplate", FormMethod.Get))
+        {
+        <p>@Html.DropDownList("FacilityId", new SelectList(ViewBag.Facility, "FacilityId", "FacilityName", ViewBag.FacilityId), null, htmlAttributes: new { @class = "form-control", onchange = "this.form.submit();" })</p>
+        }
+        <table class="table table-striped lvm-table">
+            <tr>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Description
+                </th>
+                <th style="width:80px; text-align:center;">
+                    Active
+                </th>
+                <th class="lvm-th-ico"></th>
+            </tr>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ActionName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td style="text-align:center;">
+                    @Html.DisplayFor(modelItem => item.IsActive)
+                </td>
+                <td class="lvm-td-ico">
+                    @Html.ActionLink(" ", "Details", "DeviceActionTemplate", new { id = item.DeviceActionTemplateId }, new { @class = "fa fa-eye" }) &nbsp;
+                    @Html.ActionLink(" ", "Edit", "DeviceActionTemplate", new { id = item.DeviceActionTemplateId }, new { @class = "fa fa-pencil-square-o" }) &nbsp;
+                    @Html.ActionLink(" ", "Delete", "DeviceActionTemplate", new { id = item.DeviceActionTemplateId }, new { @class = "fa fa-trash" })
+                </td>
+            </tr>
+            }
+        </table>
+    </div>
+</div>

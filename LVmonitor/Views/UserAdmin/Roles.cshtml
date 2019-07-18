@@ -1,0 +1,32 @@
+﻿@model IEnumerable<LvMonitor.Models.AppRole>
+<div class="lvm-box">
+    <div class="lvm-box-header">
+        <span>@ViewBag.Title</span>
+    </div>
+    <div class="lvm-box-body">
+        <p>
+            @Html.ActionLink("Add Role", "AddRole", null, new { @class = "btn btn-default" })
+        </p>
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <table class="table table-striped lvm-table">
+            <tr>
+                <th>
+                    Role
+                </th>
+                <th style="width:40px;"></th>
+            </tr>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RoleName)
+                </td>
+                <td style="text-align:center;">
+                    @if (item.RoleName.ToLower() != "administrator")
+                    {@Html.ActionLink(" ", "DeleteUserRole", "UserAdmin", new { id = item.RoleName }, new { @class = "fa fa-trash", onclick = "return confirm('Are you sure you want to delete this Role?');" })}
+                </td>
+            </tr>
+            }
+        </table>
+    </div>
+</div>

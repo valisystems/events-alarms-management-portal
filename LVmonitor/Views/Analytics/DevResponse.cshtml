@@ -1,0 +1,184 @@
+﻿@model LvMonitor.Models.AnalyticsModel
+@section head {
+    <link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+    @Mvc.RazorTools.BundleManager.Styles.Render()
+    <link href="~/Content/bootstrap-theme.min.css" rel="stylesheet" />
+    <link href="~/Content/daterangepicker.css" rel="stylesheet" />
+}
+@functions {
+  MvcHtmlString IndexSort(string SortField, string SortFieldTxt) { return Html.ActionLink(SortFieldTxt, "DevResponse", new { fid = Model.FacilityId, did = Model.DepartmentId, rl = Model.RoomList, df = Model.DateFrom, dt = Model.DateTo, rtm = Model.ResponseTimeMin, st = Model.ShowTop, ich = Model.IsChart, p = 1, sfo = Model.SortFieldOld, sf = SortField, so = Model.SortOrder, iss = true, rc = Model.RecCount }); }
+}
+@*@{ var PgLst = (PagedList.IPagedList<LvMonitor.Models.sLvm_RepDevResponse_Result>)Model.ReportList;}*@
+@{ var PgLst = (List<LvMonitor.Models.sLvm_RepDevResponse_Result>)Model.ReportList;}
+<div class="lvm-box">
+    <div class="lvm-box-header">
+        <span>@ViewBag.Title @ViewBag.SubTitle</span>
+    </div>
+    <div class="lvm-box-body">
+        @using (Html.BeginForm())
+        {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.ReportId)
+        @Html.HiddenFor(model => model.Id)
+        @Html.HiddenFor(model => model.CurUserId)
+        @Html.HiddenFor(model => model.IsSuperAdmin)
+        @Html.HiddenFor(model => model.IsSingleFacility)
+
+        @Html.HiddenFor(model => model.SortFieldOld)
+        @Html.HiddenFor(model => model.SortField)
+        @Html.HiddenFor(model => model.SortOrder)
+        @Html.HiddenFor(model => model.RecCount)
+
+        @*@Html.HiddenFor(model => model.DateFromTo)*@
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(m => m.FacilityId, "Facility", htmlAttributes: new { @class = "control-label col-md-1" })
+                <div class="col-md-3">
+                    @*@Html.DropDownListFor(m => m.FacilityId, (SelectList)ViewBag.lFacility, htmlAttributes: new { @class = "form-control", })*@
+                    @if (Model.IsSingleFacility)
+                    {
+                    <h5>@Model.SingleFacilityName</h5>
+                    @Html.HiddenFor(model => model.FacilityId)
+                    }
+                    else
+                    {
+                    @Html.DropDownList("FacilityId", new SelectList(ViewBag.lFacility, "FacilityId", "FacilityName", Model.FacilityId), null, htmlAttributes: new { @class = "form-control" })
+                    }
+                </div>
+                @Html.LabelFor(m => m.DepartmentId, "Department", htmlAttributes: new { @class = "control-label col-md-1" })
+                <div class="col-md-3">
+                    @Html.DropDownListFor(m => m.DepartmentId, new SelectList(ViewBag.lDepartment, "DepartmentId", "DepartmentName").InsertEmptyFirst("Select Department", "0"), htmlAttributes: new { @class = "form-control" })
+                </div>
+                @Html.LabelFor(m => m.RoomList, "Rooms", htmlAttributes: new { @class = "control-label col-md-1" })
+                <div class="col-md-3">
+                    @Html.EditorFor(model => model.RoomList, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.DateFrom, "Date", htmlAttributes: new { @class = "control-label col-md-1" })
+                <div class="col-md-3">
+                    @Html.EditorFor(model => model.DateFromTo, new { htmlAttributes = new { @class = "form-control", PlaceHolder = "Enter Date Range", @style = "height:34px;" } })
+                </div>
+                <div class="col-md-8">
+                    <div style="display:table;">
+                        <div class="LvmLabel" style="display:table-cell;">Response Time Greater Than (min.)</div>
+                        <div style="display:table-cell; width:60px;">@Html.EditorFor(model => model.ResponseTimeMin, new { htmlAttributes = new { @class = "form-control" } })</div>
+                        <div class="LvmLabel" style="display:table-cell; padding-left:20px;">Show Top</div>
+                        <div style="display:table-cell;width:60px;">@Html.EditorFor(model => model.ShowTop, new { htmlAttributes = new { @class = "form-control" } })</div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-1 col-md-8">
+                    <div style="display:table;">
+                        <div class="LvmLabel" style="display:table-cell;">
+                            <input id="GetReport" name="GetReport" type="submit" value="Get Report" class="btn btn-default" />
+                        </div>
+                        <div class="LvmLabel" style="display:table-cell;padding-left:20px;">@Html.EditorFor(model => model.IsChart)</div>
+                        <div class="LvmLabel" style="display:table-cell; ">Show Chart</div>
+                    </div>
+                </div>
+                <div class="col-md-3 LvmRepExport">
+                    <button name="btnRepPDF" id="btnRepPDF" type="submit" class="btn btn-default" title="PDF" style="color:#ff0000;">
+                        <i class="fa fa-file-pdf-o icon-fixed-width" aria-hidden="true"></i>
+                    </button>&nbsp;
+                    <button name="btnRepExcel" id="btnRepExcel" class="btn btn-default" title="Excel" style="color:#1f6b41;">
+                        <i class="fa fa-file-excel-o icon-fixed-width" aria-hidden="true"></i>
+                    </button>&nbsp;
+                    <button name="btnRepWord" id="btnRepWord" class="btn btn-default" title="Word" style="color:#295391;">
+                        <i class="fa fa-file-word-o icon-fixed-width" aria-hidden="true"></i>
+                    </button>&nbsp;
+                    <button name="btnRepImage" id="btnRepImage" class="btn btn-default" title="Image" style="color:#ff8c00;">
+                        <i class="fa fa-file-image-o icon-fixed-width" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        }
+        @{
+          if (Model.IsChart && Model.IsGetReport && (PgLst.Count() > 0))
+          {
+            <hr />
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="form-group">
+                        <p class="text-center"><strong>@ViewBag.ChartTitle</strong></p>
+                        <div style="height:250px;">
+                            <canvas id="cnvChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+          }
+        }
+        <table class="table LvmRepTbl" @{if (!Model.IsGetReport || (PgLst.Count() == 0)) { <text> style="display:none" </text>   }; }>
+            <tr>
+                <th>
+                    @IndexSort("DepartmentName", "Department")
+                </th>
+                <th>
+                    @IndexSort("FloorNumber", "Floor #")
+                </th>
+                <th>
+                    @IndexSort("RoomNumber", "Room #")
+                </th>
+                <th>
+                    @IndexSort("DeviceName", "Device Name")
+                </th>
+                <th>
+                    @IndexSort("ResponseTime", "Response Time")
+                </th>
+                <th>
+                    @IndexSort("DateControlOn", "Date")
+                </th>
+            </tr>
+            @foreach (var item in PgLst)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(i => item.DepartmentName)
+                </td>
+                <td style="text-align:center;">
+                    @Html.DisplayFor(i => item.FloorNumber)
+                </td>
+                <td style="text-align:center;">
+                    @Html.DisplayFor(i => item.RoomNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(i => item.DeviceName)
+                </td>
+                <td style="text-align:center;">
+                    <text>@TimeSpan.FromMinutes((int)item.ResponseTime).ToString(@"hh\:mm")</text>
+                </td>
+                <td style="text-align:center;">
+                    @Html.ValueFor(i => item.DateControlOn, "{0:g}")
+                </td>
+            </tr>
+            }
+        </table>
+        <div class="lvm-tbl-pager">
+            @Html.Partial("~/Views/Analytics/_Pager.cshtml")
+            <div class="lvm-tbl-pager-pagenum">Page @(Model.Pager.TotalPages < Model.Pager.CurrentPage ? 0 : Model.Pager.CurrentPage) of @Model.Pager.TotalPages</div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/Scripts/App/ddlfacilitydepartment.js")
+    @Scripts.Render("~/bundles/daterangepicker")
+    @Scripts.Render("~/bundles/chartjs")
+
+    @{
+      if (Model.IsChart && Model.IsGetReport && (PgLst.Count() > 0))
+      {
+        <script>
+            $(document).ready(function () {
+
+                @Html.Raw(Model.ChartJs);
+
+            });
+        </script>
+      }
+    }
+}

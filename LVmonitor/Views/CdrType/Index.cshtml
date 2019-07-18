@@ -1,0 +1,62 @@
+﻿@model IEnumerable<LvMonitor.Models.Lvm_CdrType>
+
+<div class="lvm-box">
+    <div class="lvm-box-header">
+        <span>@ViewBag.Title</span>
+    </div>
+    <div class="lvm-box-body">
+        <p>
+            @Html.ActionLink("Create New", "Create")
+        </p>
+        <table class="table table-striped lvm-table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.CdrType)
+                </th>
+                <th></th>
+            </tr>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CdrType)
+                </td>
+                <td class="lvm-td-ico">
+                    @Html.ActionLink(" ", "Details", "CdrType", new { id = item.CdrTypeId }, new { @class = "fa fa-eye" })&nbsp;
+                    @Html.ActionLink(" ", "Edit", "CdrType", new { id = item.CdrTypeId }, new { @class = "fa fa-pencil-square-o" })&nbsp;
+                    @Html.ActionLink(" ", "Delete", "CdrType", new { id = item.CdrTypeId }, new { @class = "fa fa-trash" })
+                </td>
+            </tr>
+            }
+        </table>
+
+        <h4 style="padding-top:10px;">CDR Post Links</h4>
+        <div style="font-size:14px;">
+            <input type="button" class="btn btn-link" style="" value="Copy Link" name="CopyLink" id="CopyLink" onclick="CopyLinkToClipboard('#linkPortSip')" />
+            PortSip:
+            <span class="text-info" style="font-size:16px;" id="linkPortSip">@ViewBag.LinkPortSip</span>
+        </div>
+        <div style="font-size:14px;">
+            <input type="button" class="btn btn-link" value="Copy Link" name="CopyLink" id="CopyLink" onclick="CopyLinkToClipboard('#linkVodiaNurse')" />
+            Vodia Nurse Calls:
+            <span class="text-info" style="font-size:16px;" id="linkVodiaNurse">@ViewBag.LinkVodiaNurse</span>
+        </div>
+        <div style="font-size:14px;">
+            <input type="button" class="btn btn-link" value="Copy Link" name="CopyLink" id="CopyLink" onclick="CopyLinkToClipboard('#linkVodiaCdr')" />
+            Vodia CDR:
+            <span class="text-info" style="font-size:16px;" id="linkVodiaCdr">@ViewBag.LinkVodiaCdr</span>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script type="text/javascript">
+        function CopyLinkToClipboard(l) {
+            var $temp = $("<input>");
+            $("body").append($temp);
+            $temp.val($(l).text()).select();
+            document.execCommand("copy");
+            $temp.remove();
+        }
+    </script>
+}

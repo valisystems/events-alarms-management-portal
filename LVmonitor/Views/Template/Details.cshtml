@@ -1,0 +1,87 @@
+﻿@model LvMonitor.Models.Lvm_Template
+
+@section head {
+    <link href="~/Content/TemplateCss/@ViewBag.TempCss" rel="stylesheet" type="text/css" />
+}
+
+<div class="lvm-box">
+    <div class="lvm-box-header">
+        <span>@ViewBag.Title @ViewBag.SubTitle</span>
+    </div>
+    <div class="lvm-box-body">
+        @*<div class="row">
+            <div class="col-md-4">
+                <div>*@
+                    <dl class="dl-horizontal">
+                        <dt>
+                            Template #
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.TemplateNumber)
+                        </dd>
+                        <dt>
+                            Template Name
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.TemplateName)
+                        </dd>
+                        <dt>
+                            Template File
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.TemplateFile)
+                        </dd>
+                        <dt>
+                            @*Thumbnail*@ Image
+                        </dt>
+                        <dd>
+                            <img class="LvmLstImgLg" src="@Url.Content(ViewBag.ImgPath + Model.Thumbnail)" alt="" />
+                        </dd>
+                    </dl>
+            @*    </div>
+            </div>
+        <div class="col-md-8">
+            <img src="@Url.Content(ViewBag.ImgPath + Model.Thumbnail)" alt="" style="width:100%;" />
+
+            @Html.Partial("~/Views/Templates/" + Model.TemplateName + ".cshtml", (LvMonitor.Models.Lvm_MonitorRecord)ViewBag.TestMonitorRecord);
+
+        </div>
+    </div>*@
+
+        @*<div style="display:inline-block; border: 1px solid red;">
+                <dl class="dl-horizontal">
+                    <dt>
+                        Template #
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.TemplateNumber)
+                    </dd>
+                    <dt>
+                        Template Name
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.TemplateName)
+                    </dd>
+                    <dt>
+                        Template File
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.TemplateFile)
+                    </dd>
+                    <dt>
+                        Image
+                    </dt>
+                    <dd>
+                        <img class="LvmLstImg140" src="@Url.Content(ViewBag.ImgPath + Model.Thumbnail)" alt="" />
+                    </dd>
+                </dl>
+            </div>
+            <div style="display:inline-block; border: 1px solid red;">
+                <img class="LvmLstImg140" src="@Url.Content(ViewBag.ImgPath + Model.Thumbnail)" alt="" style="width:100%;" />
+            </div>*@
+
+        <p>
+            @Html.ActionLink("Edit", "Edit", new { id = Model.TemplateId })
+        </p>
+    </div>
+</div>

@@ -1,0 +1,102 @@
+﻿@model PagedList.IPagedList<LvMonitor.Models.Lvm_DeviceRecordImage>
+@using PagedList.Mvc;
+@section head {<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />}
+<div class="lvm-box">
+    <div class="lvm-box-header">
+        <span>@ViewBag.Title</span>
+    </div>
+    <div class="lvm-box-body">
+        <p>
+            @Html.ActionLink("Create New", "Create")
+        </p>
+        <p>
+            @Html.ActionLink("Create New", "Create")
+        </p>
+        @using (Html.BeginForm("Index", "DeviceRecordImage", FormMethod.Get))
+        {
+        <p>@Html.DropDownList("FacilityId", new SelectList(ViewBag.Facility, "FacilityId", "FacilityName").InsertEmptyFirst("Select Facility", "0"), null, htmlAttributes: new { @class = "form-control", onchange = "this.form.submit();" })</p>
+        }        <table class="table table-striped lvm-table">
+            <tr>
+                <th>
+                    Facility
+                </th>
+                <th>
+                    Media Type
+                </th>
+                <th>
+                    Number
+                </th>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Image File
+                </th>
+                <th>
+                    Image
+                </th>
+                <th>
+                    Description
+                </th>
+                <th class="lvm-th-ico"></th>
+            </tr>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Lvm_Facility.FacilityName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Lvm_MediaType.MediaType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ImageNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ImageName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ImageFile)
+                </td>
+                <td>
+                    @{
+                      if (!string.IsNullOrWhiteSpace(item.ImageFile))
+                      {
+                          if (item.MediaTypeId > 1)
+                          {
+                        <video class="LvmLstImg" controls>
+                            <source src="@item.ImageFile" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                          }
+                          else
+                          {
+                              if (item.ImageFile.IndexOf(@"/") < 0)
+                              {
+                        <img class="LvmLstImg" src="@Url.Content(string.Format("{0}{1}/{2}", ViewBag.ImgPath, item.FacilityId, item.ImageFile))" alt="" />
+                              }
+                              else
+                              {
+                        <img class="LvmLstImg" src="@item.ImageFile" alt="" />
+                                  }
+                              }
+                          }
+                      }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ImageDescription)
+                </td>
+                <td class="lvm-td-ico">
+                    @Html.ActionLink(" ", "Details", "DeviceRecordImage", new { id = item.DeviceRecordImageId }, new { @class = "fa fa-eye" })&nbsp;
+                    @Html.ActionLink(" ", "Edit", "DeviceRecordImage", new { id = item.DeviceRecordImageId }, new { @class = "fa fa-pencil-square-o" })&nbsp;
+                    @Html.ActionLink(" ", "Delete", "DeviceRecordImage", new { id = item.DeviceRecordImageId }, new { @class = "fa fa-trash" })
+                </td>
+            </tr>
+                      }
+        </table>
+        <div class="lvm-tbl-pager">
+            <div class="lvm-tbl-pager-btn">@Html.PagedListPager(Model, page => Url.Action("Index", new { FacilityId = ViewBag.FacilityId, page }))</div>
+            <div class="lvm-tbl-pager-pagenum">Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount</div>
+        </div>
+    </div>
+</div>

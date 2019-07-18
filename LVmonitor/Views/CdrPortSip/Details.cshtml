@@ -1,0 +1,233 @@
+﻿@model LvMonitor.Models.Lvm_CdrPortSip
+
+<div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal">&times;</button>
+    <h3 class="modal-title">Call Details</h3>
+</div>
+<div class="modal-body">
+    @*<div style="overflow-y: auto;">*@
+                <dl class="dl-horizontal lvm-dl-horizontal">
+                    <dt>
+                        CDR Type
+                    </dt>
+                    <dd>
+                        PortSip
+                    </dd>
+                    <dt>
+                        Facility
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.FacilityName)
+                    </dd>
+                    @*<dt>
+                    Device
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.DeviceName)
+                </dd>*@
+                    <dt>
+                        Room
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.RoomNumber)
+                    </dd>
+                    <dt>
+                        Answered Time
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.CallAnsweredTime)
+                    </dd>
+                    <dt>
+                        Cost
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.CallCost)
+                    </dd>
+                    <dt>
+                        Direction
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.CallDirection)
+                    </dd>
+                    <dt>
+                        Ended Reason
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.CallEndedReason)
+                    </dd>
+                    <dt>
+                        Start Time
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.CallStartTime)
+                    </dd>
+                    <dt>
+                        Ended Time
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.CallEndedTime)
+                    </dd>
+                    <dt>
+                        Fail Code
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.CallFailCode)
+                    </dd>
+                    @*<dt>
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.CallFinalDestination)
+                </dd>*@
+                    <dt>
+                        Destination Domain
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.CallFinalDestinationDomain)
+                    </dd>
+                    <dt>
+                        Destination Number
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.CallFinalDestinationNumber)
+                    </dd>
+                    <dt>
+                        Call ID
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.CallId)
+                    </dd>
+                    <dt>
+                        Call Prefix
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.CallPrefix)
+                    </dd>
+                    <dt>
+                        Call Rate
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.CallRate)
+                    </dd>
+                    <dt>
+                        Call Status
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.CallStatus)
+                    </dd>
+                    <dt>
+                        Talk Time
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.CallTalkTime)
+                    </dd>
+                    <dt>
+                        Trunk Name
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.CallTrunkName)
+                    </dd>
+                    <dt>
+                        Callee
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Callee)
+                    </dd>
+                    <dt>
+                        Caller
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Caller)
+                    </dd>
+                    <dt>
+                        Caller Display Name
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.CallerDisplayName)
+                    </dd>
+                    <dt>
+                        Cost Duration Unit
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.CostDurationUnit)
+                    </dd>
+                    <dt>
+                        Tenant ID
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.TenantId)
+                    </dd>
+                    <dt>
+                        Ring Duration
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.CallRingDuration)
+                    </dd>
+                    <dt>
+                        Callee Domain
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.CalleeDomain)
+                    </dd>
+                    <dt>
+                        Callee Number
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.CalleeNumber)
+                    </dd>
+                    <dt>
+                        Caller Domain
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.CallerDomain)
+                    </dd>
+                    <dt>
+                        Caller Number
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.CallerNumber)
+                    </dd>
+                    <dt>
+                        Recording File
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.RecordingFileName)
+                    </dd>
+                    <dt>
+                        Recording Location
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.RecordingLocation)
+                    </dd>
+                    <dt>
+                        Tenant Domain
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.TenantDomain)
+                    </dd>
+                    <dt>
+                        Timezone
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Timezone)
+                    </dd>
+                    <dt>
+                        Caller Name
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.CallerName)
+                    </dd>
+                    <dt>
+                        Callee Name
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.CalleeName)
+                    </dd>
+                </dl>
+    @*</div>*@
+    <div class="row">
+        <div class="col-xs-4 col-xs-offset-4" style="padding-left:0;">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+    </div>
+</div>
+

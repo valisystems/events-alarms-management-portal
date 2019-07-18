@@ -1,0 +1,56 @@
+﻿@model LvMonitor.Models.Lvm_DeviceAction
+
+<div class="lvm-box">
+    <div class="lvm-box-header">
+        <span>@ViewBag.SubTitle for <strong>@Html.ActionLink((string)@ViewBag.DeviceNameCode, "Edit", "Device", new { id = @ViewBag.DeviceId }, null)</strong></span>
+    </div>
+    <div class="lvm-box-body">
+        @using (Html.BeginForm())
+        {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.DeviceActionId)
+            @Html.Hidden("DeviceId", (string)ViewBag.DeviceId.ToString())
+            <div class="form-group">
+                @Html.LabelFor(model => model.DeviceTypeControlId, "Control", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("DeviceTypeControlId", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.DeviceTypeControlId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.IsControlOn, "Condition Alarm", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <div class="checkbox" style="margin-left:20px;">
+                        @Html.EditorFor(model => model.IsControlOn)
+                        @Html.ValidationMessageFor(model => model.IsControlOn, "", new { @class = "text-danger", style = "margine-left:40px;" })
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.DeviceActionTemplateId, "Action", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("DeviceActionTemplateId", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.DeviceActionTemplateId, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.IsActive, "Active", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <div class="checkbox" style="margin-left:20px;">
+                        @Html.EditorFor(model => model.IsActive)
+                        @Html.ValidationMessageFor(model => model.IsActive, "", new { @class = "text-danger", style = "margine-left:40px;" })
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Save" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+        }
+    </div>
+</div>

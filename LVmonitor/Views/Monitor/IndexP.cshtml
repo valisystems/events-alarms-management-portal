@@ -1,0 +1,42 @@
+﻿@model IEnumerable<LvMonitor.Models.Lvm_MonitorRecord>
+
+@{int i = Model.Count(); if (i > 0) { i = 100 / i; if (i <= ViewBag.ColPc) { i = ViewBag.ColPc; } } else { i = 100; } }
+
+@section head {
+    <style type="text/css">
+html, body {height: 100%; width: 100%; padding: 0;  margin: 0;}
+.LvmTeplate {display:inline-block;width:@{<text>@i</text>}%;min-width:@{<text>@ViewBag.TemW</text>}px;}
+.lvmMonitorCont {margin-right: -@{<text>@ViewBag.HisW</text>}px;}
+.lvmMonitorLeft {margin-right: @{<text>@ViewBag.HisW</text>}px;}
+.lvmMonitorRight {width: @{<text>@ViewBag.HisW</text>}px;}
+body{background-color:#fff; }
+    </style>
+    <link href="~/Content/TemplateCss/HistoryTemplate.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/TemplateCss/@ViewBag.TempCss" rel="stylesheet" type="text/css" />
+}
+
+@{ViewBag.Title = "Monitor Records"; Layout = "~/Views/Shared/_LayoutMonitor.cshtml";}
+<div class="lvmMonitorCont">
+    <div class="lvmMonitorLeft">
+        <h4 class="lvmMonitorLbl">Facility: @ViewBag.Facility &nbsp; Monitor: @ViewBag.Monitor</h4>
+        @Html.Partial("~/Views/Monitor/List.cshtml")
+    </div>
+</div>
+<div class="lvmMonitorRight">
+    <div>
+        <div>
+            <h4 class="lvmMonitorLbl">Call History @ViewBag.LstHistoryCount</h4>
+            @Html.Partial("~/Views/Monitor/History.cshtml")
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    @Scripts.Render("~/scripts/app/signalclient-monitor.js")
+    @Scripts.Render("~/scripts/app/jquery.fittext.js")
+    <script type="text/javascript">
+        jQuery(".LvmRespText").fitText(1.2, { minFontSize: '10px', maxFontSize: '20px' });
+        jQuery(".LvmRespText2").fitText(1, { minFontSize: '14px', maxFontSize: '20px' });
+    </script>
+    @Scripts.Render("~/scripts/app/lvm-monitor-updateago.js")
+}

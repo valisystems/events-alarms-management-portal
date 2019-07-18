@@ -1,0 +1,9 @@
+﻿@*@model List<LvMonitor.Models.sLvmMonitorHistory_Result>*@
+
+@if (ViewBag.LstHistory != null)
+{
+    foreach (var item in (List<LvMonitor.Models.sLvmMonitorHistory_Result>)ViewBag.LstHistory)
+    {
+    @Html.Partial("~/Views/Templates/HistoryTemplate.cshtml", item)
+    }
+}

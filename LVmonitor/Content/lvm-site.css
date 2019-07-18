@@ -1,0 +1,707 @@
+﻿body {
+    /*padding-top: 50px;*/
+    /*padding-bottom: 20px;*/
+    background-color: #ecf0f5;
+    /*border:1px solid red;*/
+    /*margin:0;
+    padding:0;*/
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+/* Custom */
+@media (min-width: 768px) {
+  .lvm-dl-horizontal2 dt {
+    width: 240px;
+  }
+  .lvm-dl-horizontal2 dd {
+    margin-left: 260px;
+  }
+}
+
+/*.lvmAdmin {
+    border: 1px solid #ddd;
+}*/
+
+.lvmAdmin legend {
+    font-size: 1.3em;
+    border: none;
+    margin: 5px 0;
+}
+
+.lvmAdmin a {
+    font-size: 1.1em;
+    border: none;
+    margin: 6px 0;
+}
+
+.lvmAdmin div {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+/* Monitor */
+.lvmMonitorLbl {
+    padding: 0 0 10px 10px;
+    border-bottom: 1px solid #ccc;
+}
+
+.lvmMonitorCont {
+    width: 100%;
+    float: left;
+    margin-right: -200px;
+    min-width: 200px;
+}
+
+.lvmMonitorLeft {
+    margin-right: 200px;
+}
+
+.lvmMonitorRight {
+    width: 200px;
+    float: right;
+    height: 100%;
+    box-shadow: inset 1px 0 0 #ccc;
+    padding-left: 1px;
+}
+
+.LvmRecTestBtnStDiv button {
+    margin-right: 10px;
+    border: 1px solid #9d9d9d;
+    border-radius: 6px;
+    box-shadow: 2px 2px 2px 0 rgba(0,0,0,0.2);
+    background-color: whitesmoke;
+    width: 60px;
+}
+
+.LvmRecTestBtnStDiv img {
+    width: 40px;
+    height: 40px;
+    opacity: 0.1;
+}
+
+.LvmRecTestBtnStReload img {
+    width: 40px;
+    height: 40px;
+    opacity: 1;
+}
+
+button.LvmRecTestBtnStReload {
+    background: none;
+}
+
+/*button.LvmRecTestBtnStReload  {
+    width: 50px;
+    height: 44px;
+}
+.LvmRecTestBtnStReload i {
+    font-size:11px;
+    color:royalblue;
+}*/
+
+/*.LvmRecTestBtnAcDiv{
+padding-top:8px;
+}
+
+.LvmRecTestBtnAcDiv button{
+    margin-right:10px;
+    border:1px solid #9d9d9d;
+    border-radius: 6px;
+    box-shadow: 2px 2px 2px 0 rgba(0,0,0,0.2);
+    background-color:whitesmoke;
+}
+
+    .LvmRecTestBtnAcDiv button div {
+        width: 40px;
+        height: 40px;
+        opacity: 0.1;
+        font-size: 30px;
+        color:firebrick;
+    }*/
+
+/*.LvmRecTestBtnAcDiv {
+    padding-top: 6px;
+}*/
+
+.LvmRecTestBtnAcDiv button {
+    margin-right: 10px;
+    border: none;
+    background-color: transparent;
+    padding: 0;
+    width: 60px;
+    padding-bottom:3px;
+}
+
+.LvmRecTestBtnAcDiv button img{
+    height:30px; width:60px;
+}
+
+button.LvmRecTestBtnAcDivBtnUnder {
+    border-bottom: 2px solid red;
+}
+
+.LvmRecTestBtnAcDiv button i {
+    font-size: 48px;
+    color: dodgerblue;
+}
+
+/*.TextShadowRed i{
+    text-shadow: -1px 0 red, 0 1px red, 1px 0 red, 0 -1px red;
+}*/
+
+
+.LvmRecTestDevImg {
+    height: 100%;
+}
+
+.LvmRecTestDevResTxt div {
+    display: inline-block;
+    vertical-align: top;
+}
+/*.LvmRecTestDevResTxt div input{
+        margin-top:3px;
+    }*/
+
+
+/* -------------- Toggle Button ---------------- */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+    .switch input {
+        display: none;
+    }
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+    .slider:before {
+        position: absolute;
+        content: "";
+        height: 26px;
+        width: 26px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        -webkit-transition: .4s;
+        transition: .4s;
+    }
+
+input:checked + .slider {
+    background-color: #2196F3;
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+    border-radius: 34px;
+}
+
+    .slider.round:before {
+        border-radius: 50%;
+    }
+/* -------------- End Toggle Button ---------------- */
+
+
+
+/*.lvmMonitorRight {
+    display: inline-block;
+    position: fixed;
+    right: 0;
+    height: 100%;
+    width: 200px;
+    overflow: hidden;
+    border-left: 1px solid #ccc;
+}
+
+.lvmMonitorLeft {
+    display: inline-block;
+    padding-right: 200px;
+    width: 100%;
+}*/
+/* ********* */
+
+img.LvmLstImg {
+    width: 40px;
+}
+
+img.LvmLstImg80 {
+    width: 80px;
+}
+
+img.LvmLstImg140 {
+    width: 140px;
+}
+
+img.LvmLstImgLg {
+    width: 200px;
+}
+
+video.LvmLstImg {
+    width: 100%;
+}
+
+.LvmRepExport {
+    text-align: right;
+}
+
+    .LvmRepExport button {
+        font-size: 22px;
+        padding: 0;
+        height: 34px;
+        width: 40px;
+    }
+
+.LvmLabel {
+    line-height: 100%;
+    vertical-align: middle;
+    font-weight: bold;
+    padding-right: 10px;
+}
+
+.LvmRepTbl {
+    background-color: #fff;
+}
+
+    .LvmRepTbl th, table.LvmRepTbl > body > tr > th {
+        text-align: center;
+        border: 1px gainsboro solid;
+    }
+
+    .LvmRepTbl td {
+        border: 1px gainsboro solid;
+    }
+
+.LvmSubtitle {
+    margin-top: 0;
+    padding-left: 15px;
+}
+
+.LvmFormLabel {
+    border: none;
+    box-shadow: none;
+    background-color: transparent;
+}
+
+.content-header {
+    position: relative;
+    /*padding: 15px 15px 0 15px;*/
+}
+
+    .content-header > div {
+        margin: 0;
+        height: 42px;
+        /*padding: 4px 15px 0 15px;
+  font-size: 24px;*/
+        background-color: transparent;
+        border-bottom: 1px solid #dbdee0;
+        background-color: #e9ebec;
+    }
+
+    .content-header .breadcrumb {
+        float: none;
+        background: transparent;
+        /*border:1px solid red;*/
+        /*margin: 0;
+        padding: 0;
+        height: 42px;
+       margin-top: 0;
+  margin-bottom: 0;
+  font-size: 24px;
+  padding: 7px 5px;
+  position: absolute;
+  top: 15px;
+  right: 10px;
+  border-radius: 2px;*/
+        font-size: 16px;
+        border-radius: 0;
+        height: 42px;
+        /*border:1px solid red;*/
+    }
+
+        .content-header .breadcrumb li {
+            background: transparent;
+        }
+
+.main-footer {
+    -webkit-transition: -webkit-transform 0.3s ease-in-out, margin 0.3s ease-in-out;
+    -moz-transition: -moz-transform 0.3s ease-in-out, margin 0.3s ease-in-out;
+    -o-transition: -o-transform 0.3s ease-in-out, margin 0.3s ease-in-out;
+    transition: transform 0.3s ease-in-out, margin 0.3s ease-in-out;
+    margin-left: 230px;
+    z-index: 820;
+}
+
+/* Lvm forms, tables*/
+.lvm-box-header:before,
+.lvm-box-body:before,
+.lvm-box-footer:before,
+.lvm-box-header:after,
+.lvm-box-body:after,
+.lvm-box-footer:after {
+    content: " ";
+    display: table;
+}
+
+.lvm-box-header:after,
+.lvm-box-body:after,
+.lvm-box-footer:after {
+    clear: both;
+}
+
+.lvm-box {
+    position: relative;
+    border-radius: 3px;
+    background: #ffffff;
+    border: 1px solid #d2d6de;
+    margin-bottom: 20px;
+    width: 100%;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+.lvm-box2 {
+    position: relative;
+    border-radius: 3px;
+    background: #ffffff;
+    border: 1px solid #d2d6de;
+    margin-bottom: 20px;
+    width: 100%;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+.lvm-box-header {
+    color: #444;
+    display: block;
+    padding: 10px;
+    position: relative;
+    background: #f5f5f5;
+    border-bottom: 1px solid #d2d6de;
+    /*border:1px solid red;*/
+}
+
+    .lvm-box-header span {
+        /*border:1px solid red;*/
+        font-size: 16px;
+        line-height: 16px;
+        font-weight: 300;
+    }
+
+.lvm-box-body {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+    padding: 15px 10px 10px 10px;
+}
+
+    .lvm-box-body p {
+        margin-top: -5px;
+    }
+    .lvm-box-body .dl-horizontal dd {
+        padding-top: 6px;
+    }
+
+.lvm-table {
+    margin-bottom: 10px;
+}
+
+    .lvm-table th, .lvm-table tbody tr th {
+        border: 1px solid #d8d9d9;
+    }
+
+    .lvm-table td {
+        border: 1px solid #e1e2e3;
+    }
+
+    .lvm-table .lvm-tr-bg1 {
+        background: #f8f8f8;
+    }
+
+.lvm-th-ico {
+    width: 100px;
+}
+
+.lvm-td-ico {
+    font-size: 16px;
+    text-align: center;
+    white-space:nowrap;
+}
+
+.lvm-tbl-pager .pagination{
+margin:0;
+}
+
+.lvm-tbl-pager-btn{
+display:inline-block;
+}
+
+.lvm-tbl-pager-pagenum{
+display:inline-block;
+float:right;
+vertical-align:bottom;
+margin:3px;
+}
+
+.dl-horizontal dt{
+margin:6px 0;
+}
+
+.lvm-dl-horizontal dt {
+margin: 2px 0;
+}
+
+.lvm-dl-horizontal dd {
+    margin-top:2px;
+    margin-bottom:0;
+}
+
+.lvm-breadcrumb-right {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 40px;
+    width: 254px;
+    border: 0;
+    border-left: 1px solid #dbdee0;
+    padding: 3px 10px;
+}
+
+div.lvm-imgcat-div {
+    display: inline-block;
+    width: 24%;
+    /*min-width: 40px;*/
+}
+
+    div.lvm-imgcat-div img {
+        width: 100%;
+        cursor: pointer;
+    }
+
+
+    table.lvm-flex-table {
+  table-layout: fixed;
+  width: 100%;
+}
+table.lvm-flex-table td {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  /*border: 1px solid red;*/
+}
+
+ul.lvm-ul-left0 {
+  padding-left: 0;
+  margin-left: 0;
+}
+
+li.lvm-ul-left0 {
+    padding-left: 0;
+    margin-left: 0;
+}
+
+.input-group-btn.input-space a {
+  margin-right: 6px !important; 
+  /*border-radius:3px;*/
+} 
+
+.input-group.input-space select {
+  margin-right: 6px !important;
+  /*border-radius:13px;*/
+} 
+
+/*.lvmTextArea {
+    height: 200px;
+    width: 600px;
+    max-width: 600px;
+}*/
+
+/*.lvmAdminMonitor{
+    display:table;
+}
+.lvmAdminMonitor div{
+    display:table-cell;
+    white-space:nowrap
+}*/
+
+/* ------------Navbar ---------------------*/
+/*.navbar-inverse {
+    background-color:#347eb3;
+    color:#ffffff;
+}*/
+/*.navbar-custom {
+    background-color:#347eb3;
+    color:#ffffff;
+    border-radius:0;
+}
+
+.navbar-custom .navbar-nav > li > a {
+    color:#fff;
+}
+.navbar-custom .navbar-nav > .active > a, .navbar-nav > .active > a:hover, .navbar-nav > .active > a:focus {
+    color: #ffffff;
+    background-color:transparent;
+}
+.navbar-custom .navbar-brand {
+    color:#eeeeee;
+}*/
+
+/* ------------ TEMPLATES --------------- */
+
+/*.LvmTeplate1 {
+    border: 1px solid grey;
+    display: inline-block;
+    margin: 5px;
+}
+
+    .LvmTeplate1 img {
+        width: 120px;
+    }
+
+    .LvmTeplate1 td {
+        border: 1px solid gainsboro;
+    }
+
+
+    .LvmTeplate1 .LvmTdImg {
+        width: 120px;
+    }
+
+    .LvmTeplate1 .LvmTdRight {
+        width: 180px;
+    }
+
+    .LvmTeplate1 td {
+        min-height: 40px;
+    }
+
+    .LvmTeplate1 .LvmIco {
+        width: 40px;
+        opacity: 0.1;
+        border: 1px solid #ddd;
+    }
+
+    .LvmTeplate1 div {
+        display: inline-block;
+    }*/
+
+/*  History Templates */
+
+/*.LvmHstTeplate1 {
+border-bottom: 1px solid #ccc;
+}
+        .LvmHstTeplate1 .LvmIco {
+        width: 40px;
+        border: 1px solid #ddd;
+    }*/
+
+
+/* ************************ AB TEST Template CSS *******************************/
+
+/*.LvmHstTeplate1 {
+border-bottom: 1px solid #ccc;
+}
+        .LvmHstTeplate1 .LvmIco {
+        width: 40px;
+        border: 1px solid #ddd;
+    }
+
+
+         .LvmTeplate1 {
+        display: inline-block;
+        min-width:300px;
+    }
+
+        .LvmTeplate1 .LvmTeplate_border {
+            border: 1px solid grey;
+            margin: 5px;
+        }
+
+        .LvmTeplate1 .LvmTeplate_tbldiv {
+            display: table;
+            width: 100%;
+        }
+
+        .LvmTeplate1 .LvmTeplate_tbldiv table {
+            width: 100%;
+        }
+
+            .LvmTeplate1 table td {
+                width: 100%;
+                border-bottom: 1px solid gainsboro;
+            }
+
+            .LvmTeplate1 table .LvmTeplate_tdimg img {
+                width: 100%;
+                border: 1px solid gainsboro;
+            }
+
+            .LvmTeplate1 table .LvmTeplate_tdimg {
+                width: 40%;
+            }
+
+            .LvmTeplate1 table .LvmTeplate_tdtxt {
+                width: 60%;
+            }
+
+        .LvmTeplate1 .LvmTeplate_trdiv {
+            display: table-row;
+        }
+
+        .LvmTeplate1 .LvmTeplate_tblbottom{
+            width:100%;
+        }
+              .LvmTeplate1 .LvmTeplate_tblbottom td{
+                    width:12%;
+        }
+                            .LvmTeplate1 .LvmTeplate_tblbottom td image{
+                    width:100%;
+                    padding:2px;
+                     opacity: 0.1;
+        }*/

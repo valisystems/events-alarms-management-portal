@@ -1,0 +1,199 @@
+@model LvMonitor.Models.Lvm_MonitorRecord
+<div class="LvmTemp3 LvmTeplate">
+    <div>
+        @if (Model.Control1)
+        {
+        <table>
+            <tr>
+                <td class="LvmTep_tdImg" rowspan="2">
+                    <img src="~/Content/Images/Control/@Model.ControlImg1" />
+                </td>
+                <td class="LvmTep_tdTxt">
+                    <div class="LvmRespText2 text-uppercase">
+                        @Html.DisplayFor(m => m.ControlName1) - @Html.DisplayFor(m => m.Lvm_Device.Lvm_Department.DepartmentName) @Model.Lvm_Device.Lvm_Room.FloorNumber.ShowWithSfx() LEVEL ROOM @Html.DisplayFor(m => m.Lvm_Device.Lvm_Room.RoomNumber)
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="LvmRespText">
+                        Activated: <span id="off-@Model.MonitorRecordId">@Model.DateOn1.Value.ToString("MM/dd/yyyy hh:mm tt")</span>
+                        &nbsp;&nbsp;
+                        <span id="ago-off-@Model.MonitorRecordId" class="ago-off">@DateTime.Now.Subtract(Model.DateOn1.Value).ToString(@"hh\h\:mm\m")</span> ago
+                    </div>
+                </td>
+            </tr>
+        </table>
+        }
+        @if (Model.Control2)
+        {
+        <table>
+            <tr>
+                <td class="LvmTep_tdImg" rowspan="2">
+                    <img src="~/Content/Images/Control/@Model.ControlImg2" />
+                </td>
+                <td class="LvmTep_tdTxt">
+                    <div class="LvmRespText2  text-uppercase">
+                        @Html.DisplayFor(m => m.ControlName2) - @Html.DisplayFor(m => m.Lvm_Device.Lvm_Department.DepartmentName) @Model.Lvm_Device.Lvm_Room.FloorNumber.ShowWithSfx() LEVEL ROOM @Html.DisplayFor(m => m.Lvm_Device.Lvm_Room.RoomNumber)
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="LvmRespText">
+                        Activated: <span id="off-@Model.MonitorRecordId">@Model.DateOn2.Value.ToString("MM/dd/yyyy hh:mm tt")</span>
+                        &nbsp;&nbsp;
+                        <span id="ago-off-@Model.MonitorRecordId" class="ago-off">@DateTime.Now.Subtract(Model.DateOn2.Value).ToString(@"hh\h\:mm\m")</span> ago
+                    </div>
+                </td>
+            </tr>
+        </table>
+        }
+        @if (Model.Control3)
+        {
+        <table>
+            <tr>
+                <td class="LvmTep_tdImg" rowspan="2">
+                    <img src="~/Content/Images/Control/@Model.ControlImg3" />
+                </td>
+                <td class="LvmTep_tdTxt">
+                    <div class="LvmRespText2  text-uppercase">
+                        @Html.DisplayFor(m => m.ControlName3) - @Html.DisplayFor(m => m.Lvm_Device.Lvm_Department.DepartmentName) @Model.Lvm_Device.Lvm_Room.FloorNumber.ShowWithSfx() LEVEL ROOM @Html.DisplayFor(m => m.Lvm_Device.Lvm_Room.RoomNumber)
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="LvmRespText">
+                        Activated: <span id="off-@Model.MonitorRecordId">@Model.DateOn3.Value.ToString("MM/dd/yyyy hh:mm tt")</span>
+                        &nbsp;&nbsp;
+                        <span id="ago-off-@Model.MonitorRecordId" class="ago-off">@DateTime.Now.Subtract(Model.DateOn3.Value).ToString(@"hh\h\:mm\m")</span> ago
+                    </div>
+                </td>
+            </tr>
+        </table>
+        }
+        @if (Model.Control4)
+        {
+        <table>
+            <tr>
+                <td class="LvmTep_tdImg" rowspan="2">
+                    <img src="~/Content/Images/Control/@Model.ControlImg4" />
+                </td>
+                <td class="LvmTep_tdTxt">
+                    <div class="LvmRespText2  text-uppercase">
+                        @Html.DisplayFor(m => m.ControlName4) - @Html.DisplayFor(m => m.Lvm_Device.Lvm_Department.DepartmentName) @Model.Lvm_Device.Lvm_Room.FloorNumber.ShowWithSfx() LEVEL ROOM @Html.DisplayFor(m => m.Lvm_Device.Lvm_Room.RoomNumber)
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="LvmRespText">
+                        Activated: <span id="off-@Model.MonitorRecordId">@Model.DateOn4.Value.ToString("MM/dd/yyyy hh:mm tt")</span>
+                        &nbsp;&nbsp;
+                        <span id="ago-off-@Model.MonitorRecordId" class="ago-off">@DateTime.Now.Subtract(Model.DateOn4.Value).ToString(@"hh\h\:mm\m")</span> ago
+                    </div>
+                </td>
+            </tr>
+        </table>
+        }
+
+        @if (Model.Control5)
+        {
+        <table>
+            <tr>
+                <td class="LvmTep_tdImg" rowspan="2">
+                    <img src="~/Content/Images/Control/@Model.ControlImg5" />
+                </td>
+                <td class="LvmTep_tdTxt">
+                    <div class="LvmRespText2  text-uppercase">
+                        @Html.DisplayFor(m => m.ControlName5) - @Html.DisplayFor(m => m.Lvm_Device.Lvm_Department.DepartmentName) @Model.Lvm_Device.Lvm_Room.FloorNumber.ShowWithSfx() LEVEL ROOM @Html.DisplayFor(m => m.Lvm_Device.Lvm_Room.RoomNumber)
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="LvmRespText">
+                        Activated: <span id="off-@Model.MonitorRecordId">@Model.DateOn5.Value.ToString("MM/dd/yyyy hh:mm tt")</span>
+                        &nbsp;&nbsp;
+                        <span id="ago-off-@Model.MonitorRecordId" class="ago-off">@DateTime.Now.Subtract(Model.DateOn5.Value).ToString(@"hh\h\:mm\m")</span> ago
+                    </div>
+                </td>
+            </tr>
+        </table>
+        }
+        @if (Model.Control6)
+        {
+        <table>
+            <tr>
+                <td class="LvmTep_tdImg" rowspan="2">
+                    <img src="~/Content/Images/Control/@Model.ControlImg6" />
+                </td>
+                <td class="LvmTep_tdTxt">
+                    <div class="LvmRespText2  text-uppercase">
+                        @Html.DisplayFor(m => m.ControlName6) - @Html.DisplayFor(m => m.Lvm_Device.Lvm_Department.DepartmentName) @Model.Lvm_Device.Lvm_Room.FloorNumber.ShowWithSfx() LEVEL ROOM @Html.DisplayFor(m => m.Lvm_Device.Lvm_Room.RoomNumber)
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="LvmRespText">
+                        Activated: <span id="off-@Model.MonitorRecordId">@Model.DateOn6.Value.ToString("MM/dd/yyyy hh:mm tt")</span>
+                        &nbsp;&nbsp;
+                        <span id="ago-off-@Model.MonitorRecordId" class="ago-off">@DateTime.Now.Subtract(Model.DateOn6.Value).ToString(@"hh\h\:mm\m")</span> ago
+                    </div>
+                </td>
+            </tr>
+        </table>
+        }
+        @if (Model.Control7)
+        {
+        <table>
+            <tr>
+                <td class="LvmTep_tdImg" rowspan="2">
+                    <img src="~/Content/Images/Control/@Model.ControlImg7" />
+                </td>
+                <td class="LvmTep_tdTxt">
+                    <div class="LvmRespText2  text-uppercase">
+                        @Html.DisplayFor(m => m.ControlName7) - @Html.DisplayFor(m => m.Lvm_Device.Lvm_Department.DepartmentName) @Model.Lvm_Device.Lvm_Room.FloorNumber.ShowWithSfx() LEVEL ROOM @Html.DisplayFor(m => m.Lvm_Device.Lvm_Room.RoomNumber)
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="LvmRespText">
+                        Activated: <span id="off-@Model.MonitorRecordId">@Model.DateOn7.Value.ToString("MM/dd/yyyy hh:mm tt")</span>
+                        &nbsp;&nbsp;
+                        <span id="ago-off-@Model.MonitorRecordId" class="ago-off">@DateTime.Now.Subtract(Model.DateOn7.Value).ToString(@"hh\:mm")</span> minutes ago
+                    </div>
+                </td>
+            </tr>
+        </table>
+        }
+        @if (Model.Control8)
+        {
+        <table>
+            <tr>
+                <td class="LvmTep_tdImg" rowspan="2">
+                    <img src="~/Content/Images/Control/@Model.ControlImg8" />
+                </td>
+                <td class="LvmTep_tdTxt">
+                    <div class="LvmRespText2  text-uppercase">
+                        @Html.DisplayFor(m => m.ControlName8) - @Html.DisplayFor(m => m.Lvm_Device.Lvm_Department.DepartmentName) @Model.Lvm_Device.Lvm_Room.FloorNumber.ShowWithSfx() LEVEL ROOM @Html.DisplayFor(m => m.Lvm_Device.Lvm_Room.RoomNumber)
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="LvmRespText">
+                        Activated: <span id="off-@Model.MonitorRecordId">@Model.DateOn8.Value.ToString("MM/dd/yyyy hh:mm tt")</span>
+                        &nbsp;&nbsp;
+                        <span id="ago-off-@Model.MonitorRecordId" class="ago-off">@DateTime.Now.Subtract(Model.DateOn8.Value).ToString(@"hh\h\:mm\m")</span> ago
+                    </div>
+                </td>
+            </tr>
+        </table>
+        }
+
+    </div>
+</div>

@@ -1,0 +1,79 @@
+﻿@model LvMonitor.Models.Lvm_DeviceDiscovery
+
+<div class="lvm-box">
+    <div class="lvm-box-header">
+        <span>@ViewBag.Title @ViewBag.SubTitle</span>
+    </div>
+    <div class="lvm-box-body">
+        <div>
+            <dl class="dl-horizontal">
+                <dt>
+                    Device Type
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Lvm_DeviceType.DeviceTypeName)
+                </dd>
+                <dt>
+                    Facility
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Lvm_Facility.FacilityName)
+                </dd>
+                <dt>
+                    Department
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Lvm_Department.DepartmentName)
+                </dd>
+                <dt>
+                    Room
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Lvm_Room.RoomNumber)
+                </dd>
+                <dt>
+                    Device Code
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.DeviceCode)
+                </dd>
+                <dt>
+                    Device Name
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.DeviceName)
+                </dd>
+                <dt>
+                    Device Description
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.DeviceDescription)
+                </dd>
+                <dt>
+                    Control Type
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.ControlCode)
+                </dd>
+                <dt>
+                    Control Name
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.ControlName)
+                </dd>
+                <dt>
+                    Created
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.DateCreated)
+                </dd>
+                <dt style="text-align:left; padding-top:10px;">
+                    @Html.ActionLink("Edit", "Edit", new { id = Model.DeviceDiscoveryId })
+                </dt>
+                <dd>
+                    @Html.ActionLink("Approve", "ApproveItem", new { id = Model.DeviceDiscoveryId}, new { @class = "btn btn-default" })
+                </dd>
+            </dl>
+        </div>
+    </div>
+</div>

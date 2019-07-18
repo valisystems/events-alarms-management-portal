@@ -1,0 +1,27 @@
+﻿@model LvMonitor.Models.Lvm_Country
+<div class="lvm-box">
+    <div class="lvm-box-header">
+        <span>@ViewBag.Title @ViewBag.SubTitle</span>
+    </div>
+    <div class="lvm-box-body">
+        <div>
+            <dl class="dl-horizontal">
+                <dt>
+                    Code
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Code)
+                </dd>
+                <dt>
+                    Name
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Name)
+                </dd>
+            </dl>
+        </div>
+        <p>
+            @Html.ActionLink("Edit", "Edit", new { id = Model.CountryId })
+        </p>
+    </div>
+</div>

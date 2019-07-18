@@ -1,0 +1,123 @@
+﻿@model LvMonitor.Models.Lvm_DeviceActionTemplate
+
+<div class="lvm-box">
+    <div class="lvm-box-header">
+        <span>@ViewBag.SubTitle @ViewBag.Title</span>
+    </div>
+    <div class="lvm-box-body">
+        <div>
+            <dl class="dl-horizontal">
+                <dt>Facility</dt>
+                <dd>@Html.DisplayFor(model => model.Lvm_Facility.FacilityName)</dd>
+                <dt>Name</dt>
+                <dd>@Html.DisplayFor(model => model.ActionName)</dd>
+                <dt>Description</dt>
+                <dd>@Html.DisplayFor(model => model.Description)</dd>
+                <dt>Active</dt>
+                <dd>@Html.DisplayFor(model => model.IsActive)</dd>
+
+                @if (!(string.IsNullOrEmpty(Model.ActionUrl2) && string.IsNullOrEmpty(Model.ActionUrl3) && string.IsNullOrEmpty(Model.ActionUrlOff)))
+                {
+                <dt style="color:#629ec1;">Action Trigger #1</dt>
+                <dd style="font-weight:bold;"><input id="chkTest1" class="check-box" type="checkbox" onclick="SetTestLnk();"> &nbsp;Test</dd>
+                }
+                @if (!((Model.CallAfterSec ?? 0) == 0 || (Model.CallRepeatEveryMin ?? 0) == 0))
+                {
+                <dt>Call After</dt>
+                <dd>@Html.DisplayFor(model => model.CallAfterSec) sec. &nbsp;&nbsp;&nbsp; <span style="font-weight:bold;">Repeat Every</span> @Html.DisplayFor(model => model.CallRepeatEveryMin) min.</dd>
+                }
+                <dt>Type</dt>
+                <dd>@Html.DisplayFor(model => model.Lvm_DeviceActionType.DeviceActionType)</dd>
+                <dt>URL</dt>
+                <dd>@Html.DisplayFor(model => model.ActionUrl)</dd>
+                <dt>Data</dt>
+                <dd><div style="overflow-y: auto; max-height:100px; overflow-x:auto; width:100%; ">@Html.DisplayFor(model => model.ActionData)</div></dd>
+
+
+                @if (!string.IsNullOrEmpty(Model.ActionUrl2))
+                {
+                <dt style="color:#629ec1;">Action Trigger #2</dt>
+                <dd style="font-weight:bold;"><input id="chkTest2" class="check-box" type="checkbox" onclick="SetTestLnk();"> &nbsp;Test</dd>
+                    if (!((Model.CallAfterSec2 ?? 0) == 0 || (Model.CallRepeatEveryMin2 ?? 0) == 0))
+                    {
+                    <dt>Call After</dt>
+                    <dd>@Html.DisplayFor(model => model.CallAfterSec2) sec. &nbsp;&nbsp;&nbsp; <span style="font-weight:bold;">Repeat Every</span> @Html.DisplayFor(model => model.CallRepeatEveryMin2) min.</dd>
+                    }
+                <dt>Type</dt>
+                <dd>@Html.DisplayFor(model => model.Lvm_DeviceActionType1.DeviceActionType)</dd>
+                <dt>URL</dt>
+                <dd>@Html.DisplayFor(model => model.ActionUrl2)</dd>
+                <dt>Data</dt>
+                <dd><div style="overflow-y: auto; max-height:100px; overflow-x:auto; width:100%; ">@Html.DisplayFor(model => model.ActionData2)</div></dd>
+                }
+
+                @if (!string.IsNullOrEmpty(Model.ActionUrl3))
+                {
+                <dt style="color:#629ec1;">Action Trigger #3</dt>
+                <dd style="font-weight:bold;"><input id="chkTest3" class="check-box" type="checkbox" onclick="SetTestLnk();"> &nbsp;Test</dd>
+                    if (!((Model.CallAfterSec3 ?? 0) == 0 || (Model.CallRepeatEveryMin3 ?? 0) == 0))
+                    {
+                    <dt>Call After</dt>
+                    <dd>@Html.DisplayFor(model => model.CallAfterSec3) sec. &nbsp;&nbsp;&nbsp; <span style="font-weight:bold;">Repeat Every</span> @Html.DisplayFor(model => model.CallRepeatEveryMin3) min.</dd>
+                    }
+                <dt>Type</dt>
+                <dd>@Html.DisplayFor(model => model.Lvm_DeviceActionType2.DeviceActionType)</dd>
+                <dt>URL</dt>
+                <dd>@Html.DisplayFor(model => model.ActionUrl3)</dd>
+                <dt>Data</dt>
+                <dd><div style="overflow-y: auto; max-height:100px; overflow-x:auto; width:100%; ">@Html.DisplayFor(model => model.ActionData3)</div></dd>
+                }
+
+                @if (!string.IsNullOrEmpty(Model.ActionUrlOff))
+                {
+                <dt style="color:#629ec1;">Alarm Cancel Trigger</dt>
+                <dd style="font-weight:bold;"><input id="chkTest4" class="check-box" type="checkbox" onclick="SetTestLnk();"> &nbsp;Test</dd>
+                <dt>Type</dt>
+                <dd>@Html.DisplayFor(model => model.Lvm_DeviceActionType3.DeviceActionType)</dd>
+                <dt>URL</dt>
+                <dd>@Html.DisplayFor(model => model.ActionUrlOff)</dd>
+                <dt>Data</dt>
+                <dd><div style="overflow-y: auto; max-height:100px; overflow-x:auto; width:100%; ">@Html.DisplayFor(model => model.ActionDataOff)</div></dd>
+                }
+
+                @if ((ViewBag.IsTest != null) && ViewBag.IsTest)
+                {
+                <dt>Test Result</dt>
+                <dd><div style="overflow-y: auto; max-height:400px; overflow-x:auto; width:100%; ">@Html.Raw(@ViewBag.TestResult)</div></dd>
+                }
+
+                <dt style="text-align:left; padding-top:10px;">
+                    @Html.ActionLink("Edit", "Edit", new { id = Model.DeviceActionTemplateId })
+                </dt>
+                <dd>
+                    @Html.ActionLink("Action Test", "ActionTest", new { id = Model.DeviceActionTemplateId, st="0" }, new { @class = "btn btn-default", id="TestLnk" })
+                </dd>
+            </dl>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <script type="text/javascript">
+        function SetTestLnk() {
+            var v="";
+            for (i=1; i<5; i++)
+            {
+                if (i>1)v+="_";
+                v += $("#chkTest" + i).is(':checked') ? "1" : "0";
+            }
+            var h = $("#TestLnk").attr("href");
+            h = h.substring(0, h.indexOf("st=") + 3) + v;
+            $("#TestLnk").attr("href", h);
+        }
+    </script>
+}
+
+@*@if ((ViewBag.IsTest != null) && ViewBag.IsTest)
+    {
+    <div class="form-group">
+        <div class="col-md-2">Test Result</div>
+        <div class="col-md-10" style="padding-top:6px; width: 600px; max-width: 600px">
+            @ViewBag.TestResult
+        </div>
+    </div>
+    }*@

@@ -1,0 +1,100 @@
+﻿@model LvMonitor.Models.Lvm_DeviceRecordImage
+
+@{
+  ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+@Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <h4>Device Record Image</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.DeviceRecordImageId)
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.FacilityId, "Facility", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("FacilityId", null, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.FacilityId, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.MediaTypeId, "Media Type", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("MediaTypeId", null, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.MediaTypeId, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ImageNumber, "Number", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.ImageNumber, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.ImageNumber, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.ImageName, "Name", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.ImageName, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.ImageName, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.ImageFile, "Image File", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.ImageFile, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.ImageFile, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.Label("Image Upload", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <div style="display:inline-block;">
+            @*<img class="LvmLstImg" src="@ViewBag.ImgPath@Model.ImageFile" alt="" />*@
+                @{
+                  if (!string.IsNullOrWhiteSpace(Model.ImageFile))
+                  {
+                      if (Model.MediaTypeId > 1)
+                      {
+                    <video class="LvmLstImg" controls>
+                        <source src="@Model.ImageFile" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                      }
+                      else
+                      {
+                          if (Model.ImageFile.IndexOf(@"/") < 0)
+                          {
+                    <img class="LvmLstImg" src="@Url.Content(string.Format("{0}{1}/{2}", ViewBag.ImgPath, Model.FacilityId, Model.ImageFile))" alt="" />
+                          }
+                          else
+                          {
+                    <img class="LvmLstImg" src="@Model.ImageFile" alt="" />
+                              }
+                          }
+                      }
+                  }
+            </div>
+            <div style="display:inline-block; vertical-align:middle;"><input type="file" name="upload" /></div>
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.ImageDescription, "Description", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.ImageDescription, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.ImageDescription, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Save" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+}

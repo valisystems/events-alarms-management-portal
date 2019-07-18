@@ -1,0 +1,62 @@
+﻿@model LvMonitor.Models.SetMonitorModel
+<div class="lvm-box">
+    <div class="lvm-box-header">
+        <span>@ViewBag.SubTitle @ViewBag.Title</span>
+    </div>
+    <div class="lvm-box-body">
+        <p style="font-size:16px;">
+            @if (Model.MonitorId == 0)
+            {
+            <span class="text-danger">No Monitor Selected</span>
+            }
+            else
+            {
+            @*<text>Selected Monitor: <strong class="text-primary">@Model.MonitorName</strong> (@Model.MonitorId.ToString()) for Facility: <strong class="text-primary">@Model.FacilityName</strong> (@Model.FacilityId.ToString())</text>*@
+            <text>Selected Screen View: <strong class="text-primary">@Model.MonitorName</strong> for Facility: <strong class="text-primary">@Model.FacilityName</strong></text>
+            }
+        </p>
+        @using (Html.BeginForm())
+        {
+        @Html.AntiForgeryToken()
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-horizontal">
+                <div class="form-group">
+                    @Html.Label("Facility", htmlAttributes: new { @class = "control-label col-md-1" })
+                    <div class="col-md-11">
+                        @*@Html.DropDownListFor(m => m.FacilityId, (SelectList)ViewBag.lFacility, htmlAttributes: new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.FacilityId, "", new { @class = "text-danger" })*@
+
+                        @if (ViewBag.IsSingleFacility)
+                        {
+                        <h5>@ViewBag.SingleFacilityName</h5>
+                        @Html.HiddenFor(model => model.FacilityId)
+                        }
+                        else
+                        {
+                        @Html.DropDownList("FacilityId", new SelectList(ViewBag.lFacility, "FacilityId", "FacilityName", Model.FacilityId), null, htmlAttributes: new { @class = "form-control" })
+                        }
+
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.Label("Monitor", htmlAttributes: new { @class = "control-label col-md-1" })
+                    <div class="col-md-11">
+                        @Html.DropDownListFor(m => m.MonitorId, (SelectList)ViewBag.lMonitor, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.MonitorId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-offset-1 col-md-11">
+                    <input type="submit" value="Save" class="btn btn-default" /> &nbsp;&nbsp;&nbsp; @Html.ActionLink("Display Selected Screen View", "Index", "Monitor")
+                </div>
+            </div>
+        </div>
+        }
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/Scripts/App/ddlfacilitymonitor.js")
+}

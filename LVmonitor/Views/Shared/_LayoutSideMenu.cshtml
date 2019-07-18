@@ -1,0 +1,198 @@
+﻿
+<ul class="sidebar-menu">
+    @if (User.IsInRole("Manager") || User.IsInRole("Admin") || User.IsInRole("SuperAdmin"))
+    {
+    <li class="@Html.IsSelected(actions: "Index", controllers: "Dashboard")">
+        <a href="~/Dashboard"><i class="fa fa-bar-chart"></i><span>Dashboard</span></a>
+    </li>
+    @*<li class="@Html.IsSelected(actions: "Index", controllers: "Alert")">
+            <a href="~/Alert">
+                <i class="fa fa-bell-o"></i><span>Alerts / Escalations</span>
+                <span class="pull-right-container">
+                    <small class="label pull-right bg-yellow">2</small>
+                    <small class="label pull-right bg-red">3</small>
+                </span>
+            </a>
+        </li>*@
+    <li class="@Html.IsSelected(actions: "Index", controllers: "SetMonitor")">
+        <a href="~/SetMonitor"><i class="fa fa-desktop"></i><span>Select Screen View</span></a>
+    </li>
+    }
+    @if (User.IsInRole("SuperAdmin"))
+    {
+    <li class="@Html.IsSelected(actions: "Index", controllers: "DeviceRecordTest")">
+        <a href="~/DeviceRecordTest"><i class="fa fa-tasks"></i><span>Device Record Test</span></a>
+    </li>
+    }
+    @if (User.IsInRole("Manager") || User.IsInRole("Admin") || User.IsInRole("SuperAdmin"))
+    {
+    <li class="treeview @Html.IsSelected(actions: "DevResponse,DevResponseSum,CdrRec", controllers: "Analytics")">
+        <a href="#">
+            <i class="fa fa-pie-chart"></i>
+            <span>Analytics</span>
+            <i class="fa fa-angle-left pull-right"></i>
+        </a>
+        <ul class="treeview-menu">
+            <li class="@Html.IsSelected(actions: "DevResponse", controllers: "Analytics")">
+                <a href="~/Analytics/DevResponse"><i class="fa fa-circle-o"></i><span>Device Response</span></a>
+            </li>
+            <li class="@Html.IsSelected(actions: "DevResponseSum", controllers: "Analytics")">
+                <a href="~/Analytics/DevResponseSum"><i class="fa fa-circle-o"></i><span>Device Response Summary</span></a>
+            </li>
+            <li class="@Html.IsSelected(actions: "CdrRec", controllers: "Analytics")">
+                <a href="~/Analytics/CdrRec"><i class="fa fa-circle-o"></i><span>Nurse Calls</span></a>
+            </li>
+
+            @*<li class="@Html.IsSelected(actions: "DevActivity", controllers: "Analytics")">
+                    <a href="~/Analytics/DevActivity" style="pointer-events: none; cursor: default; color: gray;"><i class="fa fa-circle-o"></i><span>Device Activity</span></a>
+                </li>
+                <li class="@Html.IsSelected(actions: "DevCallTotal", controllers: "Analytics")">
+                    <a href="~/Analytics/DevOverview" style="pointer-events: none; cursor: default; color: gray;"><i class="fa fa-circle-o"></i><span>Device Overview</span></a>
+                </li>
+                <li class="@Html.IsSelected(actions: "DevActive", controllers: "Analytics")">
+                    <a href="~/Analytics/DevActive" style="pointer-events: none; cursor: default; color: gray;"><i class="fa fa-circle-o"></i><span>Active Calls</span></a>
+                </li>
+                <li class="@Html.IsSelected(actions: "CallException", controllers: "Analytics")">
+                    <a href="~/Analytics/CallException" style="pointer-events: none; cursor: default; color: gray;"><i class="fa fa-circle-o"></i><span>Call Exception</span></a>
+                </li>*@
+
+        </ul>
+    </li>
+    <li class="treeview @Html.IsSelected(actions: "Index,Create,Edit,Details,Delete", controllers: "Facility,Department,Room,Image,DeviceType,DeviceTypeControl,DeviceActionTemplate,Device,DeviceAction,ResourceTextType,ResourceText,ResourceTts,Template,HistoryTemplate,FacilityMonitor")">
+        <a href="#">
+            <i class="fa fa-edit"></i>
+            <span>Application Config</span>
+            <i class="fa fa-angle-left pull-right"></i>
+        </a>
+        <ul class="treeview-menu">
+            @if (User.IsInRole("SuperAdmin"))
+            {
+            <li class="@Html.IsSelected(actions: "Index,Create,Edit,Details,Delete", controllers: "Facility")">
+                <a href="~/Facility"><i class="fa fa-circle-o"></i><span>Facility Divisions</span></a>
+            </li>
+            }
+            <li class="@Html.IsSelected(actions: "Index,Create,Edit,Details,Delete", controllers: "Department")">
+                <a href="~/Department"><i class="fa fa-circle-o"></i><span>Departments</span></a>
+            </li>
+            <li class="@Html.IsSelected(actions: "Index,Create,Edit,Details,Delete", controllers: "Room")">
+                <a href="~/Room"><i class="fa fa-circle-o"></i><span>Rooms</span></a>
+            </li>
+            <li class="@Html.IsSelected(actions: "Index,Create,Edit,Details,Delete", controllers: "Image")">
+                <a href="~/Image"><i class="fa fa-circle-o"></i><span>Image Catalog</span></a>
+            </li>
+            @if (User.IsInRole("SuperAdmin"))
+            {
+            <li class="@Html.IsSelected(actions: "Index,Create,Edit,Details,Delete", controllers: "DeviceType")">
+                <a href="~/DeviceType"><i class="fa fa-circle-o"></i><span>Device Type</span></a>
+            </li>
+            <li class="@Html.IsSelected(actions: "Index,Create,Edit,Details,Delete", controllers: "DeviceTypeControl")">
+                <a href="~/DeviceTypeControl"><i class="fa fa-circle-o"></i><span>Device Type Control</span></a>
+            </li>
+            <li class="@Html.IsSelected(actions: "Index,Create,Edit,Details,Delete", controllers: "DeviceActionTemplate")">
+                <a href="~/DeviceActionTemplate"><i class="fa fa-circle-o"></i><span>Device Actions</span></a>
+            </li>
+            }
+            <li class="@Html.IsSelected(actions: "Index,Create,Edit,Details,Delete", controllers: "Device,DeviceAction")">
+                <a href="~/Device"><i class="fa fa-circle-o"></i><span>Device List</span></a>
+            </li>
+            @*<li class="@Html.IsSelected(actions: "Index", controllers: "DeviceRecordImage")"><a href="~/DeviceRecordImage"><i class="fa fa-circle-o"></i><span>Device Record Image</span></a></li>*@
+            @if (User.IsInRole("SuperAdmin"))
+            {
+            <li class="@Html.IsSelected(actions: "Index,Create,Edit,Details,Delete", controllers: "ResourceTextType")">
+                <a href="~/ResourceTextType"><i class="fa fa-circle-o"></i><span>Resource Text Type</span></a>
+            </li>
+            <li class="@Html.IsSelected(actions: "Index,Create,Edit,Details,Delete", controllers: "ResourceText")">
+                <a href="~/ResourceText"><i class="fa fa-circle-o"></i><span>Resource Text</span></a>
+            </li>
+            <li class="@Html.IsSelected(actions: "Index,Create,Edit,Details,Delete", controllers: "ResourceTts")">
+                <a href="~/ResourceTts"><i class="fa fa-circle-o"></i><span>Resource TTS</span></a>
+            </li>
+            <li class="@Html.IsSelected(actions: "Index,Create,Edit,Details,Delete", controllers: "Template")">
+                <a href="~/Template"><i class="fa fa-circle-o"></i><span>Screen Device Template</span></a>
+            </li>
+            <li class="@Html.IsSelected(actions: "Edit", controllers: "HistoryTemplate")">
+                <a href="~/HistoryTemplate/Edit"><i class="fa fa-circle-o"></i><span>History Frame Template</span></a>
+            </li>
+            }
+            <li class="@Html.IsSelected(actions: "Index,Create,Edit,Details,Delete", controllers: "FacilityMonitor")">
+                <a href="~/FacilityMonitor"><i class="fa fa-circle-o"></i><span>Facility Alarm Screen</span></a>
+            </li>
+        </ul>
+    </li>
+    }
+    @if (User.IsInRole("SuperAdmin"))
+    {
+    <li class="treeview @Html.IsSelected(actions: "Index,Create,Edit,Details,Delete", controllers: "Config,Country,StateProvince,SecurityIp,ImageType,MediaType,CdrType,DeviceDiscovery,UrlDebug,ConfigTts")">
+        <a href="#">
+            <i class="fa fa-cogs"></i>
+            <span>Admin Config</span>
+            <i class="fa fa-angle-left pull-right"></i>
+        </a>
+        <ul class="treeview-menu">
+            <li class="@Html.IsSelected(actions: "Edit", controllers: "Config")">
+                <a href="~/Config/Edit/1"><i class="fa fa-circle-o"></i><span>Settings</span></a>
+            </li>
+            <li class="@Html.IsSelected(actions: "Index,Create,Edit,Details,Delete", controllers: "Country")">
+                <a href="~/Country"><i class="fa fa-circle-o"></i><span>Country</span></a>
+            </li>
+            <li class="@Html.IsSelected(actions: "Index,Create,Edit,Details,Delete", controllers: "StateProvince")">
+                <a href="~/StateProvince"><i class="fa fa-circle-o"></i><span>State / Province</span></a>
+            </li>
+            <li class="@Html.IsSelected(actions: "Index,Create,Edit,Details,Delete", controllers: "SecurityIp")">
+                <a href="~/SecurityIp"><i class="fa fa-circle-o"></i><span>Security IP</span></a>
+            </li>
+            <li class="@Html.IsSelected(actions: "Index,Create,Edit,Details,Delete", controllers: "MediaType")">
+                <a href="~/MediaType"><i class="fa fa-circle-o"></i><span>Media Typel</span></a>
+            </li>
+            <li class="@Html.IsSelected(actions: "Index,Create,Edit,Details,Delete", controllers: "ImageType")">
+                <a href="~/ImageType"><i class="fa fa-circle-o"></i><span>Image Type</span></a>
+            </li>
+            <li class="@Html.IsSelected(actions: "Index,Create,Edit,Details,Delete", controllers: "CdrType")">
+                <a href="~/CdrType"><i class="fa fa-circle-o"></i><span>CDR Type</span></a>
+            </li>
+            <li class="@Html.IsSelected(actions: "Index,Create,Edit,Details,Delete", controllers: "DeviceDiscovery")">
+                <a href="~/DeviceDiscovery"><i class="fa fa-circle-o"></i><span>Device Discovery</span></a>
+            </li>
+            <li class="@Html.IsSelected(actions: "Index,Create,Edit,Details,Delete", controllers: "UrlDebug")">
+                <a href="~/UrlDebug"><i class="fa fa-circle-o"></i><span>URL Debugging</span></a>
+            </li>
+            @*<li class="@Html.IsSelected(actions: "Edit", controllers: "ConfigTts")">
+                <a href="~/ConfigTts/Edit"><i class="fa fa-circle-o"></i><span>TTS Settings</span></a>
+            </li>*@
+        </ul>
+    </li>
+    }
+    @if (User.IsInRole("SuperAdmin") || User.IsInRole("Admin"))
+    {
+    <li class="treeview @Html.IsSelected(actions: "Index,Register,EditUser,EditRoles,Roles,AddRole", controllers: "UserAdmin")">
+        <a href="#">
+            <i class="fa fa-users"></i>
+            <span>User / Role Admin</span>
+            <i class="fa fa-angle-left pull-right"></i>
+        </a>
+        <ul class="treeview-menu">
+            <li class="@Html.IsSelected(actions: "Index,Register,EditUser,EditRoles", controllers: "UserAdmin")">
+                <a href="~/UserAdmin"><i class="fa fa-circle-o"></i><span>Users</span></a>
+            </li>
+            @if (User.IsInRole("SuperAdmin"))
+            {
+            <li class="@Html.IsSelected(actions: "Roles,AddRole", controllers: "UserAdmin")">
+                <a href="~/UserAdmin/Roles"><i class="fa fa-circle-o"></i><span>User Roles</span></a>
+            </li>
+            }
+        </ul>
+    </li>
+    }
+    @*@if (User.IsInRole("Manager") || User.IsInRole("Admin") || User.IsInRole("SuperAdmin") || User.IsInRole("Employee"))
+        {*@
+
+    @*<li class="@Html.IsSelected(actions: "Index", controllers: "Document")">
+            <a href="~/Alert"><i class="fa fa-file-text-o"></i><span>Documentation</span></a>
+        </li>*@
+
+    @*<li class="header">LABELS</li>
+        <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span>Important</span></a></li>
+        <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Warning</span></a></li>
+        <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Information</span></a></li>*@
+    @*}*@
+</ul>

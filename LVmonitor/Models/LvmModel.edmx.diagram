@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="2952a7ae7c3146f099be703f2f1914c1" Name="Diagram1" ZoomLevel="81">
+        <EntityTypeShape EntityType="LvMonitorModel.Lvm_Address" Width="1.5" PointX="4.5" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LvMonitorModel.Lvm_Config" Width="2" PointX="1.75" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="LvMonitorModel.Lvm_Country" Width="1.5" PointX="2.25" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="LvMonitorModel.Lvm_Device" Width="1.5" PointX="6.875" PointY="0.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="LvMonitorModel.Lvm_DeviceRecord" Width="1.625" PointX="8.625" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="LvMonitorModel.Lvm_Facility" Width="1.5" PointX="6.75" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="LvMonitorModel.Lvm_FacilityUser" Width="1.5" PointX="8.625" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="LvMonitorModel.Lvm_MonitorRecord" Width="1.875" PointX="11" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LvMonitorModel.Lvm_SecurityIp" Width="1.5" PointX="6.625" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="LvMonitorModel.Lvm_StateProvince" Width="1.5" PointX="2.25" PointY="8.125" IsExpanded="true" />
+        <AssociationConnector Association="LvMonitorModel.FK_Lvm_Address_Lvm_Country" ManuallyRouted="false" />
+        <AssociationConnector Association="LvMonitorModel.FK_Lvm_Address_Lvm_StateProvince" ManuallyRouted="false" />
+        <AssociationConnector Association="LvMonitorModel.FK_Lvm_Facility_Lvm_Address" ManuallyRouted="false" />
+        <AssociationConnector Association="LvMonitorModel.FK_Lvm_StateProvince_Lvm_Country" ManuallyRouted="false" />
+        <AssociationConnector Association="LvMonitorModel.FK_Lvm_Device_Lvm_Facility" ManuallyRouted="false" />
+        <AssociationConnector Association="LvMonitorModel.FK_Lvm_DeviceRecord_Lvm_Device" ManuallyRouted="false" />
+        <AssociationConnector Association="LvMonitorModel.FK_Lvm_MonitorRecord_Lvm_Device" ManuallyRouted="false" />
+        <AssociationConnector Association="LvMonitorModel.FK_Lvm_FacilityUser_Lvm_Facility" ManuallyRouted="false" />
+        <AssociationConnector Association="LvMonitorModel.FK_Lvm_SecurityIp_Lvm_Facility" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="LvMonitorModel.Lvm_FacilityMonitor" Width="2.375" PointX="8.5" PointY="8.125" />
+        <AssociationConnector Association="LvMonitorModel.FK_Lvm_FacilityMonitor_Lvm_Facility" />
+        <AssociationConnector Association="LvMonitorModel.FK_Lvm_MonitorRecord_Lvm_FacilityMonitor" />
+        <EntityTypeShape EntityType="LvMonitorModel.Lvm_DeviceType" Width="1.75" PointX="8.625" PointY="0.75" />
+        <EntityTypeShape EntityType="LvMonitorModel.Lvm_DeviceTypeControl" Width="2" PointX="13.25" PointY="3.875" />
+        <AssociationConnector Association="LvMonitorModel.FK_Lvm_Device_Lvm_DeviceType" />
+        <AssociationConnector Association="LvMonitorModel.FK_Lvm_DeviceTypeControl_Lvm_DeviceType" />
+        <EntityTypeShape EntityType="LvMonitorModel.Lvm_DeviceRecordImage" Width="2.25" PointX="4.125" PointY="8.25" />
+        <AssociationConnector Association="LvMonitorModel.FK_Lvm_DeviceRecordImage_Lvm_Facility" />
+        <EntityTypeShape EntityType="LvMonitorModel.Lvm_MediaType" Width="1.5" PointX="2.5" PointY="10.625" />
+        <EntityTypeShape EntityType="LvMonitorModel.Lvm_Room" Width="1.5" PointX="8.875" PointY="11.5" />
+        <AssociationConnector Association="LvMonitorModel.FK_Lvm_Device_Lvm_Room" />
+        <AssociationConnector Association="LvMonitorModel.FK_Lvm_DeviceRecordImage_Lvm_MediaType" />
+        <AssociationConnector Association="LvMonitorModel.FK_Lvm_Room_Lvm_Facility" />
+        <EntityTypeShape EntityType="LvMonitorModel.Lvm_Template" Width="1.5" PointX="4.375" PointY="0.875" />
+        <EntityTypeShape EntityType="LvMonitorModel.Lvm_ImageType" Width="1.5" PointX="4.375" PointY="11.875" />
+        <EntityTypeShape EntityType="LvMonitorModel.Lvm_ResourceText" Width="1.5" PointX="14.75" PointY="12" />
+        <EntityTypeShape EntityType="LvMonitorModel.Lvm_ResourceTextType" Width="1.5" PointX="10.25" PointY="13.5" />
+        <AssociationConnector Association="LvMonitorModel.FK_Lvm_ResourceText_Lvm_ResourceTextType" />
+        <EntityTypeShape EntityType="LvMonitorModel.Lvm_MonitorRecordLog" Width="1.875" PointX="15.75" PointY="3.75" />
+        <AssociationConnector Association="LvMonitorModel.FK_Lvm_MonitorRecordLog_Lvm_Device" />
+        <AssociationConnector Association="LvMonitorModel.FK_Lvm_MonitorRecordLog_Lvm_DeviceTypeControl" />
+        <AssociationConnector Association="LvMonitorModel.FK_Lvm_MonitorRecordLog_Lvm_Facility" />
+        <AssociationConnector Association="LvMonitorModel.FK_Lvm_Device_Lvm_MediaType" />
+        <AssociationConnector Association="LvMonitorModel.FK_Lvm_FacilityMonitor_Lvm_Template" />
+        <EntityTypeShape EntityType="LvMonitorModel.Lvm_Department" Width="1.875" PointX="6.625" PointY="10.5" />
+        <AssociationConnector Association="LvMonitorModel.FK_Lvm_Department_Lvm_Facility" />
+        <AssociationConnector Association="LvMonitorModel.FK_Lvm_Device_Lvm_Department" />
+        <EntityTypeShape EntityType="LvMonitorModel.Lvm_MonitorDeviceMap" Width="1.5" PointX="15.625" PointY="8" />
+        <AssociationConnector Association="LvMonitorModel.FK_Lvm_MonitorDeviceMap_Lvm_Device" />
+        <AssociationConnector Association="LvMonitorModel.FK_Lvm_MonitorDeviceMap_Lvm_FacilityMonitor" />
+        <EntityTypeShape EntityType="LvMonitorModel.Lvm_Report" Width="1.5" PointX="2.625" PointY="12.625" />
+        <EntityTypeShape EntityType="LvMonitorModel.Lvm_Image" Width="1.5" PointX="9" PointY="15.375" />
+        <AssociationConnector Association="LvMonitorModel.FK_Lvm_Image_Lvm_Facility" />
+        <AssociationConnector Association="LvMonitorModel.FK_Lvm_Image_Lvm_ImageType" />
+        <EntityTypeShape EntityType="LvMonitorModel.Lvm_DeviceActionType" Width="2.125" PointX="15.625" PointY="0.875" />
+        <EntityTypeShape EntityType="LvMonitorModel.Lvm_DeviceActionTemplate" Width="2.625" PointX="12.625" PointY="0.625" />
+        <AssociationConnector Association="LvMonitorModel.FK_Lvm_DeviceActionTemplate_Lvm_Facility" />
+        <EntityTypeShape EntityType="LvMonitorModel.Lvm_DeviceAction" Width="1.875" PointX="10.625" PointY="0.75" />
+        <AssociationConnector Association="LvMonitorModel.FK_Lvm_DeviceAction_Lvm_Device" />
+        <AssociationConnector Association="LvMonitorModel.FK_Lvm_DeviceAction_Lvm_DeviceActionTemplate" />
+        <AssociationConnector Association="LvMonitorModel.FK_Lvm_DeviceAction_Lvm_DeviceTypeControl" />
+        <AssociationConnector Association="LvMonitorModel.FK_Lvm_DeviceActionTemplate_Lvm_DeviceActionType" />
+        <EntityTypeShape EntityType="LvMonitorModel.Lvm_UrlGeneratorField" Width="1.5" PointX="14.625" PointY="15" />
+        <EntityTypeShape EntityType="LvMonitorModel.Lvm_UrlGeneratorType" Width="1.5" PointX="12.375" PointY="15.375" />
+        <AssociationConnector Association="LvMonitorModel.FK_Lvm_UrlGeneratorField_Lvm_UrlGeneratorType" />
+        <EntityTypeShape EntityType="LvMonitorModel.Lvm_UrlDebug" Width="1.5" PointX="18.5" PointY="0.75" />
+        <AssociationConnector Association="LvMonitorModel.FK_Lvm_UrlDebug_Lvm_DeviceActionType" />
+        <EntityTypeShape EntityType="LvMonitorModel.Lvm_CdrVodia" Width="1.5" PointX="17.375" PointY="10.75" />
+        <AssociationConnector Association="LvMonitorModel.FK_Lvm_CdrVodia_Lvm_Device" />
+        <EntityTypeShape EntityType="LvMonitorModel.Lvm_CdrPortSip_CallTarget" Width="1.5" PointX="3" PointY="18.5" />
+        <EntityTypeShape EntityType="LvMonitorModel.Lvm_CdrType" Width="1.5" PointX="1.875" PointY="6.375" />
+        <AssociationConnector Association="LvMonitorModel.FK_Lvm_Facility_Lvm_CdrType" />
+        <EntityTypeShape EntityType="LvMonitorModel.Lvm_CdrPortSip" Width="1.5" PointX="0.75" PointY="16.625" />
+        <AssociationConnector Association="LvMonitorModel.FK_Lvm_CdrPortSip_CallTarget_Lvm_CdrPortSip" />
+        <AssociationConnector Association="LvMonitorModel.FK_Lvm_DeviceActionTemplate_Lvm_DeviceActionType1" />
+        <AssociationConnector Association="LvMonitorModel.FK_Lvm_DeviceActionTemplate_Lvm_DeviceActionType2" />
+        <AssociationConnector Association="LvMonitorModel.FK_Lvm_DeviceActionTemplate_Lvm_DeviceActionType3" />
+        <EntityTypeShape EntityType="LvMonitorModel.Lvm_DeviceDiscovery" Width="2" PointX="18.75" PointY="4" />
+        <AssociationConnector Association="LvMonitorModel.FK_Lvm_DeviceDiscovery_Lvm_Department" />
+        <AssociationConnector Association="LvMonitorModel.FK_Lvm_DeviceDiscovery_Lvm_DeviceType" />
+        <AssociationConnector Association="LvMonitorModel.FK_Lvm_DeviceDiscovery_Lvm_Facility" />
+        <AssociationConnector Association="LvMonitorModel.FK_Lvm_DeviceDiscovery_Lvm_Room" />
+        <EntityTypeShape EntityType="LvMonitorModel.Lvm_ResourceTts" Width="2.75" PointX="7.375" PointY="19.5" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

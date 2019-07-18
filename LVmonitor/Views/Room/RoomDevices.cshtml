@@ -1,0 +1,36 @@
+﻿@model LvMonitor.Models.Lvm_Room
+
+<table class="table table-striped lvm-table">
+    <tr>
+        <th>
+            Device Type
+        </th>
+        <th>
+            Device ID
+        </th>
+        <th>
+            Device Name
+        </th>
+        <th>
+            Device Description
+        </th>
+    </tr>
+
+    @foreach (var item in Model.Lvm_Device.Where(r=>r.RoomId== @Model.RoomId))
+    {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Lvm_DeviceType.DeviceTypeName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DeviceCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DeviceName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DeviceDescription)
+        </td>
+    </tr>
+    }
+</table>

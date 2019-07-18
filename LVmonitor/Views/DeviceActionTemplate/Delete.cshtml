@@ -1,0 +1,96 @@
+﻿@model LvMonitor.Models.Lvm_DeviceActionTemplate
+
+<div class="lvm-box">
+    <div class="lvm-box-header">
+        <span>@ViewBag.SubTitle @ViewBag.Title</span>
+    </div>
+    <div class="lvm-box-body">
+        <p class="text-danger">@ViewBag.AreYouSure</p>
+        <div>
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <dl class="dl-horizontal">
+                <dt>Facility</dt>
+                <dd>@Html.DisplayFor(model => model.Lvm_Facility.FacilityName)</dd>
+                <dt>Name</dt>
+                <dd>@Html.DisplayFor(model => model.ActionName)</dd>
+                <dt>Description</dt>
+                <dd>@Html.DisplayFor(model => model.Description)</dd>
+                <dt>Active</dt>
+                <dd>@Html.DisplayFor(model => model.IsActive)</dd>
+
+                @if (!(string.IsNullOrEmpty(Model.ActionUrl2) || string.IsNullOrEmpty(Model.ActionUrl3) || string.IsNullOrEmpty(Model.ActionUrlOff)))
+                {
+                <dt style="color:#629ec1;">Action Trigger #1</dt>
+                <dd></dd>
+                }
+                @if (!((Model.CallAfterSec ?? 0) == 0 || (Model.CallRepeatEveryMin ?? 0) == 0))
+                {
+                <dt>Call After</dt>
+                <dd>@Html.DisplayFor(model => model.CallAfterSec) sec. &nbsp;&nbsp;&nbsp; <span style="font-weight:bold;">Repeat Every</span> @Html.DisplayFor(model => model.CallRepeatEveryMin) min.</dd>
+                }
+                <dt>Type</dt>
+                <dd>@Html.DisplayFor(model => model.Lvm_DeviceActionType.DeviceActionType)</dd>
+                <dt>URL</dt>
+                <dd>@Html.DisplayFor(model => model.ActionUrl)</dd>
+                <dt>Data</dt>
+                <dd><div style="overflow-y: auto; max-height:100px; overflow-x:auto; width:100%; ">@Html.DisplayFor(model => model.ActionData)</div></dd>
+
+                @if (!string.IsNullOrEmpty(Model.ActionUrl2))
+                {
+                <dt style="color:#629ec1;">Action Trigger #2</dt>
+                <dd></dd>
+                    if (!((Model.CallAfterSec2 ?? 0) == 0 || (Model.CallRepeatEveryMin2 ?? 0) == 0))
+                    {
+                    <dt>Call After</dt>
+                    <dd>@Html.DisplayFor(model => model.CallAfterSec2) sec. &nbsp;&nbsp;&nbsp; <span style="font-weight:bold;">Repeat Every</span> @Html.DisplayFor(model => model.CallRepeatEveryMin2) min.</dd>
+                    }
+                <dt>Type</dt>
+                <dd>@Html.DisplayFor(model => model.Lvm_DeviceActionType1.DeviceActionType)</dd>
+                <dt>URL</dt>
+                <dd>@Html.DisplayFor(model => model.ActionUrl2)</dd>
+                <dt>Data</dt>
+                <dd><div style="overflow-y: auto; max-height:100px; overflow-x:auto; width:100%; ">@Html.DisplayFor(model => model.ActionData2)</div></dd>
+                }
+
+                @if (!string.IsNullOrEmpty(Model.ActionUrl3))
+                {
+                <dt style="color:#629ec1;">Action Trigger #3</dt>
+                <dd></dd>
+                    if (!((Model.CallAfterSec3 ?? 0) == 0 || (Model.CallRepeatEveryMin3 ?? 0) == 0))
+                    {
+                    <dt>Call After</dt>
+                    <dd>@Html.DisplayFor(model => model.CallAfterSec3) sec. &nbsp;&nbsp;&nbsp; <span style="font-weight:bold;">Repeat Every</span> @Html.DisplayFor(model => model.CallRepeatEveryMin3) min.</dd>
+                    }
+                <dt>Type</dt>
+                <dd>@Html.DisplayFor(model => model.Lvm_DeviceActionType2.DeviceActionType)</dd>
+                <dt>URL</dt>
+                <dd>@Html.DisplayFor(model => model.ActionUrl3)</dd>
+                <dt>Data</dt>
+                <dd><div style="overflow-y: auto; max-height:100px; overflow-x:auto; width:100%; ">@Html.DisplayFor(model => model.ActionData3)</div></dd>
+                }
+
+                @if (!string.IsNullOrEmpty(Model.ActionUrlOff))
+                {
+                <dt style="color:#629ec1;">Alarm Cancel Trigger</dt>
+                <dd></dd>
+                <dt>Type</dt>
+                <dd>@Html.DisplayFor(model => model.Lvm_DeviceActionType3.DeviceActionType)</dd>
+                <dt>URL</dt>
+                <dd>@Html.DisplayFor(model => model.ActionUrlOff)</dd>
+                <dt>Data</dt>
+                <dd><div style="overflow-y: auto; max-height:100px; overflow-x:auto; width:100%; ">@Html.DisplayFor(model => model.ActionDataOff)</div></dd>
+                }
+            </dl>
+
+            @using (Html.BeginForm())
+            {
+            @Html.AntiForgeryToken()
+            <div class="form-actions no-color">
+                <div class="col-md-offset-1 col-md-9">
+                    <input type="submit" value="Delete" class="btn btn-default" />
+                </div>
+            </div>
+            }
+        </div>
+    </div>
+</div>

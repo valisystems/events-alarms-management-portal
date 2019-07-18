@@ -1,0 +1,36 @@
+@model LvMonitor.Models.sLvmMonitorHistory_Result
+
+<div class="LvmHstTeplate1">
+    <table>
+        <tr>
+            <td>
+                <table>
+                    <tr>
+                        <td rowspan="4"><img class="LvmIco" src='@Url.Content("~/Content/Images/Control/" + Model.ControlImageFile)' /></td>
+                        <td class="LvmTdRight text-uppercase">
+                            @*style="font-size:11px;"*@
+                            @Html.DisplayFor(m => m.ControlName) - @Html.DisplayFor(m => m.DepartmentName) @Model.Floor.ShowWithSfx() LEVEL ROOM @Html.DisplayFor(m => m.Room)
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Activated: @Model.DateOn.Value.ToString("MM/dd/yyyy hh:mm:ss tt")
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Canceled: <span id="hoff-@Model.Id">@Model.DateOff.Value.ToString("MM/dd/yyyy hh:mm:ss tt")</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Response: @TimeSpan.FromSeconds((int)Model.DateDif).ToString(@"mm\m\:ss\s") &nbsp;
+                            @*<span id="off-@Model.Id-ago">@{ DateTime.Now.Subtract(Model.DateOff.Value).ToString(@"hh\:mm");}</span> minutes ago*@
+                            <span id="ago-hoff-@Model.Id" class="ago-off">@DateTime.Now.Subtract(Model.DateOff.Value).ToString(@"hh\h\:mm\m")</span> ago
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</div>

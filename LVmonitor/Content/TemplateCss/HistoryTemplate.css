@@ -1,0 +1,14 @@
+.lvmMonitorRight{
+    overflow:scroll;
+}
+
+.LvmHstTeplate1 {
+    border-bottom: 1px solid #ccc;
+    padding: 3px 0 3px 3px;
+}
+
+    .LvmHstTeplate1 .LvmIco {
+        width: 70px;
+        /*border: 1px solid #ddd;*/
+        padding: 0 6px 0 2px;
+    }

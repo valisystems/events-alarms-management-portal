@@ -1,0 +1,59 @@
+﻿@model LvMonitor.Models.Lvm_Template
+<div class="lvm-box">
+    <div class="lvm-box-header">
+        <span>@ViewBag.SubTitle @ViewBag.Title</span>
+    </div>
+    <div class="lvm-box-body">
+        <p class="text-danger">@ViewBag.AreYouSure</p>
+        <div>
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <dl class="dl-horizontal">
+                <dt>
+                    Template #
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.TemplateNumber)
+                </dd>
+                <dt>
+                    Template Name
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.TemplateName)
+                </dd>
+                <dt>
+                    Template File
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.TemplateFile)
+                </dd>
+                @*<dt>
+                        @Html.DisplayNameFor(model => model.Html)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Html)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Css)
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.Css)
+                    </dd>*@
+                <dt>
+                    Image
+                </dt>
+                <dd>
+                    <img class="LvmLstImgLg" src="@Url.Content(ViewBag.ImgPath + Model.Thumbnail)" alt="" />
+                </dd>
+            </dl>
+            @using (Html.BeginForm())
+            {
+            @Html.AntiForgeryToken()
+            <div class="form-actions no-color">
+                <div class="col-md-offset-1 col-md-9">
+                    <input type="submit" value="Delete" class="btn btn-default" />
+                </div>
+            </div>
+            }
+        </div>
+    </div>
+</div>

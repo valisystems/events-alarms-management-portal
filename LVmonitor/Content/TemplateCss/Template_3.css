@@ -1,0 +1,153 @@
+    .LvmTeplate1 {
+        display: inline-block;
+        /*width: 49%;*/
+        /*min-width:300px;*/
+    }
+
+        .LvmTeplate1 .LvmTeplate_border {
+            border: 1px solid grey;
+            margin: 5px;
+        }
+
+        .LvmTeplate1 .LvmTeplate_tbldiv {
+            display: table;
+            width: 100%;
+        }
+
+        .LvmTeplate1 .LvmTeplate_tbldiv table {
+            width: 100%;
+        }
+
+            .LvmTeplate1 table td {
+                width: 100%;
+                border-bottom: 1px solid gainsboro;
+            }
+
+            .LvmTeplate1 table .LvmTeplate_tdimg img {
+                width: 100%;
+                border: 1px solid gainsboro;
+            }
+
+            .LvmTeplate1 table .LvmTeplate_tdimg {
+                width: 40%;
+            }
+
+            .LvmTeplate1 table .LvmTeplate_tdtxt {
+                width: 60%;
+            }
+
+        .LvmTeplate1 .LvmTeplate_trdiv {
+            display: table-row;
+        }
+
+        .LvmTeplate1 .LvmTeplate_tblbottom{
+            width:100%;
+        }
+              .LvmTeplate1 .LvmTeplate_tblbottom td{
+                    /*border:1px solid red;*/
+                    width:12%;
+        }
+                            .LvmTeplate1 .LvmTeplate_tblbottom td img{
+                    width:100%;
+                    padding:2px;
+                     opacity: 0.1;
+        }
+
+            /*.LvmTeplate1 .LvmTeplate_trdiv div {
+                display: table-cell;
+                width: 15%;
+                padding: 3px;
+            }
+
+                .LvmTeplate1 .LvmTeplate_trdiv div img {
+                    width: 100%;
+                    border: 1px solid gainsboro;
+                }
+
+        LvmTeplate1 .LvmTeplate_trdiv div.LvmTeplate_tddivtxt {
+         display: table-cell;
+            width: 40%;
+        }
+
+        .LvmTeplate_tddivtxt{
+            width: 40%;
+        }*/
+
+           /*.LvmTeplate_images td{
+                               width: 15%;
+                padding: 3px;
+           }
+
+                      .LvmTeplate_images td img{
+            width: 10%;
+                    border: 1px solid gainsboro;
+           }*/
+
+           /*.LvmTeplate_tbldivImg div{
+               display:inline-block;
+               width:10%;
+           }*/
+           /*           .LvmTeplate_tbldivImg div img{
+               width:100%;
+           }*/
+
+
+/*.LvmTeplate1 {
+    border: 1px solid grey;
+    display: inline-block;
+    margin: 5px;
+}
+
+    .LvmTeplate1 img {
+        width: 120px;
+    }
+
+    .LvmTeplate1 td {
+        border: 1px solid gainsboro;
+    }
+
+
+    .LvmTeplate1 .LvmTdImg {
+        width: 120px;
+    }
+
+    .LvmTeplate1 .LvmTdRight {
+        width: 180px;
+    }
+
+    .LvmTeplate1 td {
+        min-height: 40px;
+    }
+
+    .LvmTeplate1 .LvmIco {
+        width: 40px;
+        opacity: 0.1;
+        border: 1px solid #ddd;
+    }
+
+    .LvmTeplate1 div {
+        display: inline-block;
+    }
+
+
+
+
+
+    #partners {
+  height: 105px;
+  background-color: #eee;
+  white-space: nowrap;
+  width: 100%;
+  display: table;
+}
+
+.logo-image {
+  vertical-align: middle;
+  padding: 13px;
+  display: table-cell;
+}
+
+.logo-image img {
+  max-width: 100%;
+  border:1px solid red;
+}*/

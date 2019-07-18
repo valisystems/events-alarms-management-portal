@@ -1,0 +1,99 @@
+@model LvMonitor.Models.Lvm_MonitorRecord
+<div class="LvmTemp2 LvmTeplate">
+    <table>
+        <tr>
+            <td class="LvmTep_tdImg" colspan="2">
+                @if (!(string.IsNullOrWhiteSpace(Model.DeviceRecordImg) || Model.DeviceRecordImg.EndsWith("/")))
+                {
+                    if (Model.MediaTypeId > 1)
+                    {
+                    <video class="LvmLstImg" controls>
+                        <source src="@Model.DeviceRecordImg" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    }
+                    else
+                    {
+                    <img alt="" class="LvmLstImg" src="@Url.Content(Model.DeviceRecordImg)" />
+                    }
+                }
+            </td>
+        </tr>
+        <tr>
+            <td class="LvmTep_tdTxt">
+                <div class="LvmRespText2">
+                    <div class="LvmRespText2 text-uppercase">
+                        @Model.Lvm_Device.Lvm_Room.FloorNumber.ShowWithSfx() LEVEL
+                    </div>
+                </div>
+            </td>
+            <td class="LvmTep_tdTxt">
+                <div class="LvmRespText2 text-uppercase">
+                    ROOM @Html.DisplayFor(m => m.Lvm_Device.Lvm_Room.RoomNumber)
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <div class="LvmRespText">
+                    @Html.DisplayFor(m => m.Lvm_Device.Lvm_Department.DepartmentName)
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <div class="LvmRespText">
+                    @Html.DisplayFor(model => model.Lvm_Device.DeviceName)
+                </div>
+            </td>
+        </tr>
+        @if (Model.ColDevData.Count > 0)
+        {
+            for (int i = 0; i < Model.ColDevData.Count; i++)
+            {
+            <tr>
+                <td colspan="2">
+                    <div class="LvmRespText">
+                        @if (@Model.ColDevData.AllKeys[i] != "audio")
+                        { @Html.DisplayFor(model => model.ColDevData[i]) }
+                    </div>
+                </td>
+            </tr>
+            }
+        }
+        <tr>
+            <td colspan="2">
+                <div class="LvmRespText">
+                    Activated: <span id="off-@Model.MonitorRecordId">@Model.DateOn8.Value.ToString("MM/dd/yyyy hh:mm tt")</span>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td class="LvmTep_tdIco" colspan="2">
+                <table>
+                    <tr>
+                        <td>
+                            <img src="~/Content/Images/Control/@Model.ControlImg1" @{if (Model.Control1) { <text> style="opacity:1;" </text>      } } />
+                        </td>
+                        <td>
+                            <img src="~/Content/Images/Control/@Model.ControlImg2" @{if (Model.Control2) { <text> style="opacity:1;" </text>      } } />
+                        </td>
+                        <td>
+                            <img src="~/Content/Images/Control/@Model.ControlImg3" @{if (Model.Control3) { <text> style="opacity:1;" </text>      } } />
+                        </td>
+                        <td>
+                            <img src="~/Content/Images/Control/@Model.ControlImg4" @{if (Model.Control4) { <text> style="opacity:1;" </text>      } } />
+                        </td>
+
+                        <td class="LvmTep_tdIcoTxt">
+                            <div class="LvmRespText2" style="text-align:center;">
+                                @*@Html.DisplayFor(model => model.ColDevData["t3"])*@
+                                <span id="ago-off-@Model.MonitorRecordId" class="ago-off">@DateTime.Now.Subtract(Model.DateOn8.Value).ToString(@"hh\h\:mm\m")</span> minutes ago
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</div>
