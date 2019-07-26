@@ -14,6 +14,8 @@ Events and alarms management portal software
   - Verify that 'DefaultConnection' parameter has the valid SQL connection parameters
 parameters
 
+![web_config_1](https://user-images.githubusercontent.com/53027462/61923045-cc564980-af8c-11e9-99c2-3cce154818d0.png)
+
 
 ## Security access rights
 
@@ -32,6 +34,10 @@ parameters
 1. Delete the current database, if it exists
 2. Restore the database using *.bak database backup file found in the Release folder
 
+![ssms_db_1](https://user-images.githubusercontent.com/53027462/61923041-cbbdb300-af8c-11e9-9fd9-f360a3f79785.png)
+![ssms_db_2](https://user-images.githubusercontent.com/53027462/61923042-cbbdb300-af8c-11e9-9d9f-bf7d90ffcc85.png)
+![ssms_db_3](https://user-images.githubusercontent.com/53027462/61923043-cc564980-af8c-11e9-8661-c44c37e9d3ef.png)
+![ssms_db_4](https://user-images.githubusercontent.com/53027462/61923044-cc564980-af8c-11e9-8ccd-f74675731ffa.png)
 
 ## LVMonitor initialization
 
@@ -58,6 +64,11 @@ parameters
     - Disable Overlapped Recycle -> False
     - Disable Recycling for Configuration Changes -> False
     - Regular Time Interval -> 0
+
+![iis_app_pool_1](https://user-images.githubusercontent.com/53027462/61923030-ca8c8600-af8c-11e9-85f5-b2b121f7f8a6.png)
+![iis_app_pool_2](https://user-images.githubusercontent.com/53027462/61923033-ca8c8600-af8c-11e9-8e5d-1a497600913b.png)
+![iis_app_pool_3](https://user-images.githubusercontent.com/53027462/61923034-ca8c8600-af8c-11e9-89e8-561f331a20c0.png)
+
 2. Sites
   - Add Website
     - Specify site name
@@ -66,15 +77,20 @@ parameters
   - Advanced Settings
     - Preload Enabled -> True
 
+![iis_website_1](https://user-images.githubusercontent.com/53027462/61923035-cb251c80-af8c-11e9-8985-86807c4a6866.png)
+
 
 # Section : Guide to LvMonitor Site
 
+![site_login_1](https://user-images.githubusercontent.com/53027462/61923040-cbbdb300-af8c-11e9-88a9-111e835d1824.png)
+
 1. Under Admin Config -> Settings, press DB Reset button to reset all database settings and copy required table values and files
 
+![site_db_reset_1](https://user-images.githubusercontent.com/53027462/61923037-cb251c80-af8c-11e9-91b3-579100510e28.png)
 
 ## Application Config
 
-### Facility Devisions
+### Facility Divisions
 
 1. CDR Type - type of CDR used to accept CDR calls, wrong CDR type will lead to unregistered CDR's in the system
 2. CDR Domain - domain of CDR used to accept CDR calls, wrong CDR domain will lead to unregistered CDR's in the system
@@ -83,6 +99,7 @@ parameters
 5. PBX User Password - password for the user
 6. Device Discovery - Device discovery on the facility level, when enabled, all the devices registered with the device discovery will automatically have Facility set; Note: if device discovery enabled in multiple facilities, then the first one in the list will be automatically entered in the newly discovered devices, thus, it is best to use discovery on per-facility basis
 
+![site_facility_1](https://user-images.githubusercontent.com/53027462/61923038-cb251c80-af8c-11e9-8147-a1e1662a688a.png)
 
 ### Floors
 
@@ -233,7 +250,6 @@ Note: Speech audio on the monitor must be worked on, many alarms with audio are 
 6. Delete Devices, etc, deletes the specified entries from the database
 7. Delete Monitor Records, deletes all monitor records the the database
 8. Insert Monitor Test Data, monitor records data is generated and inserted into the database. Note: sometimes a glitch with the time occurs, begin time > end time, and in the analytics the time is displayed as —h:--m:--s
-
 
 ### Device Discovery
 
