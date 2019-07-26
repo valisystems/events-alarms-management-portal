@@ -1,0 +1,50 @@
+@model LvMonitor.Models.Lvm_MonitorRecord
+<div class="LvmTemp3 LvmTeplate">
+    <div>
+        @if (Model.Control1)
+        {
+        <table>
+            <tr>
+                <td>
+                    <div class="LvmRespText">
+                        Activated: <span id="off-@Model.MonitorRecordId">@Model.DateOn1.Value.ToString("MM/dd/yyyy hh:mm tt")</span>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="LvmTep_tdImg" rowspan="3">
+                    <img src="~/Content/Images/Control/@Model.ControlImg1" />
+                </td>
+                <td class="LvmTep_tdTxt">
+                    <div class="LvmRespTxt23 text-uppercase">
+                        @Html.DisplayFor(m => m.ControlName1) - Floor @Model.Lvm_Device.Lvm_Room.FloorNumber.ShowWithSfx() Room @Html.DisplayFor(m => m.Lvm_Device.Lvm_Room.RoomNumber)
+                    </div>
+                </td>
+            </tr>
+        </table>
+        }
+        @if (Model.Control2)
+        {
+        <table>
+            <tr>
+                <td>
+                    <div class="LvmRespText">
+                        Activated: <span id="off-@Model.MonitorRecordId">@Model.DateOn2.Value.ToString("MM/dd/yyyy hh:mm tt")</span>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="LvmTep_tdImg" rowspan="3">
+                    <img src="~/Content/Images/Control/@Model.ControlImg2" />
+                </td>
+                <td class="LvmTep_tdTxt">
+                    <div class="LvmRespTxt23 text-uppercase">
+                        @Html.DisplayFor(m => m.ControlName2) - Floor @Model.Lvm_Device.Lvm_Room.FloorNumber.ShowWithSfx() Room @Html.DisplayFor(m => m.Lvm_Device.Lvm_Room.RoomNumber)
+                    </div>
+                </td>
+            </tr>
+        </table>
+        }
+
+    </div>
+</div>
