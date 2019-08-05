@@ -1,0 +1,39 @@
+@model LvMonitor.Models.FolderFilesModel
+
+<style>
+    .borderless td, .borderless th {
+        border: none;
+    }
+</style>
+
+<div class="lvm-box">
+    <div class="lvm-box-header">
+        <span>@ViewBag.Title</span>
+    </div>
+    <div class="lvm-box-body table-responsive">
+        <table class="table table-striped table-condensed borderless">
+            <thead>
+                <tr>
+                    <th>
+                        File
+                    </th>
+                    <th>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Files)
+                {
+                <tr>
+                    <td>
+                        @Html.ActionLink(item.FileName, "Download", "Documents", new { fileName = item.FileName })
+                    </td>
+                    <td class="lvm-td-ico">
+                        @Html.ActionLink(" ", "Download", "Documents", new { fileName = item.FileName }, new { @class = "fa fa-download" })
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
