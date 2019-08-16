@@ -128,7 +128,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Room</Value>
+                              <Value>Room Number</Value>
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
                                 <FontWeight>Bold</FontWeight>
@@ -181,7 +181,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Device</Value>
+                              <Value>Patient Station</Value>
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
                                 <FontWeight>Bold</FontWeight>
@@ -272,7 +272,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Response Time Avg.</Value>
+                              <Value>Response Time Avgerage</Value>
                               <Style>
                                 <FontFamily>Tahoma</FontFamily>
                                 <FontWeight>Bold</FontWeight>
