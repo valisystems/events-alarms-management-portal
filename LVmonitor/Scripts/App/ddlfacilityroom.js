@@ -20,7 +20,7 @@
                 });
             },
             error: function (xhr, ajaxOptions, thrownError) {
-                alert('Found error to load Room dropdown!');
+                alert('Error to load Room dropdown!');
             }
         });
 
@@ -40,7 +40,7 @@
                 });
             },
             error: function (xhr, ajaxOptions, thrownError) {
-                alert('Found error to load Department dropdown!');
+                alert('Error to load Department dropdown!');
             }
         });
 

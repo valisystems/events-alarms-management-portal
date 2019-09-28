@@ -19,7 +19,7 @@
                 });
             },
             error: function (xhr, ajaxOptions, thrownError) {
-                alert('Found error to load Department dropdown!');
+                alert('Error to load Department dropdown!');
             }
         });
 

@@ -22,7 +22,7 @@
                 });
             },
             error: function (xhr, ajaxOptions, thrownError) {
-                alert('Found error to load Monitor!');
+                alert('Error to load Monitor!');
             }
         });
     });

@@ -22,7 +22,7 @@
                 });
             },
             error: function (xhr, ajaxOptions, thrownError) {
-                alert('Found error to load state / province!');
+                alert('Error to load state / province!');
             }
         });
     });
