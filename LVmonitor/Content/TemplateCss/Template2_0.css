@@ -15,7 +15,7 @@ padding-left: 6px;
 
 .LvmTemp1 .LvmTep_tdImg {
 width: 40%;
-padding: 2px;
+padding: 1px;
 border-right: 1px solid lightgray;
 }
 
@@ -28,12 +28,12 @@ width: 30%;
 }
 
 .LvmTemp1 .LvmTep_tdIco {
-padding: 0;
+padding: 0.1em;
 border: none;
 }
 
 .LvmTemp1 .LvmTep_tdIco table {
-width: 100%;
+width: 90%;
 border: none;
 }
 
@@ -49,6 +49,6 @@ opacity: 0.1;
 
 .LvmTemp1 .LvmTep_tdIco table .LvmTep_tdIcoTxt {
 width: 52%;
-padding-left: 6px;
-border-left: 1px solid lightgray;
+padding-left: 8px;
+border-left: 1px solid rgb(134, 130, 130);
 }

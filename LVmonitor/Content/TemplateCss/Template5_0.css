@@ -1,0 +1,52 @@
+.LvmTemp3 table {
+border: 1px solid gray;
+width: 100%;
+}
+
+.LvmTemp3 td {
+border-bottom: 1px solid lightgray;
+vertical-align: middle;
+padding-left: 6px;
+}
+
+.LvmTemp3 .LvmTep_tdImg {
+padding: 7px;
+border-right: 1px solid lightgray;
+}
+
+.LvmTemp3 .LvmTep_tdImg img {
+width: unset!important;
+/*height: 90%;*/
+max-height:180px;
+}
+
+.LvmTemp3 .LvmTep_tdTxt {
+width: 50%;
+}
+
+.LvmTemp3 .LvmTep_tdIco {
+padding: 0;
+border: none;
+}
+
+.LvmTemp3 .LvmTep_tdIco table {
+width: 100%;
+border: none;
+}
+
+.LvmTemp3 .LvmTep_tdIco table td {
+width: 10%;
+padding: 0;
+}
+
+.LvmTemp3 .LvmTep_tdIco table img {
+width: 70%;
+padding: 4px;
+opacity: 0.1;
+}
+
+.LvmTemp3 .LvmTep_tdIco table .LvmTep_tdIcoTxt {
+width: 52%;
+padding-left: 6px;
+border-left: 1px solid lightgray;
+}
