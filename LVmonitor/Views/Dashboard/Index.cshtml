@@ -107,7 +107,7 @@
             <div class="info-box">
                 <span class="info-box-icon bg-green"><i class="fa fa-clock-o"></i></span>
                 <div class="info-box-content">
-                    <span class="info-box-text">Average<br />Response Time</span>
+                    <span class="info-box-text">Average<br />Response</span>
                     <span class="info-box-number">@ViewBag.ResponseTime</span>
                 </div>
                 <!-- /.info-box-content -->
@@ -119,7 +119,7 @@
             <div class="info-box">
                 <span class="info-box-icon bg-yellow"><i class="fa fa-group"></i></span>
                 <div class="info-box-content">
-                    <span class="info-box-text">Nurses<br />On Duty</span>
+                    <span class="info-box-text">Nurses<br />On Shift</span>
                     <span class="info-box-number">@ViewBag.OnDuty</span>
                 </div>
                 <!-- /.info-box-content -->
@@ -131,7 +131,7 @@
             <div class="info-box">
                 <span class="info-box-icon bg-aqua"><i class="fa fa-user"></i></span>
                 <div class="info-box-content">
-                    <span class="info-box-text">Total<br />Patients</span>
+                    <span class="info-box-text">Total<br />Number of Patients</span>
                     <span class="info-box-number">@ViewBag.TotalDev</span>
                 </div>
                 <!-- /.info-box-content -->
@@ -162,7 +162,7 @@
                                 <div class="row">
                                     <div class="form-group">
                                         @*<label>@ViewBag.ChartTitleTotal</label>*@
-                                        <div style="height:250px;">
+                                        <div style="height:230px;">
                                             <canvas id="cnvChartTotal"></canvas>
                                         </div>
                                     </div>
@@ -180,7 +180,7 @@
     </div>
     <!-- /.row -->
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-11">
             <div class="box">
                 <div class="box-header with-border">
                     <h3 class="box-title">Number Of Calls By Sensor Type</h3>
@@ -197,14 +197,14 @@
                 <div class="box-body">
                     <div class="row">
                         <div class="col-md-12">
-                            <p class="text-center">
+                            <p class="text-right">
                                 <strong>@ViewBag.ChartTitleType</strong>
                             </p>
                             <div class="col-md-12">
                                 <div class="row">
                                     <div class="form-group">
                                         @*<label>@ViewBag.ChartTitleTotal</label>*@
-                                        <div style="height:250px;">
+                                        <div style="height:240px;">
                                             <canvas id="cnvChartType"></canvas>
                                         </div>
                                     </div>
@@ -228,6 +228,7 @@
 @Scripts.Render("~/Scripts/App/ddlfacilitydepartment.js")
 @Scripts.Render("~/bundles/daterangepicker")
 @Scripts.Render("~/bundles/chartjs")
+@Scripts.Render("~/bundles/d3")
 
     <script type="text/javascript">
         $(document).ready(function () {
