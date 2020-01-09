@@ -71,6 +71,7 @@
             <div class="form-group">
                 @Html.Label("Reset Database and Insert Test Data", htmlAttributes: new { @class = "control-label col-md-3" })
                 <div class="col-md-9">
+                    @Html.ActionLink("Copy Default Files", "CopyDefaultFiles", null, new { @class = "btn btn-default", style = "color:red;", onclick = "return confirm('Are you sure you want to copy default files, this will overwrite existing files?');" }) &nbsp;
                     @Html.ActionLink("DB Reset", "DbReset", null, new { @class = "btn btn-default", style = "color:red;", onclick = "return confirm('Are you sure you want to reset the DB and lose all the data?');" }) &nbsp;
                     @Html.ActionLink("Delete Devices and Rooms", "DeleteDeviceRoom", null, new { @class = "btn btn-default", style = "color:red;", onclick = "return confirm('Are you sure you want to delete Devices and Rooms?');" }) &nbsp;
                     @Html.ActionLink("Delete Monitor Records", "DeleteMonitorRecords", null, new { @class = "btn btn-default", style = "color:red;", onclick = "return confirm('Are you sure you want to delete Monitor Records?');" }) &nbsp; &nbsp; &nbsp;
