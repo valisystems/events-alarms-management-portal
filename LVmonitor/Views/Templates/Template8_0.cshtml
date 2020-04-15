@@ -1,0 +1,177 @@
+﻿@model LvMonitor.Models.DB.Lvm_MonitorRecord
+@{
+    var departmentName = Model.Lvm_Department == null ? "" : string.Format("{0}", Model.Lvm_Department.DepartmentName);
+    var roomNumber = Model.Lvm_Room == null ? "" : string.Format("ROOM {0}", Model.Lvm_Room.RoomNumber);
+    var equipmentName = Model.Lvm_Equipment == null ? "" : string.Format("EQUIPMENT {0}", Model.Lvm_Equipment.EquipmentName);
+    var patientName = Model.Lvm_Patient == null ? "" : string.Format("PATIENT {0} IN BED {1} ROOM {2}", Model.Lvm_Patient.FullName, Model.Lvm_Patient.Lvm_Bed.Number, Model.Lvm_Patient.Lvm_Room.RoomNumber);
+    var device = Model.Lvm_Device == null ? "" : string.Format("{0}", Model.Lvm_Device.DeviceName);
+    var beacon = Model.Lvm_Beacon == null ? "" : string.Format("{0}", Model.Lvm_Beacon.BeaconName);
+    var zone = Model.Lvm_RestrictedZone == null ? "" : string.Format("Detected Restricted Zone Alarm in Zone '{0}'", Model.Lvm_RestrictedZone.ZoneName);
+    var classes = Model.Lvm_Beacon == null ? "device-card" : "beacon-card";
+    var text = "";
+    if (roomNumber.Length > 0)
+    {
+        text = roomNumber;
+    }
+    else if (equipmentName.Length > 0)
+    {
+        text = equipmentName;
+    }
+    else if (patientName.Length > 0)
+    {
+        text = patientName;
+    }
+
+    HtmlString text2;
+	var hideEmptyText2 = "";
+    if (device.Length > 0)
+    {
+        text2 = new HtmlString(string.Format("<a href='FacilityPlan/Index/device_{0}'><i class='fa fa-dashboard fa-lg' style='margin-right:0.5em;'></i><span class='text_inverted'>{1}</span></a>", Model.DeviceId, device));
+    }
+    else if (beacon.Length > 0)
+    {
+        text2 = new HtmlString(string.Format("<a href='FacilityPlan/Index/beacon_{0}'><i class='fa fa-cloud fa-lg' style='margin-right:0.5em;'></i><span class='text_inverted'>{1}</span></a>", Model.BeaconId, beacon));
+    }
+    else
+    {
+        text2 = new HtmlString("");
+		hideEmptyText2 = "hidden";
+    }
+}
+<div class="margin-top-7 form-inline LvmTemplate @classes" style="width:@Model.CardWidth%">
+    <div class="col-xs-12">
+        <div class="jumbotron img-rounded background_inverted border_inverted" style="padding-top:20px;padding-bottom:20px;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="row no-padding">
+                            @{
+                                if (!(string.IsNullOrWhiteSpace(Model.DeviceRecordImg) || Model.DeviceRecordImg.EndsWith("/")))
+                                {
+                                    if (Model.MediaTypeId > 1)
+                                    {
+                                        <div class="col-xs-12" style="margin-bottom:5px;padding-left:0.2em;padding-right:0.2em;">
+                                            <video class="video img img-responsive" style="margin-left:auto;margin-right:auto;width:70%;" controls>
+                                                <source src="@Model.DeviceRecordImg" type="video/mp4">
+                                                Your browser does not support the video tag.
+                                            </video>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="col-xs-12" style="margin-bottom:5px;padding-left:0.2em;padding-right:0.2em;">
+                                            <img alt="" class="img img-responsive img-rounded" src="@Url.Content(Model.DeviceRecordImg)" style="margin-left:auto;margin-right:auto;width:70%;" />
+                                        </div>
+                                    }
+                                }
+                                else if (!(string.IsNullOrWhiteSpace(Model.BeaconRecordImg) || Model.BeaconRecordImg.EndsWith("/")))
+                                {
+                                    if (Model.MediaTypeId > 1)
+                                    {
+                                        <div class="col-xs-12" style="margin-bottom:5px;padding-left:0.2em;padding-right:0.2em;">
+                                            <video class="video img img-responsive" style="margin-left:auto;margin-right:auto;width:70%;" controls>
+                                                <source src="@Model.BeaconRecordImg" type="video/mp4">
+                                                Your browser does not support the video tag.
+                                            </video>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="col-xs-12" style="margin-bottom:5px;padding-left:0.2em;padding-right:0.2em;">
+                                            <img alt="" class="img img-responsive img-rounded" src="@Url.Content(Model.BeaconRecordImg)" style="margin-left:auto;margin-right:auto;width:70%;" />
+                                        </div>
+                                    }
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="row margin-top-7">
+                    <div class="col-xs-12">
+                        <div class="row padding-sides-7">
+                            <div class="col-xs-6 img img-responsive img-rounded background_inner_inverted">
+                                <div class="form-group no-margin no-padding col-xs-12">
+                                    <h5 style="font-weight:700!important;">@text</h5>
+                                </div>
+                                @*<div class="form-group no-margin no-padding col-xs-12">
+                                        <h5 style="font-weight:700!important;">@Model.Lvm_Floor.Number.ShowWithSfx() LEVEL</h5>
+                                    </div>
+                                    <div class="form-group no-margin no-padding col-xs-12">
+                                        <h5 style="font-weight:700!important;">@departmentName</h5>
+                                    </div>*@
+                            </div>
+                            <div class="col-xs-6 clearfix no-padding pull-right @hideEmptyText2">
+                                <div class="form-group no-margin col-xs-12">
+                                    <p style="font-size:0.9em!important;font-weight:700!important;">
+                                        @text2
+                                    </p>
+                                </div>
+                                <div class="form-group no-margin">
+                                    <p class="text-danger" style="font-size:0.9em!important;">@zone</p>
+                                </div>
+                            </div>
+                        </div>
+                        @*<div class="row padding-sides-7 margin-top-7">
+                                <div class="col-xs-12 clearfix no-padding">
+                                    <div class="form-group">
+                                        <p class="text-danger" style="font-size:1.1em!important;font-weight:700!important;">Activated: <span id="off-@Model.MonitorRecordId">@Model.DateOn.ToString("MM/dd/yyyy hh:mm tt")</span> (<span id="ago-off-@Model.MonitorRecordId" class="ago-off">@Html.DisplayFor(m => m.ElapsedTime)</span> ago)</p>
+                                    </div>
+                                </div>
+                            </div>*@
+                        <div class="row margin-top-7 padding-sides-7 margin-top-7">
+                            @if (Model.ColDevData.Count > 0)
+                            {
+                                for (int i = 0; i < Model.ColDevData.Count; i++)
+                                {
+                                    if (@Model.ColDevData.AllKeys[i] != "audio")
+                                    {
+                                        <div class="col-xs-12 no-padding clearfix" style="margin-bottom:5px;">
+                                            @Html.DisplayFor(model => model.ColDevData[i])
+                                        </div>
+                                    }
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="row no-padding" style="margin-left:auto;margin-right:auto;">
+                            @{
+                                var countControls = Model.DevControls.Where(r => r.IsOn).ToList().Count;
+                                var z = 0;
+                                foreach (var c in Model.DevControls)
+                                {
+                                    if (c.IsOn)
+                                    {
+                                        if (++z > 4)
+                                        {
+                                            break;
+                                        }
+                                        var btnAction = "";
+                                        var btnStyle = "";
+                                        if (Model.Lvm_Beacon != null)
+                                        {
+                                            btnAction = string.Format("authbeaconcode?Uuid={0}&BaseName=null&EventType=Normal&Tx=0&Rssi=0&BatteryLevel=100&Distance=0&CtrlType={1}", Model.Lvm_Beacon.BeaconCode, c.Code);
+                                            btnStyle = "cursor:pointer;";
+                                        }
+                                        <div class="col-xs-1" style="margin-bottom:5px;padding-left:0.1em;padding-right:0.1em;">
+                                            <img class="img img-responsive img-rounded" src="~/Content/Images/Control/@c.Img" onclick="processAction('@btnAction');" style="opacity:1;@btnStyle">
+                                        </div>
+                                    }
+                                }
+
+                                for (var k = 0; k < 4 - countControls; k++)
+                                {
+                                    <div class="col-xs-1" style="margin-bottom:5px;padding-left:0.1em;padding-right:0.1em;">
+                                        <img src="~/Content/Images/spacer.gif">
+                                    </div>
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
