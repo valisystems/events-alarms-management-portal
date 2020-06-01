@@ -1,0 +1,122 @@
+<div class="LvmTemp2 LvmTemplate model-card hidden" style="width:100%">
+    <!-- CardWidth, model-card: device-card or beacon-card -->
+    <table>
+        <tr>
+            <td class="LvmTep_tdImg" rowspan="3">
+                <div id="image_div">
+                    <video class="LvmLstImg model-media-type-video video img img-responsive hidden" controls>
+                        <source src="" type="video/mp4"> <!-- RecordImage -->
+                        Your browser does not support the video tag.
+                    </video>
+                    <img alt="" class="LvmLstImg model-media-type-image img img-responsive img-rounded hidden" src="" /> <!-- RecordImage -->
+					<img alt="" class="LvmLstImgHeatmap model-media-type-heatmap-image img img-responsive img-rounded hidden" src="" /> <!-- HeatmapImg -->
+                </div>
+            </td>
+            <td colspan="2" class="LvmTep_tdTxt">
+                <div class="LvmRespText2 text-uppercase">
+                    <span class="model-floor"></span> LEVEL <!-- Floor -->
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <div class="LvmRespText text-uppercase">
+                    <span class="model-department"></span> <!-- Department -->
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <div class="LvmRespText2 text-uppercase text-bold">
+                    <span class="model-information"></span> <!-- Information: Room number, Equipment or Patient -->
+                </div>
+            </td>
+        </tr>
+        <tr class="model-col-dev-data-0 hidden">
+            <td colspan="3">
+                <div class="LvmRespText" style="word-wrap:anywhere;">
+                </div>
+            </td>
+        </tr>
+        <tr class="model-col-dev-data-1 hidden">
+            <td colspan="3">
+                <div class="LvmRespText" style="word-wrap:anywhere;">
+                </div>
+            </td>
+        </tr>
+        <tr class="model-col-dev-data-2 hidden">
+            <td colspan="3">
+                <div class="LvmRespText" style="word-wrap:anywhere;">
+                </div>
+            </td>
+        </tr>
+        <tr class="model-col-dev-data-3 hidden">
+            <td colspan="3">
+                <div class="LvmRespText" style="word-wrap:anywhere;">
+                </div>
+            </td>
+        </tr>
+        <tr class="model-col-dev-data-4 hidden">
+            <td colspan="3">
+                <div class="LvmRespText" style="word-wrap:anywhere;">
+                </div>
+            </td>
+        </tr>
+        <tr class="model-col-dev-data-5 hidden">
+            <td colspan="3">
+                <div class="LvmRespText" style="word-wrap:anywhere;">
+                </div>
+            </td>
+        </tr>
+        <tr class="model-col-dev-data-6 hidden">
+            <td colspan="3">
+                <div class="LvmRespText" style="word-wrap:anywhere;">
+                </div>
+            </td>
+        </tr>
+        <tr class="model-col-dev-data-7 hidden">
+            <td colspan="3">
+                <div class="LvmRespText" style="word-wrap:anywhere;">
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3">
+                <div class="LvmRespText">
+                    Activated: <span class="model-date-activated" id="off-0"></span> <!-- Activated, format MM/dd/yyyy hh:mm:ss tt -->
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td class="LvmTep_tdIco" colspan="3">
+                <table>
+                    <tr>
+                        <!-- if wireless device : action = ("authbeaconcode?Uuid={0}&BaseName=null&EventType=Normal&Tx=0&Rssi=0&BatteryLevel=100&Distance=0&CtrlType={1}", Model.Lvm_Beacon.BeaconCode, c.Code) and button style = curson:pointer; -->
+                        <td class="model-dev-control-0 hidden"><img src="Content/Images/Control/control-sample.png" onclick="processAction('');" style="opacity:1;"></td>
+                        <td class="model-dev-control-1 hidden"><img src="Content/Images/Control/control-sample.png" onclick="processAction('');" style="opacity:1;"></td>
+                        <td class="model-dev-control-2 hidden"><img src="Content/Images/Control/control-sample.png" onclick="processAction('');" style="opacity:1;"></td>
+                        <td class="model-dev-control-3 hidden"><img src="Content/Images/Control/control-sample.png" onclick="processAction('');" style="opacity:1;"></td>
+                        <td class="model-dev-control-4 hidden"><img src="Content/Images/Control/control-sample.png" onclick="processAction('');" style="opacity:1;"></td>
+                        <td class="model-dev-control-5 hidden"><img src="Content/Images/Control/control-sample.png" onclick="processAction('');" style="opacity:1;"></td>
+                        <td class="model-dev-control-6 hidden"><img src="Content/Images/Control/control-sample.png" onclick="processAction('');" style="opacity:1;"></td>
+                        <td class="model-dev-control-7 hidden"><img src="Content/Images/Control/control-sample.png" onclick="processAction('');" style="opacity:1;"></td>
+
+                        <td class="dev-controls-spacer-0 hidden"><img src="Content/Images/spacer.gif"></td>
+                        <td class="dev-controls-spacer-1 hidden"><img src="Content/Images/spacer.gif"></td>
+                        <td class="dev-controls-spacer-2 hidden"><img src="Content/Images/spacer.gif"></td>
+                        <td class="dev-controls-spacer-3 hidden"><img src="Content/Images/spacer.gif"></td>
+                        <td class="dev-controls-spacer-4 hidden"><img src="Content/Images/spacer.gif"></td>
+                        <td class="dev-controls-spacer-5 hidden"><img src="Content/Images/spacer.gif"></td>
+                        <td class="dev-controls-spacer-6 hidden"><img src="Content/Images/spacer.gif"></td>
+                        <td class="dev-controls-spacer-7 hidden"><img src="Content/Images/spacer.gif"></td>
+                        <td class="LvmTep_tdIcoTxt">
+                            <div class="LvmRespText2" style="text-align:center;">
+                                <span id="ago-off-0" class="model-date-ago ago-off"></span> ago <!-- Ago, format hh\h\:mm\m\:ss\s -->
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</div>
